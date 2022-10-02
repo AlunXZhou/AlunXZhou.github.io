@@ -21,6 +21,7 @@
     <title>网安篇（2）</title>
     <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%882%EF%BC%89/</url>
     <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><p>1.从kali上的burpsuite上想要抓取物理机上的数据包，必须设置kali的网络连接为NAT模式，并且设置网段与物理机在同一个网段，在burpsuite上设置的代理与本机代理一致。<br>2.REQUEST是在网页端输入变量访问，POST则是在使用像中国蚁剑之类的工具连接。<br>3.MIME类型：一种文件拓展名包含一种MIME类型。</p>
+<span id="more"></span>
 <h5 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h5><p>第一：文件上传漏洞采用上传漏洞顾名思义，就是攻击者上传了一个可执行文件如木马，病毒，恶意脚本，WebShell等到服务器执行，并最终获得网站控制权限的高危漏洞。<br>以下三条一句话木马<br>1.<?php @eval($_POST['flag']);?>此类为POST类型一句话木马，需蚁剑连接。<br>2.<?php eval($_REQUEST['php']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?php=phpinfo(),这里等号后面的只能填php语言有效）<br>3.<?php system($_REQUEST['linux']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?linux=cat /etc/psaawd,这里等号后面的只能填linux命令有效）<br>目前DVWA上的文件上传漏洞分为三个级别，分别为“low、medium、high”<br>low级别<br>将一句话木马用php文件打包好之后，上传到可以上传图片的地方（这里的上传点有较大的漏洞，安全级别为low，并未限制上传的文件格式），如果上传成功，我们可用菜刀或蚁剑之类的工具连接url地址，就可以获取网站控制权限。<br>medium级别<br>此时，安全性高了一个等级，文件上传有了文件类型的限制（如 if( ( $uploaded_type == “image/jpeg” || $uploaded_type == “image/png” ) &amp;&amp;），这样我们只有修改文件类型即可成功上传。<br>用burpsuite抓包修改Content-Type请求头里的内容即可，将MIME类型改为image/jpeg，再forward就能成功上传文件</p>
 <h5 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h5><p>LFI<br>本地文件包含 Local File Include (LFI)<br>所包含文件内容符合PHP语法规范，任何扩展名都可以被PHP解析。<br>所包含文件内容不符合PHP语法规范，会暴露其源代码（相当于文件读取）。<br>RFI<br>远程文件包含 Remote File Include (RFI)<br>如果要使用远程包含功能，首先需要确定PHP是否已经开启远程包含功能选项（php默认关闭远程包含功能：allow_url_include=off），开启远程包含功能需要在php.ini配置文件中修改。<br>远程包含与本地包含没有区别，无非是支持远程加载，更容易getshell，无论是哪种扩展名，只要遵循PHP语法规范，PHP解析器就会对其解析。</p>
 <p>文件包含漏洞也可以和文件上传漏洞相配合使用。<br>通过jpg文件和php文件的结合，将一句话木马隐藏在图片内。<br> 将jpg文件和php文件放在一个目录内，在这个目录cmd模式下输入   copy /b xxx.jpg + xxxx.php xxxxx.jpg 就可生成xxxxx.jpg文件。<br><?php fputs(fopen('shell.php','w'),'<?php eval($_post[flag]);>');?>这段代码意思是生成shell.php这个新文件，并将<?php eval($_post[flag]);>');?>写入。<br>最后将jpg文件上传，用蚁剑连接shell.php这个文件拿到权限。<br>这就叫条件竞争绕过  竞争条件：服务端首先是允许用户上传任意类型的文件，上传过后再去检查文件，如果文件存在恶意的内容，那么就会执行删除操作，可以利用这个时间差来完成攻击。</p>
@@ -36,6 +37,7 @@
     <title>网安篇（3）</title>
     <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%883%EF%BC%89/</url>
     <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><h5 id="xss主要分类："><a href="#xss主要分类：" class="headerlink" title="xss主要分类："></a>xss主要分类：</h5><p>反射型xss攻击（Reflected XSS） ：又称为非持久性跨站点脚本攻击，它是最常见的类型的XSS。漏洞产生的原因是攻<br>击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的链接(即每次攻击需要用户的点击)。<br>存储型XSS（Stored XSS) ：又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据 库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大, 因为每当用户打开页面，查看内容时脚本将自动执行。</p>
+<span id="more"></span>
 <h6 id="xss弹框"><a href="#xss弹框" class="headerlink" title="xss弹框"></a>xss弹框</h6><p>弹框警告<br>此脚本实现弹框提示，一般作为漏洞测试或者演示使用,类似SQL注入漏洞测试中的单引号’, 一旦此脚本能执行，也就意 味着后端服务器没有对特殊字符做过滤&lt;&gt;/‘ 这样就可以证明，这个页面位置存在了XSS漏洞。 </p>
 <p>php+HTML<br> &lt;scri.pt&gt;ale.rt(‘xss’)</script></p>
 <h6 id="弹框警告并重定向"><a href="#弹框警告并重定向" class="headerlink" title="弹框警告并重定向"></a>弹框警告并重定向</h6><script>al.ert("请移步到我们的新站");location.href="http://www.qfedu.com"</script> 
