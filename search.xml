@@ -54,4 +54,35 @@
         <tag>——web</tag>
       </tags>
   </entry>
+  <entry>
+    <title>网安篇（3）</title>
+    <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
+<p>PHP提供4个专门的执行外部命令的函数：exec(), system(), passthru(), shell_exec()</p>
+<p>除了拼接函数外，我们还可以使用命令连接符来组合这些系统函数增加命令执行成功率。常见的命令连接符有（“|，&amp;&amp;，||”这三个连接符都是Windows系统与Linux系统共有的，而“&amp;”是Windows系统特有，“；”是Linux系统特有的）：</p>
+<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>A|B:无论执行的A命令是否正确，B命令都执行</p>
+<p>&amp;&amp;<br>逻辑与</p>
+<p>A&amp;&amp;B：只有在A命令成功执行的前提下，B命令才可以执行</p>
+<p>||<br>逻辑或</p>
+<p>A||B：只有在A命令没有执行失败的前提下，B命令才可以执行</p>
+<p>&amp;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
+<p>;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
+<p>命令执行漏洞</p>
+<h5 id="ctfshow29"><a href="#ctfshow29" class="headerlink" title="ctfshow29"></a>ctfshow29</h5><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:26:48</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"> <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);       <span class="comment">//不输出错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;     <span class="comment">//接受参数</span></span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;<span class="comment">//没有匹配到flag就输出eval（&amp;c）意味着过滤了flag字符串</span></span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>知识点：</p>
+<p>1.linux通配符绕过：<em>匹配任意字符串/文本，包括空字符串。如 ls list -&gt; ls l</em>. ?匹配任意一个字符（不在括号内时）</p>
+<p>2.[abcd]正则 表示匹配[ ] 里的任何一个字符abcd</p>
+<p>3.[a-z] 匹配a-z的任意字符</p>
+<p>4.拼接字符串cat file.txt == ca’t’ f’i’le.txt</p>
+<p>5.换行符绕过：cat file.txt = cat f\ile.txt</p>
+<p>最终palyload: ?c=system(‘cat f*’);</p>
+]]></content>
+      <categories>
+        <category>——网络安全</category>
+      </categories>
+      <tags>
+        <tag>——web</tag>
+      </tags>
+  </entry>
 </search>
