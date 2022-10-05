@@ -55,9 +55,10 @@
       </tags>
   </entry>
   <entry>
-    <title>网安篇（3）</title>
-    <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
+    <title>网安篇（4）</title>
+    <url>/2022/10/03/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
     <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
+<span id="more"></span>
 <p>PHP提供4个专门的执行外部命令的函数：exec(), system(), passthru(), shell_exec()</p>
 <p>除了拼接函数外，我们还可以使用命令连接符来组合这些系统函数增加命令执行成功率。常见的命令连接符有（“|，&amp;&amp;，||”这三个连接符都是Windows系统与Linux系统共有的，而“&amp;”是Windows系统特有，“；”是Linux系统特有的）：</p>
 <h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>A|B:无论执行的A命令是否正确，B命令都执行</p>
