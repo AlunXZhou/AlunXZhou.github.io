@@ -55,38 +55,6 @@
       </tags>
   </entry>
   <entry>
-    <title>网安篇（4）</title>
-    <url>/2022/10/03/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
-    <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
-<span id="more"></span>
-<p>PHP提供4个专门的执行外部命令的函数：exec(), system(), passthru(), shell_exec()</p>
-<p>除了拼接函数外，我们还可以使用命令连接符来组合这些系统函数增加命令执行成功率。常见的命令连接符有（“|，&amp;&amp;，||”这三个连接符都是Windows系统与Linux系统共有的，而“&amp;”是Windows系统特有，“；”是Linux系统特有的）：</p>
-<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>A|B:无论执行的A命令是否正确，B命令都执行</p>
-<p>&amp;&amp;<br>逻辑与</p>
-<p>A&amp;&amp;B：只有在A命令成功执行的前提下，B命令才可以执行</p>
-<p>||<br>逻辑或</p>
-<p>A||B：只有在A命令没有执行失败的前提下，B命令才可以执行</p>
-<p>&amp;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
-<p>;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
-<p>命令执行漏洞</p>
-<h5 id="ctfshow29"><a href="#ctfshow29" class="headerlink" title="ctfshow29"></a>ctfshow29</h5><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:26:48</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"> <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);       <span class="comment">//不输出错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;     <span class="comment">//接受参数</span></span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;<span class="comment">//没有匹配到flag就输出eval（&amp;c）意味着过滤了flag字符串</span></span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>知识点：</p>
-<p>1.linux通配符绕过：<em>匹配任意字符串/文本，包括空字符串。如 ls list -&gt; ls l</em>. ?匹配任意一个字符（不在括号内时）</p>
-<p>2.[abcd]正则 表示匹配[ ] 里的任何一个字符abcd</p>
-<p>3.[a-z] 匹配a-z的任意字符</p>
-<p>4.拼接字符串cat file.txt == ca’t’ f’i’le.txt</p>
-<p>5.换行符绕过：cat file.txt = cat f\ile.txt</p>
-<p>最终palyload: ?c=system(‘cat f*’);</p>
-]]></content>
-      <categories>
-        <category>——网络安全</category>
-      </categories>
-      <tags>
-        <tag>——web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安篇（5）</title>
     <url>/2022/10/30/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%885%EF%BC%89/</url>
     <content><![CDATA[<h1 id="一、学习内容"><a href="#一、学习内容" class="headerlink" title="一、学习内容"></a>一、学习内容</h1><h2 id="1-1dirsearch下载及使用"><a href="#1-1dirsearch下载及使用" class="headerlink" title="1.1dirsearch下载及使用"></a>1.1dirsearch下载及使用</h2><pre><code> GitHub的下载地址为：https://github.com/maurosoria/dirsearch
@@ -101,7 +69,7 @@
 <p>例如：<img src="https://cdn.nlark.com/yuque/0/2022/png/27996677/1667099409732-133558e3-d66c-4106-b770-e558db773eef.png" alt="img"></p>
 <h2 id="1-2修改请求头为本地访问"><a href="#1-2修改请求头为本地访问" class="headerlink" title="1.2修改请求头为本地访问"></a>1.2修改请求头为本地访问</h2><p>X-Forward-For：127.0.0.1</p>
 <p>Referer：127.0.0.1</p>
-<h2 id="1-3xss漏洞"><a href="#1-3xss漏洞" class="headerlink" title="1.3xss漏洞"></a>1.3xss漏洞</h2><p>在登录界面随便输入一个账号密码，看一下返回的信息若得到错误的信息，发现url里面有get类型的错误参数，如果没有过滤的话我们将文字替换为<script>alert('1')</script>可以得到xss漏洞，没有过滤，拿下xss。</p>
+<h2 id="1-3xss漏洞"><a href="#1-3xss漏洞" class="headerlink" title="1.3xss漏洞"></a>1.3xss漏洞</h2><p>在登录界面随便输入一个账号密码，看一下返回的信息若得到错误的信息，发现url里面有get类型的错误参数，如果没有过滤的话我们将文字替换为可以得到xss漏洞，没有过滤，拿下xss。</p>
 <h2 id="1-4端口号对应服务"><a href="#1-4端口号对应服务" class="headerlink" title="1.4端口号对应服务"></a>1.4端口号对应服务</h2><p>HTTP                                             80</p>
 <p>​        HTTPS                                            443</p>
 <p>​        Telnet                                             23</p>
@@ -269,6 +237,38 @@
 <p>寒暑假逆袭的关键，而我却没有加以利用，认真去学习！</p>
 <p>接着开学封校，一直到九月中旬才能来校学习，这次，我不会再浪费时间，我一直以来的黑客梦永远不会消散。</p>
 <p>虽然道路艰难，但我会一直前行，漫漫长征路，偏向虎山行，此志共勉！</p>
+]]></content>
+      <categories>
+        <category>——网络安全</category>
+      </categories>
+      <tags>
+        <tag>——web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安篇（4）</title>
+    <url>/2022/10/03/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
+<span id="more"></span>
+<p>PHP提供4个专门的执行外部命令的函数：exec(), system(), passthru(), shell_exec()</p>
+<p>除了拼接函数外，我们还可以使用命令连接符来组合这些系统函数增加命令执行成功率。常见的命令连接符有（“|，&amp;&amp;，||”这三个连接符都是Windows系统与Linux系统共有的，而“&amp;”是Windows系统特有，“；”是Linux系统特有的）：</p>
+<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>A|B:无论执行的A命令是否正确，B命令都执行</p>
+<p>&amp;&amp;<br>逻辑与</p>
+<p>A&amp;&amp;B：只有在A命令成功执行的前提下，B命令才可以执行</p>
+<p>||<br>逻辑或</p>
+<p>A||B：只有在A命令没有执行失败的前提下，B命令才可以执行</p>
+<p>&amp;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
+<p>;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
+<p>命令执行漏洞</p>
+<h5 id="ctfshow29"><a href="#ctfshow29" class="headerlink" title="ctfshow29"></a>ctfshow29</h5><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:26:48</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"> <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);       <span class="comment">//不输出错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;     <span class="comment">//接受参数</span></span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;<span class="comment">//没有匹配到flag就输出eval（&amp;c）意味着过滤了flag字符串</span></span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>知识点：</p>
+<p>1.linux通配符绕过：<em>匹配任意字符串/文本，包括空字符串。如 ls list -&gt; ls l</em>. ?匹配任意一个字符（不在括号内时）</p>
+<p>2.[abcd]正则 表示匹配[ ] 里的任何一个字符abcd</p>
+<p>3.[a-z] 匹配a-z的任意字符</p>
+<p>4.拼接字符串cat file.txt == ca’t’ f’i’le.txt</p>
+<p>5.换行符绕过：cat file.txt = cat f\ile.txt</p>
+<p>最终palyload: ?c=system(‘cat f*’);</p>
 ]]></content>
       <categories>
         <category>——网络安全</category>
