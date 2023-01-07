@@ -653,52 +653,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ctfshow web32 对分号、括号的绕过</title>
-    <url>/2023/01/07/ctfshow-web32-%E5%AF%B9%E5%88%86%E5%8F%B7%E3%80%81%E6%8B%AC%E5%8F%B7%E7%9A%84%E7%BB%95%E8%BF%87/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Author: h1xa</span><br><span class="line"># @Date:   2020-09-04 00:12:34</span><br><span class="line"># @Last Modified by:   h1xa</span><br><span class="line"># @Last Modified time: 2020-09-04 00:56:31</span><br><span class="line"># @email: h1xa@ctfer.com</span><br><span class="line"># @link: https://ctfer.com</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">if(isset($_GET[&#x27;c&#x27;]))&#123;</span><br><span class="line">    $c = $_GET[&#x27;c&#x27;];</span><br><span class="line">    if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#x27;|\`|echo|\;|\(/i&quot;, $c))&#123;</span><br><span class="line">        eval($c);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>过滤了 flag system php cat sort shell . space ’ ` echo ; (</p>
-<p>过滤了空格可以用${IFS}和%0a 代替，分号可以用?&gt;代替<br>但是过滤了括号之后就不能用带有括号的函数，php中include是可以不带括号的函数，和web31一样，这里需要用文件包含</p>
-<p>php伪协议通常用于文件包含中，php中文件包含的函数有很多，比如  include、require、include_once、require_once、highlight_file、show_source、file_get_contents、fopen、file、readfile</p>
-<p>c=include$_GET[“1”]?&gt;</p>
-<p>&amp;1=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<p>也可以data伪协议</p>
-<p><img src="/2023/01/07/ctfshow-web32-%E5%AF%B9%E5%88%86%E5%8F%B7%E3%80%81%E6%8B%AC%E5%8F%B7%E7%9A%84%E7%BB%95%E8%BF%87/1671418472191-aca008df-ed05-4206-bc53-0490feaec1e2.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>命令执行</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(data伪协议利用)[SWPUCTF 2021 新生赛]PseudoProtocols</title>
-    <url>/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983882058-c9be0e2d-b933-4549-b15f-170fe2f23f25.png" alt="img"></p>
-<span id="more"></span>
-
-<p>利用filter伪协议读取hint.php文件</p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983908738-ca366767-a56c-4b08-8b1d-411cb75c93b4.png" alt="img"></p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983956595-161766cb-00be-42f6-ba3a-b2c76b0ab005.png" alt="img"></p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983975968-8e569827-467c-4454-a3eb-f87d4bdd8d0e.png" alt="img"></p>
-<p>分析代码</p>
-<p>ini_set(“max_execution_time”, “180”);通过“ini_set(“max_execution_time”,”180”);”增加脚本执行时间。</p>
-<p>if(isset($a)&amp;&amp;(file_get_contents($a,’r’)) === ‘I want flag’)   //a参数利用file_get_contents()函数只读形式打开，打开后内容要与”I want flag”字符串相匹配，才能执行下面的文件包含$file参数。</p>
-<p>看到用的是file_get_contents()函数打开text参数，以及后面的文件包含函数，自然的想到php伪协议中的data://协议。</p>
-<p>构造?a=data://text/plain;base64,SSB3YW50IGZsYWc= 。得到flag。</p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670984151591-43784152-bee8-4420-979b-9b1684688eb9.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>easy_md5(复现)</title>
     <url>/2023/01/07/easy-md5-%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p><img src="/2023/01/07/easy-md5-%E5%A4%8D%E7%8E%B0/1670938628105-3d90a17a-a99f-44be-8f72-5ef78a5a15f2.png" alt="img"></p>
@@ -742,6 +696,52 @@
 <p>param1[]=1&amp;param2[]=2</p>
 <p><img src="/2023/01/07/easy-md5-%E5%A4%8D%E7%8E%B0/1670940412975-67720e4c-a2f3-422b-92f0-b74c3b8be055.png" alt="img"></p>
 <p>得到flag：    NSSCTF{fb498f88-84ad-4543-8225-dc7536c24cf6}</p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ctfshow web32 对分号、括号的绕过</title>
+    <url>/2023/01/07/ctfshow-web32-%E5%AF%B9%E5%88%86%E5%8F%B7%E3%80%81%E6%8B%AC%E5%8F%B7%E7%9A%84%E7%BB%95%E8%BF%87/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Author: h1xa</span><br><span class="line"># @Date:   2020-09-04 00:12:34</span><br><span class="line"># @Last Modified by:   h1xa</span><br><span class="line"># @Last Modified time: 2020-09-04 00:56:31</span><br><span class="line"># @email: h1xa@ctfer.com</span><br><span class="line"># @link: https://ctfer.com</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">if(isset($_GET[&#x27;c&#x27;]))&#123;</span><br><span class="line">    $c = $_GET[&#x27;c&#x27;];</span><br><span class="line">    if(!preg_match(&quot;/flag|system|php|cat|sort|shell|\.| |\&#x27;|\`|echo|\;|\(/i&quot;, $c))&#123;</span><br><span class="line">        eval($c);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>过滤了 flag system php cat sort shell . space ’ ` echo ; (</p>
+<p>过滤了空格可以用${IFS}和%0a 代替，分号可以用?&gt;代替<br>但是过滤了括号之后就不能用带有括号的函数，php中include是可以不带括号的函数，和web31一样，这里需要用文件包含</p>
+<p>php伪协议通常用于文件包含中，php中文件包含的函数有很多，比如  include、require、include_once、require_once、highlight_file、show_source、file_get_contents、fopen、file、readfile</p>
+<p>c=include$_GET[“1”]?&gt;</p>
+<p>&amp;1=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<p>也可以data伪协议</p>
+<p><img src="/2023/01/07/ctfshow-web32-%E5%AF%B9%E5%88%86%E5%8F%B7%E3%80%81%E6%8B%AC%E5%8F%B7%E7%9A%84%E7%BB%95%E8%BF%87/1671418472191-aca008df-ed05-4206-bc53-0490feaec1e2.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>命令执行</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(data伪协议利用)[SWPUCTF 2021 新生赛]PseudoProtocols</title>
+    <url>/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983882058-c9be0e2d-b933-4549-b15f-170fe2f23f25.png" alt="img"></p>
+<span id="more"></span>
+
+<p>利用filter伪协议读取hint.php文件</p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983908738-ca366767-a56c-4b08-8b1d-411cb75c93b4.png" alt="img"></p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983956595-161766cb-00be-42f6-ba3a-b2c76b0ab005.png" alt="img"></p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983975968-8e569827-467c-4454-a3eb-f87d4bdd8d0e.png" alt="img"></p>
+<p>分析代码</p>
+<p>ini_set(“max_execution_time”, “180”);通过“ini_set(“max_execution_time”,”180”);”增加脚本执行时间。</p>
+<p>if(isset($a)&amp;&amp;(file_get_contents($a,’r’)) === ‘I want flag’)   //a参数利用file_get_contents()函数只读形式打开，打开后内容要与”I want flag”字符串相匹配，才能执行下面的文件包含$file参数。</p>
+<p>看到用的是file_get_contents()函数打开text参数，以及后面的文件包含函数，自然的想到php伪协议中的data://协议。</p>
+<p>构造?a=data://text/plain;base64,SSB3YW50IGZsYWc= 。得到flag。</p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670984151591-43784152-bee8-4420-979b-9b1684688eb9.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>文件包含</category>
@@ -1663,6 +1663,28 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>文件包含常用函数</title>
+    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>include()</p>
+<p>require()</p>
+<p>fopen()</p>
+<p>include_once()</p>
+<p>require_once()</p>
+<p>readfile()</p>
+<span id="more"></span>
+
+<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
+<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
+<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(文件上传+命令执行)BUU UPLOAD COURSE</title>
     <url>/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158113792-baa4586e-7558-4d92-b3dc-e9554a91fe2f.png" alt="img"></p>
@@ -1778,28 +1800,6 @@ include('files/'.$action.'.php'); //载入相应文件
 ]]></content>
       <categories>
         <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件包含常用函数</title>
-    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>include()</p>
-<p>require()</p>
-<p>fopen()</p>
-<p>include_once()</p>
-<p>require_once()</p>
-<p>readfile()</p>
-<span id="more"></span>
-
-<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
-<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
-<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -2139,6 +2139,29 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网安基础总结二</title>
     <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
     <content><![CDATA[<p><strong>本周重点</strong></p>
@@ -2262,29 +2285,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <ul>
 <li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
 </ul>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
