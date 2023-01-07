@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本周重点 1.学习进展 1.完成burpsuite的安装以及java环境的配置。 2.完成对http协议的学习以及对url，web前端的一些浅显的了解。 3.了解了公网ip和内网ip的区别.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网安基础总结二">
+<meta property="og:url" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/index.html">
+<meta property="og:site_name" content="無与倫比">
+<meta property="og:description" content="本周重点 1.学习进展 1.完成burpsuite的安装以及java环境的配置。 2.完成对http协议的学习以及对url，web前端的一些浅显的了解。 3.了解了公网ip和内网ip的区别.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png">
+<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png">
+<meta property="article:published_time" content="2022-05-01T06:43:59.000Z">
+<meta property="article:modified_time" content="2023-01-07T07:07:53.667Z">
+<meta property="article:author" content="alun">
+<meta property="article:tag" content="web基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png">
+
+
+<link rel="canonical" href="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/","path":"2022/05/01/网安基础总结二/","title":"网安基础总结二"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网安基础总结二 | 無与倫比</title>
+  
+
+
+
+
+
+<link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">無与倫比</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">菜鸟成长记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FoxyProxy-%E6%A0%87%E5%87%86%E7%89%88"><span class="nav-number">1.</span> <span class="nav-text">FoxyProxy 标准版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Proxy-SwitchyOmega"><span class="nav-number">2.</span> <span class="nav-text">Proxy SwitchyOmega</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="alun"
+      src="/images/alun.jpg">
+  <p class="site-author-name" itemprop="name">alun</p>
+  <div class="site-description" itemprop="description">静者心多妙，飘然思不群</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/alun.jpg">
+      <meta itemprop="name" content="alun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="無与倫比">
+      <meta itemprop="description" content="静者心多妙，飘然思不群">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网安基础总结二 | 無与倫比">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网安基础总结二
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-01 14:43:59" itemprop="dateCreated datePublished" datetime="2022-05-01T14:43:59+08:00">2022-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-07 15:07:53" itemprop="dateModified" datetime="2023-01-07T15:07:53+08:00">2023-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">网安基础篇</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>本周重点</strong></p>
+<p><strong>1.学习进展</strong></p>
+<p>1.完成burpsuite的安装以及java环境的配置。</p>
+<p>2.完成对http协议的学习以及对url，web前端的一些浅显的了解。</p>
+<p>3.了解了公网ip和内网ip的区别.</p>
+<span id="more"></span>
+
+<p><strong>2.遗留问题</strong></p>
+<p>​        <strong>1.内网IP与公网IP的联系和区别是什么。内网IP是不是有很多，而公网IP只有几个或者是某些内网IP连接一个公网IP。</strong></p>
+<p>​         <strong>2.自己电脑上设置的IP地址会不会与别人的IP地址想冲突，导致自己上不了网。</strong></p>
+<p><strong>3.下周计划</strong></p>
+<p>1.学习数据库基础</p>
+<p>2.学习SQL基础</p>
+<p>3.学习MySQL部署与使用</p>
+<p><strong>4.思考总结</strong></p>
+<p>​         <strong>首先总结一下burpsuite的安装与Java环境的配置！</strong></p>
+<p><strong>1.首先找到系统设置中的高级系统设置，点击环境变量。</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif" alt="img"></p>
+<p><strong>2.找到系统变量path设置</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif" alt="img"></p>
+<p><strong>3.点击并编辑两条新的文本</strong></p>
+<p>%JAVA_HOME%\bin %JAVA_HOME%\jre\bin</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif" alt="img"></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif" alt="img"></p>
+<p><strong>4.添加新的系统变量JAVA_HOME</strong></p>
+<p>变量值是jdk的安装路径。</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif" alt="img"></p>
+<p><strong>5.添加CLASSPATH这个新的系统变量</strong></p>
+<p>变量值是 </p>
+<p>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif" alt="img"></p>
+<p>切记，最前方有  .；</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif" alt="img"></p>
+<p><strong>6.配置完成后点击确定。</strong></p>
+<p><strong>7.在cmd命令中输入java -version和javac -version</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif" alt="img"></p>
+<p>若出现版本号，则Java环境配置成功。</p>
+<p>后面的burpsuite安装过程很简单，这里不细讲。</p>
+<hr>
+<p>​                          <strong>第二，总结一下http协议</strong></p>
+<p><strong>Request请求数据包</strong></p>
+<p>HTTP规划定义了8种可能的请求方法:</p>
+<p>1 GET:检索URL中标识资源的一个简单请求</p>
+<p>2HEAD:与GET方法相同， 服务器只返回状态行和头标，并不返回请求文档</p>
+<p>3 POST: 服务器接受被写入客户端输出流中的数据的请求</p>
+<p>4PUT:服务器保存请求数据作为指定URI新内容的请求</p>
+<p>5DELETE:服务器删除URL中命令的资源的请求</p>
+<p>6OPTIONS:关于服务器支持的请求方法信息的请求</p>
+<p>7 TRACE: web服务器反馈Http请求和其头标的请求</p>
+<p>8 CONNECT :已文档化，但当前未实现的一个方法，预留做隧道处理</p>
+<p>例如：</p>
+<p>请求行     GET /index.html HTTP/1.1</p>
+<p>请求方法：GET    请求url：index.html   HTTP版本：HTTP/1.1</p>
+<p>​                                                                                                       <strong>划重点！！！</strong></p>
+<p><strong>下面用chrome浏览器对某一网页进行检查</strong></p>
+<p>我们随便进入一个网页如下图</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png" alt="img"></p>
+<p>然后点击network</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png" alt="img"></p>
+<p>按住ctrl+r</p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png" alt="img"></p>
+<p>就可以得到这一网站里的内容，<strong>这就类似于burp suite的抓包</strong></p>
+<p><strong>我们看一下请求数据包request header</strong></p>
+<p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png" alt="img"></p>
+<p>可以清楚的看到，他的请求数据包里的<strong>请求行</strong>是GET————一直到HTTP/1.1</p>
+<p>GET后的一大串内容则是检索URL中的标识资源。</p>
+<p><em><strong>我们说一下url的组成</strong></em></p>
+<p>URL简单来说就是输入地址栏里的一大串网址，按此网页的地址栏内的网址为例<a target="_blank" rel="noopener" href="https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG">https://ayitsec.yuque.com/staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG</a></p>
+<p> 第一部分是url方案，方案可以告知web客户端要怎么访问资源。这里是https://，也就是https协议。常见的还有http、ftp等。<br>第二部分指定服务器的位置，这部分告知web客户端资源的位置。例子中是ayitsec.yuque.com<br>第三部分是资源路径，路径说明了资源在服务器的位置。也即是例子中的</p>
+<p>staff-pfl4l5/mbv8b5/uhfr4z/edit?toc_node_uuid=w9bQEpfPpVSSY8SG  </p>
+<p><strong>我的理解：</strong></p>
+<p><strong>1.请求行下面的都是请求头，其中HOST请求头里面的内容则是url中的第二部分——指定服务器位置</strong></p>
+<p> <strong>2.我们说的http协议有八种请求方法，其中最常用的两种请求方法是get与post。</strong></p>
+<p> <strong>3.GET请求把参数放在url中，POST请求通过request body传递参数（也就是空行下的那一行）。而且GET请求对url中传送的参数有长度限制，而POST 则没有长度限制。</strong></p>
+<p> <strong>4.GET请求里，请求行中‘？’分割实际的url和参数，‘&amp;’是url指定的参数间的分隔符。所以，我们的例子中的参数就是</strong>toc_node_uuid=w9bQEpfPpVSSY8SG               </p>
+<p>请求头：</p>
+<p>1.HOST：主机或域名地址。对应网址URL中的Web名称和端口号。</p>
+<p>2.Accept:指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。</p>
+<p>3.User-Agent: 是客户浏览器名称</p>
+<p>4.Accept-Langeuage: 指出浏览器可以接受的语言种类，如en或en-us， 指英语。</p>
+<p>5.connection: 用来告诉服务器是否可以维持固定的HTTP连接。http是无连接的，HTTP/1.1使用Keep-Alive为默认值， 这样，当浏览器需要多个文件时(比如一个HTML文件和相关的图形文件)，不需要每次都建立连接。（HTTP 1.1默认进行持久连接），它就可以利用持久连接的优点。</p>
+<p>6 Cookie: 浏览器用这个属性向服务器发送Cookie。Cookie是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。</p>
+<p>7 Referer: 表明产生请求的网页URL。 如比从网页/ icconcept/ index. jsp中点击一个链接到网页/icwork/ search，在向服务器发送的GET/icwork/ search中的请求中，Referer是<a target="_blank" rel="noopener" href="http://hostname:8080/icconcept">http://hostname:8080/icconcept</a> /index.jsp.</p>
+<p>8 Content-Type: 用来表名request的内容类型。可以用HttpServletRequest的getContentType ()方法取得。</p>
+<p>9 Accept-Charset: 指出浏览器可以接受的字符编码。英文浏览器的默认值是IS0-8859-1.</p>
+<p>10 Accept-Encoding: 指出浏览器可以接受的编码方式。编码方式不同于文件格式，它是为了压缩文件并加速文件传递速度。浏览器在接收到web响应之后先解码，然后再检查文件格式。</p>
+<p>空行</p>
+<p>最后一个请求头标之后是空行，发送回车符和退行，通知服务器以下不再有头标。</p>
+<p>请求数据</p>
+<p>使用POST传送，最常使用的是Content-Type和Content-Length头标</p>
+<p><strong>Response返回数据包数据格式</strong></p>
+<p>1.状态行：协议版本，数字形式的状态代码和状态描述，个元素之间以空格分隔</p>
+<p>2.响应头标:包含服务器类型、日期、长度、内容类型等</p>
+<p>3.空行:响应头与响应体之间用空行隔开</p>
+<p>4.响应数据:浏览器会将实体内容中的数据取出来，生成相应的页面</p>
+<p>HTTP响应码:</p>
+<p>1xx: 信息，请求收到，继续处理</p>
+<p>2xx: 成功，行为被成功地接受、理解和采纳</p>
+<p>3xx: 重定向，为了完成请求，必须进一步执行的动作</p>
+<p>4xx:客户端错误</p>
+<p>5xx:服务器错误</p>
+<p>200 存在文件</p>
+<p>403 存在文件夹</p>
+<p>3xx 均可能存在</p>
+<p>404 不存在文件及文件夹</p>
+<p>500 均可能存在</p>
+<hr>
+<p>​                             <em><strong>第三.内网ip和公网ip</strong></em></p>
+<p>内网ip：路由器以内的网络。可以连接互联网，但是互联网无法直接连接内网（需要端口映射）</p>
+<p>公网IP：互联网IP地址。</p>
+<p>IP地址就像家庭地址一样，公网IP是小区地址，小区中又有很多住户，内网ip就像你家具体的门牌号，你可以从小区里出去（内网ip能连接到互联网），但是外人进入你家需要进行验证（公网IP无法直接连接到内网ip）<br>具体操作<br>用邮寄系统作比喻。有公网ip，相当于说你有一个详细的地址，你可以写信寄给别人，别人也可以用这个地址和你进行各种通讯。<br>来看看没有公网ip是一种什么局面。这就像是住在一个大院里 ，所有进出邮件都由传达室转交。如果是普通的邮件，可以放在传达室，传达室的大爷大妈看到你了就会转交给你，或者你自己去传达室看看，这不重要，反正虽然经过了一点波折，还是可以看到邮件的。假设以下如果来了个挂号，邮局的人员说：必须本人签收。传达室的大爷就说了：对不起，所有的邮件都要经过我中转~。于是邮局的人员只好把信带回去了……<br>实际情况和这个差不多，所谓没有公网ip，就是说你的机子并非直接连接上internet，而是所有通讯经过一台代理（一般是透明网关）进行中转，这时候问题就来了，就会有一些通讯无法在这种机制下顺利进行。比如两个网吧之间，网吧的机子是没有公网 ip的典型例子，通常两个网吧之间通过QQ传送文件就不是直接两台机器建立连接传输的，而是通过QQ的公网服务器进行中转传输了。又比如没有公网ip，上网玩对战游戏通常会有问题，你建立的游戏别人无法加入等等，当然通过服务提供商的公网服务器中转还是可以达成两个没有公网IP的机器进行交流的。</p>
+<hr>
+<p>​       <strong>第四：使用burp suite时浏览器的代理设置。</strong></p>
+<p><strong>1.火狐浏览器安装插件</strong></p>
+<h1 id="FoxyProxy-标准版"><a href="#FoxyProxy-标准版" class="headerlink" title="FoxyProxy 标准版"></a>FoxyProxy 标准版</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png" alt="img"></p>
+<p>2.Edge浏览器安装插件</p>
+<h1 id="Proxy-SwitchyOmega"><a href="#Proxy-SwitchyOmega" class="headerlink" title="Proxy SwitchyOmega"></a>Proxy SwitchyOmega</h1><p><img src="/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png" alt="img"></p>
+<p>什么时候用就打开。</p>
+<ul>
+<li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div
+      class="social-share"
+      
+        data-sites="weibo,qq,wechat,tencent,douban,qzone,linkedin,diandian,facebook,twitter,google"
+      
+      
+        data-wechat-qrcode-title="share.title"
+      
+      
+        data-wechat-qrcode-helper="share.prompt"
+      
+    >
+    </div>
+  </div>
+  <script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+          <div class="post-tags">
+              <a href="/tags/web%E5%9F%BA%E7%A1%80/" rel="tag"># web基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/" rel="prev" title="网安基础总结一">
+                  <i class="fa fa-chevron-left"></i> 网安基础总结一
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/" rel="next" title="网安基础总结三">
+                  网安基础总结三 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alun</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:52</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

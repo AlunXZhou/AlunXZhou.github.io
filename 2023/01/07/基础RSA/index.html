@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="什么是RSARSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。在了解RSA算法之前，先熟悉下几个术语根据密钥的使用方法，可以将密码分为对称密码和公钥密码对称密码：加密和解密使用同一种密钥的方式公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。  RSA加密RSA的加密过程可以使用一个通式来表达">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础RSA">
+<meta property="og:url" content="http://alunxzhou.github.io/2023/01/07/%E5%9F%BA%E7%A1%80RSA/index.html">
+<meta property="og:site_name" content="無与倫比">
+<meta property="og:description" content="什么是RSARSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。在了解RSA算法之前，先熟悉下几个术语根据密钥的使用方法，可以将密码分为对称密码和公钥密码对称密码：加密和解密使用同一种密钥的方式公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。  RSA加密RSA的加密过程可以使用一个通式来表达">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-07T09:05:45.000Z">
+<meta property="article:modified_time" content="2023-01-07T09:07:05.325Z">
+<meta property="article:author" content="alun">
+<meta property="article:tag" content="RSA">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://alunxzhou.github.io/2023/01/07/%E5%9F%BA%E7%A1%80RSA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2023/01/07/%E5%9F%BA%E7%A1%80RSA/","path":"2023/01/07/基础RSA/","title":"基础RSA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基础RSA | 無与倫比</title>
+  
+
+
+
+
+
+<link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">無与倫比</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">菜鸟成长记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="alun"
+      src="/images/alun.jpg">
+  <p class="site-author-name" itemprop="name">alun</p>
+  <div class="site-description" itemprop="description">静者心多妙，飘然思不群</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2023/01/07/%E5%9F%BA%E7%A1%80RSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/alun.jpg">
+      <meta itemprop="name" content="alun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="無与倫比">
+      <meta itemprop="description" content="静者心多妙，飘然思不群">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="基础RSA | 無与倫比">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基础RSA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-01-07 17:05:45 / 修改时间：17:07:05" itemprop="dateCreated datePublished" datetime="2023-01-07T17:05:45+08:00">2023-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/RSA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">RSA基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ol>
+<li>什么是RSA<br>RSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。在了解RSA算法之前，先熟悉下几个术语<br>根据密钥的使用方法，可以将密码分为对称密码和公钥密码<br>对称密码：加密和解密使用同一种密钥的方式<br>公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。 </li>
+<li>RSA加密<br>RSA的加密过程可以使用一个通式来表达 </li>
+</ol>
+<span id="more"></span>
+
+<p>密文＝明文EmodN<br>密文＝明文EmodN<br>也就是说RSA加密是对明文的E次方后除以N后求余数的过程。就这么简单？对，就是这么简单。<br>从通式可知，只要知道E和N任何人都可以进行RSA加密了，所以说E、N是RSA加密的密钥，也就是说E和N的组合就是公钥，我们用(E,N)来表示公钥</p>
+<p>公钥＝(E,N)<br>公钥＝(E,N)<br>不过E和N不并不是随便什么数都可以的，它们都是经过严格的数学计算得出的，关于E和N拥有什么样的要求及其特性后面会讲到。顺便啰嗦一句E是加密（Encryption）的首字母，N是数字（Number）的首字母</p>
+<ol>
+<li>RSA解密<br>RSA的解密同样可以使用一个通式来表达</li>
+</ol>
+<p>明文＝密文DmodN<br>明文＝密文DmodN<br>也就是说对密文进行D次方后除以N的余数就是明文，这就是RSA解密过程。知道D和N就能进行解密密文了，所以D和N的组合就是私钥</p>
+<p>私钥＝(D,N)<br>私钥＝(D,N)<br>从上述可以看出RSA的加密方式和解密方式是相同的，加密是求“E次方的mod N”;解密是求“D次方的mod N”<br>此处D是解密（Decryption）的首字母；N是数字（Number）的首字母。</p>
+<p>小结下</p>
+<p>公钥    （E，N）<br>私钥    （D，N）<br>密钥对    （E，D，N）<br>加密<br>密文＝明文EmodN<br>密文＝明文EmodN<br>解密<br>明文＝密文DmodN<br>明文＝密文DmodN<br>\4. 生成密钥对<br>既然公钥是（E，N），私钥是（D，N）所以密钥对即为（E，D，N）但密钥对是怎样生成的？步骤如下：</p>
+<p>求N<br>求L（L为中间过程的中间数）<br>求E<br>求D<br>4.1 求N<br>准备两个质数p，q。这两个数不能太小，太小则会容易破解，将p乘以q就是N</p>
+<p>N=p∗q<br>N=p∗q<br>4.2 求L<br>L 是 p－1 和 q－1的最小公倍数，可用如下表达式表示</p>
+<p>L=lcm（p－1，q－1）<br>L=lcm（p－1，q－1）<br>4.3 求E<br>E必须满足两个条件：E是一个比1大比L小的数，E和L的最大公约数为1<br>用gcd(X,Y)来表示X，Y的最大公约数则E条件如下：</p>
+<p>1 &lt; E &lt; L<br>gcd（E，L）=1<br>之所以需要E和L的最大公约数为1是为了保证一定存在解密时需要使用的数D。现在我们已经求出了E和N也就是说我们已经生成了密钥对中的公钥了。</p>
+<p>4.4 求D<br>数D是由数E计算出来的。D、E和L之间必须满足以下关系：</p>
+<p>1 &lt; D &lt; L<br>E＊D mod L ＝ 1<br>只要D满足上述2个条件，则通过E和N进行加密的密文就可以用D和N进行解密。<br>简单地说条件2是为了保证密文解密后的数据就是明文。<br>现在私钥自然也已经生成了，密钥对也就自然生成了。<br>小结下：</p>
+<p>求N    N＝ p ＊ q ；p，q为质数<br>求L    L＝lcm（p－1，q－1） ；L为p－1、q－1的最小公倍数<br>求E    1 &lt; E &lt; L，gcd（E，L）=1；E，L最大公约数为1（E和L互质）<br>求D    1 &lt; D &lt; L，E＊D mod L ＝ 1<br>5 实践下吧<br>我们用具体的数字来实践下RSA的密钥对对生成，及其加解密对全过程。为方便我们使用较小数字来模拟。</p>
+<p>5.1 求N<br>我们准备两个很小对质数，<br>p ＝ 17<br>q ＝ 19<br>N ＝ p ＊ q ＝ 323</p>
+<p>5.2 求L<br>L ＝ lcm（p－1， q－1）＝ lcm(16，18） ＝ 144<br>144为16和18对最小公倍数</p>
+<p>5.3 求E<br>求E必须要满足2个条件：1 &lt; E &lt; L ，gcd（E，L）=1<br>即1 &lt; E &lt; 144，gcd（E，144） ＝ 1<br>E和144互为质数，5显然满足上述2个条件<br>故E ＝ 5</p>
+<p>此时公钥=(E，N）＝ （5，323）</p>
+<p>5.4 求D<br>求D也必须满足2个条件：1 &lt; D &lt; L，E＊D mod L ＝ 1<br>即1 &lt; D &lt; 144，5 ＊ D mod 144 ＝ 1<br>显然当D＝ 29 时满足上述两个条件<br>1 &lt; 29 &lt; 144<br>5＊29 mod 144 ＝ 145 mod 144 ＝ 1<br>此时私钥＝（D，N）＝（29，323）</p>
+<p>5.5 加密<br>准备的明文必须时小于N的数，因为加密或者解密都要mod N其结果必须小于N<br>假设明文 ＝ 123<br>则 密文＝明文EmodN＝1235mod323=225密文＝明文EmodN＝1235mod323=225<br>5.6 解密<br>明文＝密文DmodN＝22529mod323=123明文＝密文DmodN＝22529mod323=123<br>解密后的明文为123。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/dbs1215/article/details/48953589">https://blog.csdn.net/dbs1215/article/details/48953589</a></p>
+<p>附上一脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Time : 2022/12/6 10:10</span><br><span class="line"># @Author : 阿伦</span><br><span class="line"># @File : 1</span><br><span class="line"># @Project : py</span><br><span class="line">import gmpy2</span><br><span class="line"></span><br><span class="line">e = 65537</span><br><span class="line">p = 9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span><br><span class="line">q = 11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span><br><span class="line">n = p * q</span><br><span class="line"># 密文</span><br><span class="line">C = 83208298995174604174773590298203639360540024871256126892889661345742403314929861939100492666605647316646576486526217457006376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span><br><span class="line"></span><br><span class="line">d = gmpy2.invert(e, (p - 1) * (q - 1))</span><br><span class="line">print(d)</span><br><span class="line"># 求明文</span><br><span class="line">M = pow(C, d, n)  # 快速求幂取模运算</span><br><span class="line">print(M)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div
+      class="social-share"
+      
+        data-sites="weibo,qq,wechat,tencent,douban,qzone,linkedin,diandian,facebook,twitter,google"
+      
+      
+        data-wechat-qrcode-title="share.title"
+      
+      
+        data-wechat-qrcode-helper="share.prompt"
+      
+    >
+    </div>
+  </div>
+  <script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+          <div class="post-tags">
+              <a href="/tags/RSA/" rel="tag"># RSA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/07/%E4%B8%80%E9%81%93%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="一道反序列化">
+                  <i class="fa fa-chevron-left"></i> 一道反序列化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/" rel="next" title="php-SER-libs反序列化靶场">
+                  php-SER-libs反序列化靶场 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alun</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:52</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
