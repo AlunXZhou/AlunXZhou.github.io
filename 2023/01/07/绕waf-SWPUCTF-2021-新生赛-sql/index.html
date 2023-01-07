@@ -18,34 +18,34 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta property="og:type" content="article">
 <meta property="og:title" content="(绕waf)[SWPUCTF 2021 新生赛]sql">
-<meta property="og:url" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/index.html">
+<meta property="og:url" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/index.html">
 <meta property="og:site_name" content="無与倫比">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987374639-4c9ed84c-df0f-453f-ae38-9e15ddbfbce7.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987396171-c5179e77-8527-40a0-ab63-6d470a6fdd8e.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987553033-2d493f9c-2a69-46a2-a928-3fd1e9d8d19e.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987604766-6e7b5395-2625-4cf7-98bb-bda4ad61a3d9.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987626714-4f1d2ff4-9ca8-4673-9ab3-3d05385cc24f.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987685675-aacbaba8-2fac-45a2-8427-5b47cb88c5fc.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987714459-0ee3f487-7179-44f6-8caf-8ff40f930aba.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987742801-f437aedb-f2f2-402d-ab8d-fcf7f67126cb.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987374639-4c9ed84c-df0f-453f-ae38-9e15ddbfbce7.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987396171-c5179e77-8527-40a0-ab63-6d470a6fdd8e.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987553033-2d493f9c-2a69-46a2-a928-3fd1e9d8d19e.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987604766-6e7b5395-2625-4cf7-98bb-bda4ad61a3d9.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987626714-4f1d2ff4-9ca8-4673-9ab3-3d05385cc24f.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987685675-aacbaba8-2fac-45a2-8427-5b47cb88c5fc.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987714459-0ee3f487-7179-44f6-8caf-8ff40f930aba.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987742801-f437aedb-f2f2-402d-ab8d-fcf7f67126cb.png">
 <meta property="article:published_time" content="2023-01-07T07:41:50.000Z">
 <meta property="article:modified_time" content="2023-01-07T07:43:56.296Z">
 <meta property="article:author" content="alun">
 <meta property="article:tag" content="web漏洞">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987374639-4c9ed84c-df0f-453f-ae38-9e15ddbfbce7.png">
+<meta name="twitter:image" content="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987374639-4c9ed84c-df0f-453f-ae38-9e15ddbfbce7.png">
 
 
-<link rel="canonical" href="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/">
+<link rel="canonical" href="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/","path":"2023/01/07/绕waf-SWPUCTF-2021-新生赛-sql/","title":"(绕waf)[SWPUCTF 2021 新生赛]sql"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/","path":"2023/01/07/绕waf-SWPUCTF-2021-新生赛-sql/","title":"(绕waf)[SWPUCTF 2021 新生赛]sql"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>(绕waf)[SWPUCTF 2021 新生赛]sql | 無与倫比</title>
@@ -217,7 +217,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.top/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/alun.jpg">

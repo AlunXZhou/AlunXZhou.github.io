@@ -18,41 +18,41 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta property="og:type" content="article">
 <meta property="og:title" content="(报错注入)[SWPUCTF 2021 新生赛]error(复现)">
-<meta property="og:url" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:url" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="無与倫比">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981836315-077cff39-364a-4d39-b030-9702a7ca1cb6.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981874043-19a18628-ddeb-4557-bdc7-5a089d68cc99.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981901678-19b44580-8099-4599-a44f-f48a4ac5ab96.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981930601-ee1477dd-0f76-4e79-842a-17da16d463a6.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981998436-0484397c-a6f8-4eb9-b4dc-93225ec40863.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982014319-e9219f3f-8a25-456f-bff9-8c8f17b96aed.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982102319-6a77af40-23a9-4df7-ab24-356d36e13bbc.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982142333-497a784e-b102-477a-b3b5-cfda462082f8.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982349544-28298c74-7d94-4244-b806-640e46c3d9e5.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982388550-e22ca230-26a5-40bf-bee9-5ab4af8fe48c.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982446855-81e128ab-556c-471c-a41f-56a0bfcbc58b.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982528304-8ddc6a6b-2fc4-4589-af5d-765de8721df4.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982606359-4ccfd0fa-66db-443c-9a05-730e1303cb3c.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982641872-a2fa8f11-164b-4699-ae7e-df955984845a.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982669851-8252474d-9ef9-45d1-a329-89ace55a7923.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981836315-077cff39-364a-4d39-b030-9702a7ca1cb6.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981874043-19a18628-ddeb-4557-bdc7-5a089d68cc99.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981901678-19b44580-8099-4599-a44f-f48a4ac5ab96.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981930601-ee1477dd-0f76-4e79-842a-17da16d463a6.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981998436-0484397c-a6f8-4eb9-b4dc-93225ec40863.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982014319-e9219f3f-8a25-456f-bff9-8c8f17b96aed.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982102319-6a77af40-23a9-4df7-ab24-356d36e13bbc.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982142333-497a784e-b102-477a-b3b5-cfda462082f8.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982349544-28298c74-7d94-4244-b806-640e46c3d9e5.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982388550-e22ca230-26a5-40bf-bee9-5ab4af8fe48c.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982446855-81e128ab-556c-471c-a41f-56a0bfcbc58b.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982528304-8ddc6a6b-2fc4-4589-af5d-765de8721df4.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982606359-4ccfd0fa-66db-443c-9a05-730e1303cb3c.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982641872-a2fa8f11-164b-4699-ae7e-df955984845a.png">
+<meta property="og:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670982669851-8252474d-9ef9-45d1-a329-89ace55a7923.png">
 <meta property="article:published_time" content="2023-01-07T07:44:43.000Z">
 <meta property="article:modified_time" content="2023-01-07T07:47:14.940Z">
 <meta property="article:author" content="alun">
 <meta property="article:tag" content="web漏洞">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981836315-077cff39-364a-4d39-b030-9702a7ca1cb6.png">
+<meta name="twitter:image" content="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981836315-077cff39-364a-4d39-b030-9702a7ca1cb6.png">
 
 
-<link rel="canonical" href="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/">
+<link rel="canonical" href="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/","path":"2023/01/07/报错注入-SWPUCTF-2021-新生赛-error-复现/","title":"(报错注入)[SWPUCTF 2021 新生赛]error(复现)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/","path":"2023/01/07/报错注入-SWPUCTF-2021-新生赛-error-复现/","title":"(报错注入)[SWPUCTF 2021 新生赛]error(复现)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>(报错注入)[SWPUCTF 2021 新生赛]error(复现) | 無与倫比</title>
@@ -223,7 +223,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.top/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/alun.jpg">

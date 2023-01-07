@@ -18,48 +18,48 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"alunxzhou.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="本周重点 1.学习进展 1.完成burpsuite的安装以及java环境的配置。 2.完成对http协议的学习以及对url，web前端的一些浅显的了解。 3.了解了公网ip和内网ip的区别.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网安基础总结二">
-<meta property="og:url" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/index.html">
+<meta property="og:url" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/index.html">
 <meta property="og:site_name" content="無与倫比">
 <meta property="og:description" content="本周重点 1.学习进展 1.完成burpsuite的安装以及java环境的配置。 2.完成对http协议的学习以及对url，web前端的一些浅显的了解。 3.了解了公网ip和内网ip的区别.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062309-ab8cf4dd-78dc-42d6-8c55-a47e3cedadfa.gif">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062542-7e15a7f3-0076-4b0f-8c92-1ca5a60fa4f6.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062311-b40a5d85-b7bc-497d-953d-f3efb211d2ed.gif">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062302-c19e5f59-de13-4cb6-8981-8291facc8652.gif">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062817-a06cd932-0656-4e3b-9bd1-ca7960eb396c.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366062872-b4fb976d-c5fa-44da-9ffd-2791761c576f.gif">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062938-cd99e78e-4be7-4026-91e8-552b03b1cee6.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063259-9af407bf-8cf7-42ea-ba47-33d2ea98f103.gif">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366063917-b33286fc-1178-46ab-b6dd-7acab372a840.gif">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366063982-e583a5d7-21c3-4073-8b27-fd7c18617131.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064047-80a7e79e-fc19-4e04-8db4-6f86203c3184.gif">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366064353-75e1c6b8-34aa-4ca2-974f-7cd94ea171a2.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/gif/27996677/1651366064407-b4ff7bdc-d542-42f5-b1da-6eba6d7c0c4b.gif">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png">
-<meta property="og:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366519046-3e22d4cb-35a5-43a4-8fff-bb784d430c7d.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366577455-cf0bf193-ab72-4cf7-b541-79a51ecd6e63.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366610192-8c8d1065-d648-4a5c-9db6-ccae8fdc9937.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366748992-dd527888-897e-48e3-8fd8-67789024a49d.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370687313-39151ef7-4f02-4207-b095-7bc7f2a593f8.png">
+<meta property="og:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651370760581-fdf5355f-64a6-4b92-afdc-51d4c5a7198a.png">
 <meta property="article:published_time" content="2022-05-01T06:43:59.000Z">
 <meta property="article:modified_time" content="2023-01-07T07:07:53.667Z">
 <meta property="article:author" content="alun">
 <meta property="article:tag" content="web基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png">
+<meta name="twitter:image" content="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/1651366062708-feae412f-7908-4f68-ba33-568ff1651b65.png">
 
 
-<link rel="canonical" href="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/">
+<link rel="canonical" href="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/","path":"2022/05/01/网安基础总结二/","title":"网安基础总结二"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/","path":"2022/05/01/网安基础总结二/","title":"网安基础总结二"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>网安基础总结二 | 無与倫比</title>
@@ -231,7 +231,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://alunxzhou.github.io/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/">
+    <link itemprop="mainEntityOfPage" href="http://alunxzhou.top/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/alun.jpg">
