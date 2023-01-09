@@ -2830,16 +2830,21 @@ body {
   background-attachment: fixed;
   background-size: 100% 100%;
 }
-.post-block {
+.content-wrap {
+  opacity: 0.8;
+}
+.main-inner {
   opacity: 0.9;
 }
-.sidebar {
-  background-color: transparent;
-  opacity: 0.9;
+.sidebar-inner {
+  background: rgba(255,255,255,0.7) none repeat scroll !important;
 }
 .header-inner {
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.8);
 }
 .popup {
-  opacity: 0.9;
+  opacity: 0.8;
+}
+.post-block {
+  background: rgba(255,255,255,0.7) none repeat scroll !important;
 }
